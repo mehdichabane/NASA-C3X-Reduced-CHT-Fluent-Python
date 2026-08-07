@@ -1,0 +1,20 @@
+surface,arc_start_percent,arc_end_percent,uncertainty_percent,source,report_page,notes
+pressure,0,16,6.8,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+pressure,16,23,6.3,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+pressure,23,34,6.6,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+pressure,34,45,7.3,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+pressure,45,55,8.9,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+pressure,55,66,13.3,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+pressure,66,78,11.6,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+pressure,78,89,20.1,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+pressure,89,100,23.5,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,0,8,6.8,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,8,31,6.7,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,31,39,6.2,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,39,49,6.5,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,49,58,7.1,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,58,67,8.6,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,67,76,11.9,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,76,85,10.9,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,85,94,15.8,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty
+suction,94,100,23.5,NASA-CR-168015 Table VI,27,C3X heat-transfer coefficient uncertainty

@@ -1,0 +1,15 @@
+metric,value,unit
+fluent_cells,44760.0,-
+fluent_faces,90768.0,-
+fluent_nodes,45999.0,-
+minimum_cell_volume,3.697944e-10,m^3
+maximum_cell_volume,3.630286e-06,m^3
+total_volume,0.02966792,m^3
+minimum_face_area,9.928653e-07,m^2
+maximum_face_area,0.002885044,m^2
+periodic_translation_y,0.11773,m
+minimum_orthogonal_quality,0.128589,-
+maximum_aspect_ratio,418.787,-
+maximum_cell_equiangle_skewness_fluid,0.80257449,-
+maximum_cell_equiangle_skewness_solid,0.67070346,-
+maximum_cell_equiangle_skewness_global,0.80257449,-

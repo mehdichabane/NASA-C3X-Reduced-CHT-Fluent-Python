@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it using the metadata below."
+title: "Reduced RANS/CHT benchmark of NASA C3X Run 145"
+type: software
+authors:
+  - family-names: "Chabane"
+    given-names: "Mehdi"
+license: MIT
+keywords:
+  - NASA C3X
+  - conjugate heat transfer
+  - turbine vane
+  - computational fluid dynamics
+  - Ansys Fluent
+  - RANS
+  - benchmark
+  - numerical verification
+  - measurement comparison
+abstract: >-
+  A reduced two-dimensional steady compressible RANS/CHT benchmark of NASA C3X
+  Run 145. The repository contains documented Fluent exports and a Python
+  workflow for convergence, mesh sensitivity, conservation, wall resolution,
+  and quantitative comparison with public NASA pressure and thermal measurements.
+
+repository-code: "https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python"
+url: "https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python"

@@ -1,0 +1,4 @@
+check,export_value,reference_value,unit,absolute_difference,acceptance_limit,status
+Integrated wall heat rate,-28548.268707980125,-28548.269,W/m,0.00029201987490523607,0.01,True
+Area-averaged wall temperature,608.8789925253844,608.8789970992104,K,4.573826004161674e-06,0.001,True
+Area-averaged wall y+,0.2510916414498204,0.25109164,-,1.4498203748658511e-09,1e-06,True

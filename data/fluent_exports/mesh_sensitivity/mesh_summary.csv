@@ -1,0 +1,4 @@
+mesh,source_case,final_iteration,fluent_nodes,fluent_cells,first_layer_height_m,inflation_layers,min_orthogonal_quality,max_skewness,max_wall_yplus,notes,maximum_aspect_ratio
+coarse,c3x_run145_nasa_exact_coarse_second_order_ACCEPTED_iter156_yplus_verified,156,15186,14657,,,0.0489421772673651,0.6253342002974865,0.450773,Computed from the Fluent CFF case.,1424.0216343381
+medium,c3x_run145_nasa_exact_medium_second_order_ACCEPTED_iter161_yplus_verified,161,24548,23781,,,0.0514609837026265,0.6375658909311842,0.452959,Computed from the Fluent CFF case.,699.7513910811532
+fine,c3x_run145_nasa_exact_fine_SST_final_iter236,236,45999,44760,1e-06,30.0,0.1285890834740482,0.8025744851335743,0.45188603,Computed from the Fluent CFF case.,418.7867920719884

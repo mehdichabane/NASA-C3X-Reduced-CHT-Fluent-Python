@@ -1,0 +1,4 @@
+quantity,unit,final_value,window_start,window_end,span,relative_span_percent,acceptance_limit_percent,status
+External heat-transfer rate,W/m,28548.27415186194,537,556,0.10106437902868493,0.00035401266864386723,0.02,True
+Outlet Mach,-,0.9033510682539844,537,556,4.87003435212241e-06,0.0005391089689877462,0.02,True
+Mean external wall temperature,K,608.8789970992104,537,556,0.00039842374690124416,6.543562639289517e-05,0.02,True

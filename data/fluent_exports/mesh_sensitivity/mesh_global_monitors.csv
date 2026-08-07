@@ -1,0 +1,4 @@
+mesh,source_case,fluent_nodes,fluent_cells,final_iteration,outlet_mach,mean_wall_temperature_K,external_heat_rate_W_per_m
+coarse,c3x_run145_nasa_exact_coarse_second_order_ACCEPTED_iter156_yplus_verified,15186,14657,156,0.899857855,655.182765,35762.73
+medium,c3x_run145_nasa_exact_medium_second_order_ACCEPTED_iter161_yplus_verified,24548,23781,161,0.900418553,655.401781,35789.614
+fine,c3x_run145_nasa_exact_fine_SST_final_iter236,45999,44760,236,0.9012944409738727,655.6192166102478,35819.60242176458

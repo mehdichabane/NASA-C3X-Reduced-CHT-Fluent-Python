@@ -1,0 +1,7 @@
+check,value,unit,acceptance_limit,status
+Mass imbalance,5.086560946372457e-05,%,0.1,True
+Fluid-solid interface mismatch,5.583534648812571e-06,%,0.01,True
+Solid heat imbalance,0.0019207360260505432,%,0.1,True
+Minimum wall y+,0.01044239,-,1.0,True
+Mean wall y+,0.30440758,-,1.0,True
+Maximum wall y+,0.45188603,-,1.0,True

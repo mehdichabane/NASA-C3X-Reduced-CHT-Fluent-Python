@@ -1,0 +1,36 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ANSYS/Fluent project files
+*.cas
+*.cas.h5
+*.dat.h5
+*.msh
+*.msh.h5
+*.wbpj
+*.wbpz
+*.rst
+results/exports/
+
+# Local scratch work
+scratch/
+tmp/
+
+# Large deterministic analysis outputs
+results/processed/mesh_sensitivity/run145_sst_*_wall_mapped.csv
+results/processed/mesh_sensitivity/run145_three_grid_common_surface_profiles.csv
+results/processed/mesh_sensitivity/run145_sst_comparison_profile.csv
+results/processed/mesh_sensitivity/run145_transition_sst_comparison_profile.csv
+results/processed/solid_temperature/run145_sst_temperature_gradient.csv

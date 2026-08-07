@@ -1,0 +1,29 @@
+name: Rebuild and test analysis
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-preprocess.txt
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -r requirements.txt -r requirements-preprocess.txt
+      - run: python -m compileall -q scripts tests
+      - run: python scripts/preprocess/build_internal_convection_inputs.py --check
+      - run: python scripts/run_all.py
+      - run: python -m pytest -q
+      - run: git diff --exit-code

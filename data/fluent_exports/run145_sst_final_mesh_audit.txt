@@ -1,0 +1,20 @@
+NASA C3X Run 145: final fine-grid Fluent mesh audit
+Final solution: SST, iteration 236
+Fluent version: 26.1
+
+Topology and periodicity
+- Mesh check: PASS (no warnings)
+- Cells: 44,760
+- Faces: 90,768
+- Nodes: 45,999
+- Minimum cell volume: 3.697944e-10 m^3 (positive)
+- Translational periodicity: dx within [-4.16e-17, 8.05e-16] m; dy = 0.1177300 m
+
+Quality metrics
+- Minimum orthogonal quality: 0.128589
+- Maximum aspect ratio: 418.787
+- Maximum cell equiangle skewness: 0.80257449
+  - fluid hot-gas zone: 0.80257449
+  - solid vane zone: 0.67070346
+
+Status: PASS

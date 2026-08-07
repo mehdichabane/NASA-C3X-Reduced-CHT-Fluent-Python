@@ -1,0 +1,11 @@
+category,setting,value,units,source,notes
+solver,viscous_model,Transition SST (4 eqn),-,warm-start transcript,Enabled from the fine SST state at iteration 236
+boundary,inlet_total_pressure,403800,Pa,saved Transition SST case,Pressure inlet total pressure
+boundary,inlet_total_temperature,792,K,saved Transition SST case,Pressure inlet total temperature
+boundary,inlet_flow_direction,1;0;0,-,saved Transition SST case,Cartesian direction components
+turbulence,inlet_intensity,6.5,percent,saved Transition SST case,Pressure inlet turbulence specification
+turbulence,inlet_viscosity_ratio,10,-,saved Transition SST case,Pressure inlet turbulence specification
+transition,inlet_intermittency,1.0,-,saved Transition SST case,Pressure inlet transition value
+transition,inlet_retheta,Fluent correlation from inlet turbulence intensity,-,Ansys Fluent Transition SST formulation,No independent numeric inlet value was specified
+numerics,transition_equations_stabilization,first-order upwind,-,warm-start transcript,Used before the change at iteration 386
+numerics,transition_equations_final,bounded second order,-,warm-start transcript,Used from iteration 386 to 556

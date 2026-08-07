@@ -46,6 +46,44 @@ Each converged case should retain the same outputs used by the baseline workflow
 
 The main sensitivity coefficients will be evaluated around the baseline from the symmetric +/-5% and +/-5 K cases. The +/-10% and +/-10 K cases provide a wider screening check for nonlinearity.
 
-## Pilot run
+## h_m10 pilot
 
-Run `h_m10` first from the converged fine-grid SST state. Change only the ten internal heat-transfer coefficients, keep their free-stream temperatures unchanged, continue the existing solution until the same convergence and balance criteria are satisfied, and save a new case/data pair plus the standard wall and report exports.
+The corrected `h_m10` case was restarted from the accepted fine-grid SST state at iteration 236. All ten internal heat-transfer coefficients were set to exactly `0.9 h0`; the ten coolant bulk temperatures were unchanged. The final state is iteration 271.
+
+The final case/data files were checked directly: all ten convection boundaries contain the intended coefficient scale and baseline free-stream temperatures.
+
+| Quantity | Baseline | `h_m10` | Change |
+|---|---:|---:|---:|
+| Mean external wall temperature | `655.619 K` | `661.724 K` | `+6.104 K` |
+| External heat-transfer rate | `35.820 kW/m` | `33.888 kW/m` | `-5.393%` |
+| Outlet Mach number | `0.901294` | `0.901302` | `+0.000804%` |
+| Solid minimum temperature | `552.824 K` | `563.826 K` | `+11.002 K` |
+| Solid maximum temperature | `716.831 K` | `720.356 K` | `+3.525 K` |
+
+The final continuity residual is `3.5728e-4`. Over iterations 252-271, the three printed engineering monitors remain within the existing `0.02%` span criterion.
+
+The final balance checks are:
+
+| Check | `h_m10` | Limit |
+|---|---:|---:|
+| Relative mass imbalance | `0.000294%` | `0.01%` |
+| Fluid-solid interface mismatch | `8.06e-7%` | `0.01%` |
+| Solid heat imbalance | `0.00365%` | `0.05%` |
+| Maximum wall `y+` | `0.4500` | `1.0` |
+
+`h_m10` is therefore retained for the sensitivity study.
+
+The NASA comparison was rebuilt from the saved CFF case/data fields with the same coordinate mapping and metric definitions as the baseline. Reapplying that extraction to the baseline reproduces the committed baseline metrics to numerical precision.
+
+| Quantity | Surface | Baseline MAPE | `h_m10` MAPE |
+|---|---|---:|---:|
+| Pressure ratio | pressure | `0.926%` | `0.926%` |
+| Pressure ratio | suction | `3.980%` | `3.987%` |
+| Wall temperature | pressure | `1.448%` | `2.618%` |
+| Wall temperature | suction | `2.005%` | `2.865%` |
+| HTC | pressure | `7.795%` | `7.691%` |
+| HTC | suction | `11.535%` | `10.752%` |
+
+The 10% reduction in prescribed internal HTC therefore changes the thermal solution strongly enough to worsen the wall-temperature comparison while leaving the pressure comparison essentially unchanged. The HTC error does not move in the same direction as the wall-temperature error, so the two thermal quantities should be treated separately in the remaining screening cases.
+
+Detailed values are in `h_m10_integral_summary.csv`, `h_m10_nasa_metrics.csv` and `run145_sst_fine_h_m10_global_checks.csv`.

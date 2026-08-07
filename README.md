@@ -1,5 +1,7 @@
 # NASA C3X Run 145: reduced RANS/CHT benchmark
 
+[![Rebuild and test analysis](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml)
+
 Steady two-dimensional compressible RANS and conjugate heat-transfer model of
 the NASA C3X turbine vane, solved with Ansys Fluent 26.1 and checked with
 Python. The repository is intended for readers who already know basic CFD and
@@ -8,6 +10,9 @@ Fluent; it is not a Fluent tutorial.
 The hot-gas passage and solid vane are resolved. The ten internal passages use
 passage-specific convection boundary conditions, so coolant flow and film
 cooling are not resolved.
+
+**Skills shown:** compressible CFD, conjugate heat transfer, mesh verification,
+experimental comparison, Python automation and regression testing.
 
 ## Fine-grid SST results
 
@@ -114,11 +119,11 @@ python scripts/preprocess/build_internal_convection_inputs.py --check
 
 ## Saved Fluent states
 
-The separate archive `NASA-C3X-Fluent-restart-files.zip` contains matching
-Fluent 26.1 case/data pairs for coarse, medium and fine SST, plus the fine
-Transition SST case. Filenames, iterations, cell counts and SHA-256 values are
-in [`fluent/restart_manifest.csv`](fluent/restart_manifest.csv). Reopening steps
-are in [`fluent/README.md`](fluent/README.md).
+The matching [Fluent restart release](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/releases/tag/initial-public-release)
+contains Fluent 26.1 case/data pairs for coarse, medium and fine SST, plus the
+fine Transition SST case. Filenames, iterations, cell counts and SHA-256 values
+are in [`fluent/restart_manifest.csv`](fluent/restart_manifest.csv). Reopening
+steps are in [`fluent/README.md`](fluent/README.md).
 
 The saved states can be reopened. The original SpaceClaim and Ansys Meshing GUI
 history was not retained. No complete replay from initialization, with a

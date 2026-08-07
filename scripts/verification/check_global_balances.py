@@ -6,9 +6,9 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "data/fluent_exports/run145_sst_global_checks.csv"
 OUTPUT_DIR = ROOT / "results/processed/verification"
 
-MASS_LIMIT_PERCENT = 0.1
+MASS_LIMIT_PERCENT = 0.01
 INTERFACE_LIMIT_PERCENT = 0.01
-SOLID_ENERGY_LIMIT_PERCENT = 0.1
+SOLID_ENERGY_LIMIT_PERCENT = 0.05
 YPLUS_LIMIT = 1.0
 
 

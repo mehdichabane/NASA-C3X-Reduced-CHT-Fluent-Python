@@ -10,14 +10,14 @@ Only the ten internal convection boundaries are varied. Their baseline values ar
 
 ## Screening matrix
 
-Two one-factor families are used:
+Two completed one-factor families are used:
 
 - internal heat-transfer coefficient: `h/h0 = 0.90, 0.95, 1.00, 1.05, 1.10`;
 - coolant bulk temperature: `Tbulk - Tbulk,0 = -10, -5, 0, +5, +10 K`.
 
-All ten passages are perturbed together in the first screening. Combined `h` and `Tbulk` perturbations are not included at this stage.
+All ten passages are perturbed together. The local interaction check uses the four `(+/-5% h, +/-5 K)` corners around the same baseline; exact values are listed in `interaction_case_matrix.csv`.
 
-The exact boundary values are listed in `case_matrix.csv`.
+The one-factor boundary values are listed in `case_matrix.csv`.
 
 ## Case IDs
 
@@ -32,10 +32,14 @@ The exact boundary values are listed in `case_matrix.csv`.
 | `t_m05` | all internal `Tbulk` values shifted by -5 K |
 | `t_p05` | all internal `Tbulk` values shifted by +5 K |
 | `t_p10` | all internal `Tbulk` values shifted by +10 K |
+| `h_m05_t_m05` | `0.95 h0`, `Tbulk,0 - 5 K` |
+| `h_m05_t_p05` | `0.95 h0`, `Tbulk,0 + 5 K` |
+| `h_p05_t_m05` | `1.05 h0`, `Tbulk,0 - 5 K` |
+| `h_p05_t_p05` | `1.05 h0`, `Tbulk,0 + 5 K` |
 
-## Quantities to compare
+## Quantities compared
 
-Each converged case should retain the same outputs used by the baseline workflow, including:
+Each accepted case retains the same outputs used by the baseline workflow, including:
 
 - wall-temperature bias, MAE, RMSE and MAPE on pressure and suction sides;
 - HTC comparison metrics on both sides;
@@ -44,7 +48,7 @@ Each converged case should retain the same outputs used by the baseline workflow
 - mass, fluid-solid interface and solid-energy balance checks;
 - wall profiles required to compute `delta Tw = Tw(case) - Tw(baseline)`.
 
-The main sensitivity coefficients will be evaluated around the baseline from the symmetric +/-5% and +/-5 K cases. The +/-10% and +/-10 K cases provide a wider screening check for nonlinearity.
+The local one-factor sensitivity coefficients use the symmetric `+/-5%` and `+/-5 K` cases. The `+/-10%` and `+/-10 K` cases provide the wider screening check for nonlinearity.
 
 ## h_m10 pilot
 
@@ -84,13 +88,13 @@ The NASA comparison was rebuilt from the saved CFF case/data fields with the sam
 | HTC | pressure | `7.795%` | `7.691%` |
 | HTC | suction | `11.535%` | `10.752%` |
 
-The 10% reduction in prescribed internal HTC therefore changes the thermal solution strongly enough to worsen the wall-temperature comparison while leaving the pressure comparison essentially unchanged. The HTC error does not move in the same direction as the wall-temperature error, so the two thermal quantities should be treated separately in the remaining screening cases.
+The 10% reduction in prescribed internal HTC worsens the wall-temperature comparison while leaving the pressure comparison essentially unchanged. HTC error moves in the opposite direction, so wall-temperature and HTC agreement are treated separately throughout the screening.
 
 Detailed values are in `h_m10_integral_summary.csv`, `h_m10_nasa_metrics.csv` and `run145_sst_fine_h_m10_global_checks.csv`.
 
 ## Completed one-factor screening
 
-Both five-point families are now complete. The symmetric local derivatives and the wider five-point derivatives agree closely for the main thermal quantities.
+Both five-point families are complete. The symmetric local derivatives and the wider five-point derivatives agree closely for the main thermal quantities.
 
 | Quantity | HTC family | `Tbulk` family | HTC linear `R2` | `Tbulk` linear `R2` |
 |---|---:|---:|---:|---:|
@@ -104,6 +108,22 @@ Using the mean baseline coolant bulk temperature (`410.022 K`) only as the refer
 
 The two families give a consistent physical picture. Stronger prescribed internal cooling, obtained either by increasing `h` or decreasing `Tbulk`, lowers the wall and solid temperatures and increases the external heat-transfer rate. It also improves the NASA wall-temperature comparison while slightly worsening the NASA HTC comparison. Pressure ratio and outlet Mach remain effectively insensitive at the scale of these perturbations.
 
-The completed OFAT screening does not identify `h`-`Tbulk` interaction effects. A combined-factor check is therefore a separate question; the natural next step, if interaction screening is required, is the four `(+/-5% h, +/-5 K)` corner cases around the baseline.
+## Completed interaction screening
 
-The consolidated results are in `h_family_summary.csv`, `h_family_local_sensitivity.csv`, `t_family_summary.csv`, `t_family_local_sensitivity.csv`, `t_family_linearity.csv` and `h_vs_t_family_comparison.csv`.
+The four `(+/-5% h, +/-5 K)` corners were restarted independently from the same accepted baseline at iteration 236 and evaluated with the same convergence and balance criteria. The coded bilinear model is
+
+`Y = beta0 + beta_h*x_h + beta_T*x_T + beta_hT*x_h*x_T`.
+
+For the principal thermal responses:
+
+| Quantity | Main effect `h` | Main effect `Tbulk` | Interaction effect | Interaction / `h` | Interaction / `Tbulk` |
+|---|---:|---:|---:|---:|---:|
+| Mean wall temperature | `-5.7830 K` | `+3.0473 K` | `+0.0650 K` | `1.12%` | `2.13%` |
+| External heat-transfer rate | `+1841.45 W/m` | `-955.66 W/m` | `-25.10 W/m` | `1.36%` | `2.63%` |
+| Mean solid temperature | `-6.6781 K` | `+3.5459 K` | `+0.0783 K` | `1.17%` | `2.21%` |
+
+The interaction is therefore resolved but small relative to both main effects in this local screening box. The factorial main effects also reproduce the symmetric one-factor effects closely: the relative differences are about `0.0023%` (`h`) and `0.054%` (`Tbulk`) for mean wall temperature, and `0.0014%` and `0.036%` for external heat-transfer rate.
+
+The four-corner bilinear model is saturated, so no ANOVA p-values or experimental-error confidence intervals are inferred from these deterministic CFD runs. The result supports a predominantly additive local response, with a small bilinear correction over the tested `+/-5% h` and `+/-5 K` range.
+
+Consolidated one-factor results are in `h_family_summary.csv`, `h_family_local_sensitivity.csv`, `t_family_summary.csv`, `t_family_local_sensitivity.csv`, `t_family_linearity.csv` and `h_vs_t_family_comparison.csv`. Interaction inputs and results are in `interaction_case_matrix.csv`, `interaction_plan.md`, `interaction_corner_summary.csv`, `interaction_factorial_coefficients.csv`, `interaction_additivity_check.csv` and `interaction_main_effect_consistency.csv`.

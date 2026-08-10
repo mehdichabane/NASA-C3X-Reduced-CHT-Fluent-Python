@@ -87,3 +87,23 @@ The NASA comparison was rebuilt from the saved CFF case/data fields with the sam
 The 10% reduction in prescribed internal HTC therefore changes the thermal solution strongly enough to worsen the wall-temperature comparison while leaving the pressure comparison essentially unchanged. The HTC error does not move in the same direction as the wall-temperature error, so the two thermal quantities should be treated separately in the remaining screening cases.
 
 Detailed values are in `h_m10_integral_summary.csv`, `h_m10_nasa_metrics.csv` and `run145_sst_fine_h_m10_global_checks.csv`.
+
+## Completed one-factor screening
+
+Both five-point families are now complete. The symmetric local derivatives and the wider five-point derivatives agree closely for the main thermal quantities.
+
+| Quantity | HTC family | `Tbulk` family | HTC linear `R2` | `Tbulk` linear `R2` |
+|---|---:|---:|---:|---:|
+| Mean wall temperature | `-0.5783 K` per `+1% h` | `+0.30489 K/K` | `0.999012` | `0.999998` |
+| External heat-transfer rate | `+184.15 W/m` per `+1% h` | `-95.601 W/(m K)` | `0.999229` | `0.9999999` |
+| Mean solid temperature | `-0.6678 K` per `+1% h` | `+0.35479 K/K` | `0.999017` | `0.999999` |
+
+For the `Tbulk` family, the central and five-point derivatives differ by only `0.0011%` for mean wall temperature and `0.0043%` for external heat-transfer rate. The maximum linear-fit residual is `0.072%` of the five-point response span for mean wall temperature and `0.025%` for heat-transfer rate. The HTC family is also close to linear, but its corresponding residuals are about `1.35%` and `1.19%` of the response span.
+
+Using the mean baseline coolant bulk temperature (`410.022 K`) only as the reference scale for nondimensionalization, the local normalized sensitivities are `-0.0882` to `h` and `+0.1907` to a uniform `Tbulk` shift for mean wall temperature, and `+0.5141` to `h` and `-1.0943` to `Tbulk` for external heat-transfer rate. These normalized values compare local relative response strength; they do not make the two screening ranges equivalent physical uncertainties.
+
+The two families give a consistent physical picture. Stronger prescribed internal cooling, obtained either by increasing `h` or decreasing `Tbulk`, lowers the wall and solid temperatures and increases the external heat-transfer rate. It also improves the NASA wall-temperature comparison while slightly worsening the NASA HTC comparison. Pressure ratio and outlet Mach remain effectively insensitive at the scale of these perturbations.
+
+The completed OFAT screening does not identify `h`-`Tbulk` interaction effects. A combined-factor check is therefore a separate question; the natural next step, if interaction screening is required, is the four `(+/-5% h, +/-5 K)` corner cases around the baseline.
+
+The consolidated results are in `h_family_summary.csv`, `h_family_local_sensitivity.csv`, `t_family_summary.csv`, `t_family_local_sensitivity.csv`, `t_family_linearity.csv` and `h_vs_t_family_comparison.csv`.

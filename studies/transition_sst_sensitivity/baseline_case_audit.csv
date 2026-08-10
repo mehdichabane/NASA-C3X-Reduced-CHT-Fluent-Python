@@ -1,0 +1,19 @@
+category,setting,value,units,evidence
+solver_case,final_iteration,556,iteration,uploaded final data
+mesh,cells,44760,-,uploaded case mesh
+mesh,faces,90768,-,uploaded case mesh
+mesh,nodes,45999,-,uploaded case mesh
+geometry,inlet_to_geometric_le_axial_distance,58.605029731,mm,uploaded case mesh
+turbulence,inlet_turbulence_intensity,6.5,%,case BC; face field reproduces exactly
+turbulence,inlet_turbulent_viscosity_ratio,10,-,case BC
+transition,inlet_intermittency,1,-,case BC; face field reproduces exactly
+transition,inlet_retheta,100.359273888,-,saved inlet face field
+transition_model,roughness_correlation_enabled,0,bool,case setting #f
+transition_model,curvature_correction_enabled,0,bool,case setting #f
+transition_model,production_limiter_enabled,1,bool,case setting #t
+transition_model,kato_launder_enabled,1,bool,case setting #t
+transition_model,custom_retheta_t_correlation,0,bool,case setting: none
+transition_model,custom_retheta_c_correlation,0,bool,case setting: none
+transition_model,custom_flength_correlation,0,bool,case setting: none
+diagnostic,near_le_freestream_Tu_median,1.24732612165,%,2-5 mm upstream; wall distance > 8 mm
+diagnostic,near_le_freestream_Tu_decay_from_inlet,80.8103673593,%,relative reduction from 6.5% inlet

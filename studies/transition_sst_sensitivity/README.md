@@ -2,7 +2,7 @@
 
 This study investigates why the fine-grid Transition SST solution preserves the Run 145 pressure comparison while producing a substantially different thermal field from the SST baseline. It is a model-behavior and sensitivity study, not a calibration exercise and not an uncertainty quantification.
 
-Phase A diagnoses the accepted Transition SST solution at iteration 556. Phase B then perturbs the inlet turbulence state in controlled one-factor cases while keeping the mesh, thermal boundary conditions, numerics and Transition SST model settings unchanged.
+Phase A diagnoses the accepted Transition SST solution at iteration 556. Phase B perturbs the inlet turbulence state in controlled one-factor cases while keeping the mesh, thermal boundary conditions, numerics and Transition SST model settings unchanged.
 
 ## Baseline case
 
@@ -39,64 +39,96 @@ Local turbulence intensity is reconstructed from the saved fields as
 
 `Tu = 100 sqrt(2 k / 3) / |U|`.
 
-For the upstream freestream diagnostic, only fluid cells upstream of the geometric leading edge and farther than `8 mm` from a wall are retained. Values are summarized in axial bins using the median, with the 10th and 90th percentiles also retained for `Tu`. This filter was checked at 5, 8, 10 and 15 mm wall-distance cutoffs; the near-leading-edge median remains approximately `1.24-1.29%`.
+For the upstream freestream diagnostic, only fluid cells upstream of the geometric leading edge and farther than `8 mm` from a wall are retained. Values are summarized in axial bins using the median, with the 10th and 90th percentiles also retained for `Tu`.
 
-The current case therefore does not carry the imposed `6.5%` unchanged to the vane. In the `2-5 mm` freestream bin immediately upstream of the leading edge:
+In the `2-5 mm` freestream bin immediately upstream of the leading edge, the baseline contains:
 
 - median `Tu = 1.2473%`;
-- 10th-90th percentile `Tu = 1.0371-1.8159%`;
 - median `mu_t/mu = 7.851`;
 - median `Re_theta_t = 412.933`.
 
-Relative to the prescribed inlet intensity, the median `Tu` reduction is about `80.81%`. The corresponding turbulent kinetic energy also falls strongly, so this is not only an acceleration effect.
-
-Detailed values are in `baseline_freestream_decay.csv`; the case audit is in `baseline_case_audit.csv`.
+The imposed inlet value therefore does not remain unchanged to the vane. Detailed values are in `baseline_freestream_decay.csv`; the case audit is in `baseline_case_audit.csv`.
 
 ## Phase A: wall transition signature
 
-The `wall_vane-shadow` loop was traversed geometrically from the leading edge to the trailing edge on each side. Saved wall-adjacent intermittency, `Re_theta_t`, wall temperature and wall shear were then inspected along the two paths.
+The `wall_vane-shadow` loop is traversed geometrically from the leading edge to the trailing edge on each side. Saved wall-adjacent intermittency, wall temperature and wall shear are then inspected along the paths.
 
-On the suction side, the transported intermittency remains near `0.020` through the first half of the surface and then begins a sharp local rise. The largest concurrent gradients in intermittency and wall temperature occur around `s/L = 0.4972`, `x/Cx = 0.6534`; the largest wall-shear gradient is nearby at `s/L = 0.4994`, `x/Cx = 0.6551`. The pressure side shows no comparable mid-side intermittency rise: between `0.1 < s/L < 0.9`, its saved intermittency remains approximately `0.02000-0.02044`.
+For the baseline, the largest concurrent suction-side gradients in intermittency and wall temperature occur around `x/Cx = 0.6534`; the largest wall-shear gradient is nearby at `x/Cx = 0.6551`. The pressure side shows no comparable mid-side intermittency rise.
 
-This location is described here as a **transition-like response front**, not as an experimentally established transition onset. In particular, the transported wall-adjacent intermittency does not approach `0.5` in the mid-suction-side region, so a `gamma = 0.5` criterion is not used.
-
-Selected threshold and gradient locations are recorded in `baseline_transition_signature.csv`.
+This is described as a **transition-like response front**, not as an experimentally established transition onset. Selected threshold and gradient locations are recorded in `baseline_transition_signature.csv`.
 
 ## Phase B1: viscosity-ratio sensitivity at fixed inlet intensity
 
-The first controlled case, `tu065_vr05`, keeps `Tu_in = 6.5%` and changes only the inlet turbulent viscosity ratio from `10` to `5`. It is restarted from the accepted Transition SST state at iteration 556 and converges at iteration 686.
+All B1 cases retain `Tu_in = 6.5%` and change only the inlet turbulent viscosity ratio. Each case restarts independently from the accepted Transition SST state at iteration 556.
 
-The final inlet face fields still reproduce `Tu = 6.500000%`, `gamma = 1.000000` and `Re_theta_t = 100.359274`. The final mesh is byte-for-byte identical to the baseline mesh.
+### `tu065_vr05`
 
-The global checks pass the existing study limits:
+Changing `mu_t/mu_in` from `10` to `5` gives:
 
-- mass imbalance: `0.000396%`;
-- fluid-solid interface mismatch: `2.26e-5%`;
-- solid heat imbalance: `0.00621%`;
-- maximum saved wall `y+`: `0.3983`.
+- near-leading-edge median `Tu`: `1.2473 -> 0.8701%`;
+- near-leading-edge median `mu_t/mu`: `7.851 -> 3.698`;
+- near-leading-edge median `Re_theta_t`: `412.933 -> 655.346`;
+- mean external wall temperature: `608.879 -> 604.438 K`;
+- external heat-transfer rate: `28.5483 -> 27.7758 kW/m`;
+- outlet Mach number: `0.903351 -> 0.903562`.
 
-The main integral response relative to the `vr10` baseline is:
+The suction-side transition-like response moves downstream from about `0.65` to `0.69 x/Cx`. The final mesh is byte-for-byte identical to the baseline mesh and the recorded mass, interface, solid-energy and `y+` checks pass the study limits.
 
-- mean external wall temperature: `608.879 -> 604.438 K` (`-4.441 K`);
-- external heat-transfer rate: `28.5483 -> 27.7758 kW/m` (`-2.706%`);
-- outlet Mach number: `0.903351 -> 0.903562` (`+0.0234%`).
+### `tu065_vr01`
 
-The freestream-decay diagnostic changes substantially. In the same `2-5 mm` pre-leading-edge bin:
+Changing `mu_t/mu_in` from `10` to `1` produces a much stronger response. The case converges at iteration `1046`.
 
-- median `Tu`: `1.2473 -> 0.8701%` (`-30.24%`);
-- median `mu_t/mu`: `7.851 -> 3.698` (`-52.89%`);
-- median `Re_theta_t`: `412.933 -> 655.346` (`+58.71%`);
-- median `k`: `2.9090 -> 1.4145 m2/s2` (`-51.38%`);
-- median speed changes by only about `-0.004%`.
+Final CFF hashes:
 
-The suction-side transition-like response also moves downstream. The maximum intermittency-gradient location shifts from `x/Cx = 0.6534` to `0.6858`; the maximum wall-temperature-gradient location shifts from `0.6534` to `0.6842`; and the maximum wall-shear-gradient location shifts from `0.6551` to `0.6858`. The pressure-side mid-surface intermittency remains near `0.0200` with no comparable response front.
+- case SHA-256: `8d703624e063247955182ada4e7021311bf25e81a5f5e33952eebe572d47e268`;
+- data SHA-256: `a0ece8767b071d8e34c8bb34a0349112835779c8abc0db3122a55b963478b4da`.
 
-This first controlled perturbation therefore supports the proposed mechanism: reducing inlet `mu_t/mu` at fixed `Tu_in` increases freestream turbulence decay, lowers the turbulence level reaching the vane and delays the suction-side transition-like thermal/shear response. It also changes the thermal field substantially while leaving outlet Mach nearly unchanged. The result is a sensitivity observation, not a calibration result and not proof that a specific experimental transition location has been recovered.
+The mesh and all non-target boundary-condition settings remain unchanged. The final inlet still contains `Tu = 6.500000%`, `gamma = 1.000000` and `Re_theta_t = 100.359274`.
 
-Detailed results are in `tu065_vr05_global_checks.csv`, `tu065_vr05_integral_summary.csv`, `tu065_vr05_freestream_decay.csv`, `tu065_vr05_transition_signature.csv` and `vr10_vs_vr05_diagnostic_summary.csv`.
+The final `2-5 mm` pre-leading-edge diagnostic is:
 
-## Interpretation and decision gate
+- median `Tu = 0.36371%`;
+- median `mu_t/mu = 0.63855`;
+- median `Re_theta_t = 1062.83`;
+- median `k = 0.24909 m2/s2`.
 
-Phase A established that the baseline computational inlet is prescribed at `6.5%` turbulence intensity while the saved solution contains only about `1.25%` median freestream turbulence intensity immediately upstream of the vane. The first B1 perturbation shows that reducing `mu_t/mu_in` from `10` to `5` lowers that near-vane value further to about `0.87%` and moves the suction-side transition-like response downstream by roughly `0.03 x/Cx`.
+Relative to the `vr10` baseline:
 
-The spatial measurement/reference location of the experimental `6.5%` turbulence level has still not been established from NASA-CR-168015 in this study. Subsequent levels are therefore chosen from the inlet-to-vane decay problem rather than selected to minimize NASA temperature or HTC error.
+- mean external wall temperature: `608.879 -> 574.705 K` (`-5.613%`);
+- external heat-transfer rate: `28.5483 -> 22.9198 kW/m` (`-19.716%`);
+- outlet Mach number: `0.903351 -> 0.905424` (`+0.229%`).
+
+The final 20-iteration maximum relative changes saved in the Fluent convergence-condition history are `0.00268%` for external heat rate, `0.000394%` for mean wall temperature and `0.000070%` for outlet Mach, all below the study criterion of `0.02%`. Final continuity is `2.02e-5`, and maximum saved wall `y+` is `0.3936`.
+
+The suction-side response has moved into the trailing-edge region. The first `gamma >= 0.025` location is `x/Cx = 0.9616`; the interior intermittency-gradient and wall-shear-gradient maxima are near `0.9667` and `0.9680`, respectively. The wall-temperature-gradient maximum is no longer co-located with these two signatures. For this case, gradient searches are restricted to `x/Cx < 0.98` to prevent the geometric trailing edge itself from dominating the metric. The resulting locations remain model-response diagnostics, not experimental transition-onset measurements.
+
+The final CFF pair preserves the mass-flow, coupled-interface, `y+`, residual and report-convergence quantities recorded in `tu065_vr01_global_checks.csv`. The separate cooling-hole total heat-rate Flux Report used for the earlier solid-energy balance was not persisted as a report definition in this final CFF pair. No final coolant-total or solid-heat-imbalance value is reconstructed or invented from the saved files; subsequent cases must record that Flux Report explicitly at closure.
+
+Detailed B1 results are in the `tu065_vr05_*`, `tu065_vr01_*`, `vr10_vs_vr05_diagnostic_summary.csv`, `vr10_vs_vr01_diagnostic_summary.csv` and `b1_three_point_summary.csv` files.
+
+## Experimental inlet-turbulence reference
+
+NASA-CR-168015 defines `Tu` in the C3X test-condition table as the **average inlet turbulence intensity**. The report states that the combustor-induced cascade inlet level was `6.5%`, measured with the LDA, and that installing circular rods upstream increased the inlet level to `8.3%`. The facility description places the LDA optical access at the cascade inlet plane.
+
+This resolves the earlier ambiguity sufficiently for the sensitivity design: `6.5%` is an experimental inlet-level quantity, not a documented `6.5%` leading-edge target. The exact geometric correspondence between the experimental inlet measurement plane and this reduced computational inlet is not assumed.
+
+## B1 conclusion and B2 decision
+
+B1 establishes a strong, nonlinear viscosity-ratio sensitivity at fixed `Tu_in = 6.5%`:
+
+`mu_t/mu_in: 10 -> 5 -> 1`
+
+maps to approximately
+
+`Tu_2-5mm: 1.247% -> 0.870% -> 0.364%`.
+
+The accompanying thermal/transition response changes strongly while outlet Mach changes comparatively little. This supports the inlet-to-vane turbulence-decay mechanism as a major model sensitivity. It does not identify an optimal viscosity ratio and is not used to tune the calculation to NASA wall-temperature or HTC data.
+
+For B2, retain `mu_t/mu_in = 10` so that only inlet turbulence intensity changes relative to the accepted baseline. The next case is `tu083_vr10`, using the second C3X inlet turbulence level documented in NASA-CR-168015:
+
+- `Tu_in = 8.3%`;
+- `mu_t/mu_in = 10`;
+- restart independently from accepted Transition SST iteration 556;
+- all other settings unchanged.
+
+The existing `baseline_tu065_vr10` is the B2 anchor. This requires one new B2 run rather than inventing an additional inlet turbulence level. Any lower-intensity or interaction case remains optional and must be justified after the `6.5 -> 8.3%` response is known.

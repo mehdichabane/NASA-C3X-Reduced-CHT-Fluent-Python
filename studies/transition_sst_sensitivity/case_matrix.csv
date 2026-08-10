@@ -1,0 +1,6 @@
+stage,case_id,Tu_in_percent,inlet_viscosity_ratio,status,restart_from,purpose
+A,baseline_tu065_vr10,6.5,10,complete,accepted Transition SST iter556,accepted diagnostic baseline
+B1,tu065_vr05,6.5,5,planned,accepted Transition SST iter556,isolate viscosity-ratio effect at fixed Tu_in
+B1,tu065_vr01,6.5,1,planned,accepted Transition SST iter556,isolate viscosity-ratio effect at fixed Tu_in
+B2,tu_low_vrXX,TBD,TBD,gated,accepted Transition SST iter556,lower near-vane turbulence state selected after B1
+B2,tu_high_vrXX,TBD,TBD,gated,accepted Transition SST iter556,higher near-vane turbulence state selected after B1

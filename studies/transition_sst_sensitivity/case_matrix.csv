@@ -2,4 +2,4 @@ stage,case_id,Tu_in_percent,inlet_viscosity_ratio,status,restart_from,purpose
 A,baseline_tu065_vr10,6.5,10,complete,accepted Transition SST iter556,accepted diagnostic baseline
 B1,tu065_vr05,6.5,5,complete,accepted Transition SST iter556,isolate viscosity-ratio effect at fixed Tu_in
 B1,tu065_vr01,6.5,1,complete,accepted Transition SST iter556,isolate viscosity-ratio effect at fixed Tu_in
-B2,tu083_vr10,8.3,10,planned,accepted Transition SST iter556,isolate inlet-turbulence-intensity effect at fixed vr10 using the second NASA C3X inlet level
+B2,tu083_vr10,8.3,10,complete,accepted Transition SST iter556,isolate inlet-turbulence-intensity effect at fixed vr10 using the second NASA C3X inlet level

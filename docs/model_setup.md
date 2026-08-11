@@ -89,6 +89,11 @@ The original source-selection records for several constants were not saved.
 lists which values have a direct literature match and which are only recoverable
 from the saved Fluent case.
 
+The hot-gas specific heat, molecular viscosity and thermal conductivity are
+retained as constant baseline inputs in the saved model. Their sensitivity is
+not evaluated here, so the reported comparison should not be interpreted as
+including uncertainty associated with those property choices.
+
 ## Mesh and near-wall resolution
 
 | Mesh | Nodes | Cells | External wall faces |

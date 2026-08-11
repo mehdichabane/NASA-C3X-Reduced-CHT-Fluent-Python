@@ -16,6 +16,7 @@
 | `verification/check_mesh_summary.py` | committed mesh-quality/sensitivity tables | consistency checks |
 | `verification/check_global_balances.py` | final Fluent reports | mass/interface/solid-energy verification |
 | `verification/check_sensitivity_studies.py` | committed internal-cooling and Transition SST case matrices/summary tables | cross-study baseline, case-coverage and response-consistency checks |
+| `verification/replay_saved_state_reports.py` | local licensed Fluent + released `.cas.h5/.dat.h5` pair | optional PyFluent recomputation of existing scalar report definitions |
 | `verification/plot_wall_yplus.py` | fine wall export | wall-resolution figure and statistics |
 | `comparison/compare_run145.py` | rebuilt CFD profiles + NASA tables | pointwise comparison, error metrics and figures |
 
@@ -27,6 +28,11 @@ comparison metrics and the committed sensitivity-study headline relationships.
 The sensitivity-study consistency check does not rerun Fluent. It protects the
 committed campaign matrices and summaries against accidental cross-case or
 headline-result inconsistencies.
+
+The optional `replay_saved_state_reports.py` helper is deliberately not part of
+`run_all.py` or CI because it requires a locally installed, licensed Fluent
+session. It audits an already saved state; it does not replay the solve from
+initialization.
 
 The restart binaries are not stored in Git, so CFF mesh extraction is run
 after the bundle has been downloaded and extracted:

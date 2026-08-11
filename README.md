@@ -132,6 +132,21 @@ The committed study matrices and summary tables are also checked by
 `scripts/verification/check_sensitivity_studies.py`; this protects the reported
 cross-case relationships in CI but does not replay the Fluent sensitivity runs.
 
+## Assumption and uncertainty status
+
+| Source of modeling or numerical uncertainty | Treatment in this repository |
+|---|---|
+| Spatial discretization | Three-grid solution sensitivity; no formal asymptotic GCI or discretization-uncertainty band |
+| Internal cooling `h` and `Tbulk` | Deterministic one-factor screening plus a local `h x Tbulk` interaction check; not probabilistic UQ |
+| Transition SST inlet state | Fine-grid sensitivity to `Tu_in` and turbulent-viscosity ratio; turbulence length scale is not varied independently |
+| Hot-gas `Cp`, molecular viscosity and thermal conductivity | Constant saved baseline values; sensitivity not evaluated and some original source-selection records are missing |
+| Solver-state reproducibility | Saved case/data pairs are released; an optional PyFluent helper recomputes existing scalar reports, but no full initialization-to-final replay is claimed |
+| Experimental/model-input uncertainty | Not propagated into a combined validation uncertainty budget |
+
+This table separates quantities that were actually screened from assumptions
+that remain unquantified. The latter should not be read as negligible merely
+because the baseline comparison is good.
+
 ## Run from a fresh clone
 
 Tested with Python 3.13.
@@ -163,6 +178,11 @@ fine Transition SST case. Filenames, iterations, cell counts and SHA-256 values
 are in [`fluent/restart_manifest.csv`](fluent/restart_manifest.csv). Reopening
 steps are in [`fluent/README.md`](fluent/README.md).
 
+For a local licensed Fluent installation, the optional
+`scripts/verification/replay_saved_state_reports.py` helper uses PyFluent to
+open a released case/data pair and recompute existing scalar report definitions.
+It is not part of CI and is not a replay from initialization.
+
 The saved states can be reopened. The original SpaceClaim and Ansys Meshing GUI
 history was not retained. No complete replay from initialization, with a
 transcript and final-state equivalence checks, is included. The exact status is
@@ -186,6 +206,7 @@ summarized in
 - Internal cooling is represented by prescribed convection boundaries.
 - The original interactive meshing history was not saved.
 - Some material values lack their original source-selection record.
+- Hot-gas `Cp`, molecular viscosity and thermal conductivity are constant baseline inputs whose sensitivity is not evaluated.
 - Input-property uncertainty is not propagated into the comparison metrics.
 - No coarse or medium Transition SST calculation is included.
 - The sensitivity perturbations are deterministic screening values, not measured

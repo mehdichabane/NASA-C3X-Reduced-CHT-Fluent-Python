@@ -29,6 +29,20 @@ run Fluent.
 | Saved Fluent states | matching case/data pairs and SHA-256 manifest |
 | Sensitivity-study consistency | committed case matrices and summary tables checked in CI for baseline agreement, expected case coverage and reported cross-case trends |
 
+## Optional solver-side saved-state audit
+
+`scripts/verification/replay_saved_state_reports.py` can be run in an
+environment with PyFluent and a locally installed, licensed Fluent instance. It
+opens one released `.cas.h5/.dat.h5` pair and recomputes existing scalar report
+definitions from the saved state. The default fine-grid reports are external
+heat-transfer rate, mean wall temperature and outlet Mach number.
+
+This helper is intentionally outside `run_all.py` and GitHub Actions because the
+CI environment does not contain Fluent. It narrows the gap between the released
+solver state and the Python post-processing, but it is not evidence of a replay
+from initialization and does not regenerate the full set of wall and flux
+exports used by the repository.
+
 ## What cannot be replayed from the repository
 
 The original SpaceClaim and Ansys Meshing GUI history was not saved. The source

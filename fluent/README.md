@@ -27,6 +27,28 @@ The bundle supports reopening the saved states and auditing the SST CFF meshes.
 It does not reproduce the original interactive meshing sequence or demonstrate
 that a new initialization converges to the saved fine SST state.
 
+## Optional PyFluent saved-state report audit
+
+A small optional helper can reopen a saved case/data pair through PyFluent and
+recompute report definitions that already exist in the saved case:
+
+```text
+python -m pip install ansys-fluent-core
+python scripts/verification/replay_saved_state_reports.py PATH_TO_FINE_CASE.cas.h5
+```
+
+The default report names are `fine_external_heat_rate`,
+`fine_wall_temperature_avg` and `fine_mach_outlet`; use `--report` to override
+them for another saved case. `--output result.json` writes the returned values
+to JSON as well as stdout.
+
+This helper follows the Fluent 26.1 PyFluent interfaces for reading a case/data
+pair and computing existing report definitions. It requires a locally installed,
+licensed Fluent environment and is not executed in GitHub Actions. It is a
+saved-state audit only: it does not regenerate the mesh, initialize the solver,
+replay iterations, export the full wall data set, or establish final-state
+equivalence from initialization.
+
 ## Transition SST restart
 
 The fine-grid Transition SST case starts from the fine SST state at iteration

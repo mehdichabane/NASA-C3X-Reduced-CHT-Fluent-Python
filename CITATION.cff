@@ -16,11 +16,14 @@ keywords:
   - benchmark
   - numerical verification
   - measurement comparison
+  - sensitivity analysis
 abstract: >-
   A reduced two-dimensional steady compressible RANS/CHT benchmark of NASA C3X
   Run 145. The repository contains documented Fluent exports and a Python
   workflow for convergence, mesh sensitivity, conservation, wall resolution,
-  and quantitative comparison with public NASA pressure and thermal measurements.
+  quantitative comparison with public NASA pressure and thermal measurements,
+  and deterministic sensitivity studies of internal cooling boundary conditions
+  and Transition SST inlet turbulence.
 
 repository-code: "https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python"
 url: "https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python"

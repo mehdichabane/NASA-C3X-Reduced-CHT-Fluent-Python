@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+FLUENT_PRODUCT_VERSION = "26.1.0"
 DEFAULT_REPORTS = (
     "fine_external_heat_rate",
     "fine_wall_temperature_avg",
@@ -15,9 +16,9 @@ DEFAULT_REPORTS = (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Open a saved Fluent case/data pair through PyFluent and recompute "
-            "existing scalar report definitions. This is a saved-state audit, "
-            "not a replay from initialization."
+            "Open a saved Fluent 26.1 case/data pair through PyFluent and "
+            "recompute existing scalar report definitions. This is a "
+            "saved-state audit, not a replay from initialization."
         )
     )
     parser.add_argument(
@@ -52,6 +53,20 @@ def json_ready(value: Any) -> Any:
     return str(value)
 
 
+def fluent_version_text(value: Any) -> str:
+    """Return the underlying Fluent version string for enum- or string-like values."""
+    return str(getattr(value, "value", value))
+
+
+def launch_saved_state_session(pyfluent: Any) -> Any:
+    """Launch the same Fluent release, dimension and precision used by the benchmark."""
+    return pyfluent.launch_fluent(
+        product_version=FLUENT_PRODUCT_VERSION,
+        dimension=pyfluent.Dimension.TWO,
+        precision=pyfluent.Precision.DOUBLE,
+    )
+
+
 def main() -> None:
     args = parse_args()
     case_file = args.case_file.expanduser().resolve()
@@ -65,18 +80,30 @@ def main() -> None:
     except ModuleNotFoundError as exc:
         raise SystemExit(
             "PyFluent is required for this optional solver-side audit. "
-            "Install ansys-fluent-core in an environment that can launch a "
-            "licensed Fluent installation."
+            "Install the pinned requirements-fluent.txt dependency in an "
+            "environment that can launch a licensed Fluent 26.1 installation."
         ) from exc
 
-    session = pyfluent.launch_fluent()
+    session = launch_saved_state_session(pyfluent)
     try:
+        actual_version = session.get_fluent_version()
+        actual_version_text = fluent_version_text(actual_version)
+        if actual_version_text != FLUENT_PRODUCT_VERSION:
+            raise RuntimeError(
+                "Unexpected Fluent version: "
+                f"requested {FLUENT_PRODUCT_VERSION}, got {actual_version_text}."
+            )
+
         session.settings.file.read_case_data(file_name=str(case_file))
         computed = session.settings.solution.report_definitions.compute(
             report_defs=list(args.report)
         )
         payload = {
             "case_file": str(case_file),
+            "requested_fluent_version": FLUENT_PRODUCT_VERSION,
+            "actual_fluent_version": actual_version_text,
+            "dimension": "2D",
+            "precision": "double",
             "report_definitions": list(args.report),
             "computed": json_ready(computed),
             "scope": (

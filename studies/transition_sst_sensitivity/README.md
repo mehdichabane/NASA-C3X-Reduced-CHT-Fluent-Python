@@ -112,7 +112,49 @@ NASA-CR-168015 defines `Tu` in the C3X test-condition table as the **average inl
 
 This resolves the earlier ambiguity sufficiently for the sensitivity design: `6.5%` is an experimental inlet-level quantity, not a documented `6.5%` leading-edge target. The exact geometric correspondence between the experimental inlet measurement plane and this reduced computational inlet is not assumed.
 
-## B1 conclusion and B2 decision
+## Phase B2: inlet-turbulence-intensity sensitivity at fixed viscosity ratio
+
+B2 keeps `mu_t/mu_in = 10` fixed and changes only the prescribed inlet turbulence intensity from the accepted `6.5%` baseline to the second C3X inlet level, `8.3%`. The new case restarts independently from the accepted Transition SST state at iteration 556.
+
+### `tu083_vr10`
+
+The case converges automatically at iteration `651` using the common 20-iteration report-definition criterion.
+
+Final CFF hashes:
+
+- case SHA-256: `bf4ce538011b3e41222af51479d3829c4311d855446fa59aabc89dff87e091c2`;
+- data SHA-256: `efb468e1ebfb057a41a39663b561ff7c15defb6ed8e5c1b4eef34d604511038d`.
+
+The 37 mesh datasets are byte-for-byte identical to the baseline. A direct comparison of Fluent `Thread Variables` shows a single intended boundary-condition change: inlet `turb-intensity` changes from `0.065` to `0.083`; all other serialized thread settings are unchanged.
+
+The final `2-5 mm` pre-leading-edge diagnostic is:
+
+- median `Tu = 1.23704%`;
+- median `mu_t/mu = 7.52764`;
+- median `Re_theta_t = 417.412`;
+- median `k = 2.85903 m2/s2`.
+
+Relative to `baseline_tu065_vr10`:
+
+- mean external wall temperature: `608.879 -> 608.678 K` (`-0.033%`);
+- external heat-transfer rate: `28.5483 -> 28.5133 kW/m` (`-0.122%`);
+- outlet Mach number: `0.903351 -> 0.903358` (`+0.0007%`).
+
+The prescribed inlet change is therefore strongly attenuated before the vane in this `vr10` configuration. At `50-55 mm` upstream, the median turbulence intensity is higher than the `6.5%` baseline (`4.186%` versus `3.924%`), but the decay curves approach one another and cross between the `25-30 mm` and `20-25 mm` bins. In the final `2-5 mm` bin, the `8.3%` case reaches `1.2370%`, compared with `1.2473%` for the baseline.
+
+The suction-side transition-like response changes only slightly. The intermittency-gradient and wall-temperature-gradient maxima move from `x/Cx = 0.65338` to `0.65512`, and the wall-shear-gradient maximum from `0.65512` to `0.65685`. These shifts are one wall-face station in the present extraction and are not interpreted as a materially different experimental transition onset.
+
+The final 20-iteration maximum relative changes are `0.01978%` for external heat rate, `0.00554%` for mean wall temperature and `0.000538%` for outlet Mach, all below the common `0.02%` criterion. Final continuity is `4.132e-05` and maximum wall `y+` is `0.4029`.
+
+The explicitly recorded closure Flux Reports also pass the study limits:
+
+- mass imbalance: `0.000086%`;
+- fluid-solid interface heat mismatch: `0.000016%`;
+- solid heat imbalance from `wall_vane` plus all ten cooling-hole heat rates: `0.002097%`.
+
+Detailed B2 results are in `tu083_vr10_freestream_decay.csv`, `tu083_vr10_transition_signature.csv`, `tu083_vr10_global_checks.csv`, `tu083_vr10_integral_summary.csv`, `tu065_vs_tu083_vr10_diagnostic_summary.csv` and `b2_two_point_summary.csv`.
+
+## Campaign conclusion
 
 B1 establishes a strong, nonlinear viscosity-ratio sensitivity at fixed `Tu_in = 6.5%`:
 
@@ -122,13 +164,16 @@ maps to approximately
 
 `Tu_2-5mm: 1.247% -> 0.870% -> 0.364%`.
 
-The accompanying thermal/transition response changes strongly while outlet Mach changes comparatively little. This supports the inlet-to-vane turbulence-decay mechanism as a major model sensitivity. It does not identify an optimal viscosity ratio and is not used to tune the calculation to NASA wall-temperature or HTC data.
+The accompanying thermal/transition response changes strongly while outlet Mach changes comparatively little. This supports inlet-to-vane turbulence decay as a major model sensitivity. It does not identify an optimal viscosity ratio and is not used to tune the calculation to NASA wall-temperature or HTC data.
 
-For B2, retain `mu_t/mu_in = 10` so that only inlet turbulence intensity changes relative to the accepted baseline. The next case is `tu083_vr10`, using the second C3X inlet turbulence level documented in NASA-CR-168015:
+B2 then changes the documented inlet turbulence level at fixed `mu_t/mu_in = 10`:
 
-- `Tu_in = 8.3%`;
-- `mu_t/mu_in = 10`;
-- restart independently from accepted Transition SST iteration 556;
-- all other settings unchanged.
+`Tu_in: 6.5% -> 8.3%`
 
-The existing `baseline_tu065_vr10` is the B2 anchor. This requires one new B2 run rather than inventing an additional inlet turbulence level. Any lower-intensity or interaction case remains optional and must be justified after the `6.5 -> 8.3%` response is known.
+while the near-vane median changes only
+
+`Tu_2-5mm: 1.247% -> 1.237%`.
+
+The corresponding changes in mean wall temperature (`-0.033%`), external heat-transfer rate (`-0.122%`) and outlet Mach (`+0.0007%`) are small, and the transition-like response shifts by only one wall-face station. Within the deterministic perturbations tested here, the viscosity-ratio changes therefore produce a much larger model response than the documented `6.5 -> 8.3%` inlet-intensity change.
+
+The minimum sensitivity campaign is complete: two B1 viscosity-ratio runs and one B2 inlet-intensity run, all restarted independently from iteration 556 and closed against common convergence/balance criteria. No additional CFD case is required for the present diagnostic question. A `Tu x mu_t/mu` interaction case remains possible only if a later study poses a specific interaction question; it is not part of the current campaign.

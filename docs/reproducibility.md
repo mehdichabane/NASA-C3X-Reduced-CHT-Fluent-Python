@@ -32,10 +32,15 @@ run Fluent.
 ## Optional solver-side saved-state audit
 
 `scripts/verification/replay_saved_state_reports.py` can be run in an
-environment with PyFluent and a locally installed, licensed Fluent instance. It
-opens one released `.cas.h5/.dat.h5` pair and recomputes existing scalar report
-definitions from the saved state. The default fine-grid reports are external
-heat-transfer rate, mean wall temperature and outlet Mach number.
+environment with a locally installed, licensed Fluent 26.1 instance. Its
+separate dependency is pinned in `requirements-fluent.txt` as
+`ansys-fluent-core==0.40.2`.
+
+The helper explicitly launches Fluent `26.1.0` in 2D double precision, checks
+the running Fluent version returned by the session, opens one released
+`.cas.h5/.dat.h5` pair and recomputes existing scalar report definitions from
+the saved state. The default fine-grid reports are external heat-transfer rate,
+mean wall temperature and outlet Mach number.
 
 This helper is intentionally outside `run_all.py` and GitHub Actions because the
 CI environment does not contain Fluent. It narrows the gap between the released

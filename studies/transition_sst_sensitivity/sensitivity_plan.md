@@ -42,21 +42,21 @@ Keep the accepted baseline viscosity ratio fixed at `mu_t/mu_in = 10` and vary o
 | Case | `Tu_in` | `mu_t/mu_in` | Status |
 |---|---:|---:|---|
 | `baseline_tu065_vr10` | 6.5% | 10 | complete |
-| `tu083_vr10` | 8.3% | 10 | planned |
+| `tu083_vr10` | 8.3% | 10 | complete |
 
 The `8.3%` level is the second inlet turbulence condition documented for the C3X cascade. Using ratio 10 keeps a direct connection to the accepted baseline and makes the new run a clean one-factor perturbation. It is not chosen because it improves or worsens the NASA comparison.
 
-After `tu083_vr10`, compare the same near-vane turbulence, wall-response and integral quantities as in B1. A lower-intensity pilot or an interaction case should only be added if this result creates a specific scientific question that the existing cases cannot answer.
+The completed case converges at iteration `651`. The `2-5 mm` pre-leading-edge median `Tu` changes only from `1.2473%` at the `6.5%` baseline to `1.2370%` at `8.3%`, while external heat rate changes by `-0.122%` and mean wall temperature by `-0.033%`. The suction-side gradient response shifts by one wall-face station. The much larger B1 response is therefore not reproduced by changing the documented inlet-intensity level alone at fixed ratio 10.
 
 ## Campaign size
 
-The minimum campaign is now:
+The minimum campaign is complete:
 
 - existing accepted baseline: 1 case;
 - B1: 2 new runs, complete;
-- B2: 1 new run, planned.
+- B2: 1 new run, complete.
 
-This gives **three new CFD runs total** before any optional follow-up. The reduction from the original four-run plan follows the primary-source clarification that `6.5%` and `8.3%` are the documented C3X inlet turbulence levels.
+This gives **three new CFD runs total**, all completed. No lower-intensity or interaction case is scheduled because the current one-factor campaign answers the diagnostic question. A future interaction case should be added only if a new, explicitly stated scientific question requires it.
 
 ## Common restart and numerics
 
@@ -120,4 +120,6 @@ For Fluent report-definition convergence conditions, `Ignore Iterations Before` 
 
 ## Optional follow-up
 
-Only after B2 should an interaction or lower-intensity case be considered. Add one only if the completed one-factor results identify a concrete unresolved mechanism; otherwise stop the campaign.
+No follow-up run is scheduled for the present study. The completed B1/B2 campaign is sufficient to show that the tested viscosity-ratio perturbations produce a much larger near-vane turbulence and thermal response than the documented `6.5 -> 8.3%` inlet-intensity change at fixed ratio 10.
+
+A future interaction case such as `tu083_vr05` should be added only if a later study poses a specific `Tu x mu_t/mu` interaction question. It is not required to close this diagnostic campaign.

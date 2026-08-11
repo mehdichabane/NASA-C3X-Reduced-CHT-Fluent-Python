@@ -95,8 +95,9 @@ is kept as a sensitivity case rather than used as the primary thermal result.
 The mapping, point counts, metrics and interpretation limits are in
 [`docs/nasa_comparison.md`](docs/nasa_comparison.md).
 
-The repository reports a benchmark comparison and numerical verification
-assessment. It does not claim a complete [ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
+The repository reports a benchmark comparison, iterative/conservation
+verification checks and a three-grid mesh-sensitivity assessment. It does not
+claim a complete [ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
 validation because the experiment and model inputs do not have a combined
 uncertainty budget.
 
@@ -186,7 +187,9 @@ For a local licensed Fluent 26.1 installation, the optional
 `scripts/verification/replay_saved_state_reports.py` helper uses the PyFluent
 version pinned in `requirements-fluent.txt` to launch a 2D double-precision
 session, open a released case/data pair and recompute existing scalar report
-definitions. It is not part of CI and is not a replay from initialization.
+definitions. It is not part of CI and is not a replay from initialization. The
+launch configuration is unit-tested in CI; no JSON from an actual licensed
+Fluent 26.1 execution is committed, so a live saved-state audit is not claimed.
 
 The saved states can be reopened. The original SpaceClaim and Ansys Meshing GUI
 history was not retained. No complete replay from initialization, with a

@@ -21,13 +21,17 @@ model-sensitivity analysis, Python automation and regression testing.
 |---|---:|
 | Final iteration | `236` |
 | Outlet Mach number | `0.901` |
-| Wall-temperature MAPE | `1.448%` pressure / `2.005%` suction |
+| Wall-temperature MAE / MAPE | `8.887 K / 1.448%` pressure; `12.999 K / 2.005%` suction |
 | HTC MAPE | `7.795%` pressure / `11.535%` suction |
 | Pressure-ratio MAPE | `0.926%` pressure / `3.980%` suction |
 | Relative mass imbalance | `5.1e-5%` |
 | Fluid-solid interface mismatch | `5.6e-6%` |
 | Solid heat imbalance | `0.0019%` |
 | Maximum wall `y+` | `0.452` |
+
+Wall-temperature MAPE is retained as a compact relative summary, but the
+headline result also reports MAE in kelvin because it is the more directly
+interpretable dimensional error for an absolute-temperature comparison.
 
 | Wall temperature | Heat-transfer coefficient |
 |---|---|
@@ -140,7 +144,7 @@ cross-case relationships in CI but does not replay the Fluent sensitivity runs.
 | Internal cooling `h` and `Tbulk` | Deterministic one-factor screening plus a local `h x Tbulk` interaction check; not probabilistic UQ |
 | Transition SST inlet state | Fine-grid sensitivity to `Tu_in` and turbulent-viscosity ratio; turbulence length scale is not varied independently |
 | Hot-gas `Cp`, molecular viscosity and thermal conductivity | Constant saved baseline values; sensitivity not evaluated and some original source-selection records are missing |
-| Solver-state reproducibility | Saved case/data pairs are released; an optional PyFluent helper recomputes existing scalar reports, but no full initialization-to-final replay is claimed |
+| Solver-state reproducibility | Saved case/data pairs are released; an optional pinned-PyFluent helper explicitly launches Fluent 26.1 in 2D double precision and recomputes existing scalar reports, but no full initialization-to-final replay is claimed |
 | Experimental/model-input uncertainty | Not propagated into a combined validation uncertainty budget |
 
 This table separates quantities that were actually screened from assumptions
@@ -178,10 +182,11 @@ fine Transition SST case. Filenames, iterations, cell counts and SHA-256 values
 are in [`fluent/restart_manifest.csv`](fluent/restart_manifest.csv). Reopening
 steps are in [`fluent/README.md`](fluent/README.md).
 
-For a local licensed Fluent installation, the optional
-`scripts/verification/replay_saved_state_reports.py` helper uses PyFluent to
-open a released case/data pair and recompute existing scalar report definitions.
-It is not part of CI and is not a replay from initialization.
+For a local licensed Fluent 26.1 installation, the optional
+`scripts/verification/replay_saved_state_reports.py` helper uses the PyFluent
+version pinned in `requirements-fluent.txt` to launch a 2D double-precision
+session, open a released case/data pair and recompute existing scalar report
+definitions. It is not part of CI and is not a replay from initialization.
 
 The saved states can be reopened. The original SpaceClaim and Ansys Meshing GUI
 history was not retained. No complete replay from initialization, with a

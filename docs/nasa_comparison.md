@@ -60,10 +60,23 @@ uncertainty.
 ## Why SST remains the primary case
 
 Transition SST gives similar pressure errors but much larger thermal errors for
-this mesh and operating point. The sharp rear suction-side increase is a model
+the accepted fine-grid baseline. The sharp rear suction-side increase is a model
 response; Run 145 does not provide a measured transition location that would
 confirm it.
 
-The lower SST errors do not show that SST is generally superior to transition
-models. Wall temperature also combines external convection, solid conduction
-and the prescribed internal convection boundaries.
+The separate
+[`Transition SST inlet-turbulence sensitivity study`](../studies/transition_sst_sensitivity/README.md)
+shows that the imposed inlet turbulence state does not remain unchanged between
+the computational inlet and the vane. At fixed `Tu_in = 6.5%`, changes in inlet
+turbulent-viscosity ratio produce large changes in near-vane turbulence decay,
+the suction-side transition-like response and the thermal field, while the
+outlet Mach number changes much less. At viscosity ratio `10`, changing the
+documented inlet turbulence level from `6.5%` to `8.3%` produces only a small
+near-vane and thermal response because the inlet difference is strongly
+attenuated before the leading edge.
+
+These results explain a strong model sensitivity; they do not identify an
+experimentally verified transition onset, calibrate the calculation, or show
+that SST is generally superior to transition models. Wall temperature also
+combines external convection, solid conduction and the prescribed internal
+convection boundaries.

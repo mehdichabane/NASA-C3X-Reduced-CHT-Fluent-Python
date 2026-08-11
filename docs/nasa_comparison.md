@@ -5,9 +5,12 @@ Hylton et al., NASA-CR-168015. HTC uncertainty intervals come from Table VI,
 report page 27. The transcribed source rows retain those page references in
 `references/experimental_data/`.
 
-This is a benchmark comparison. A complete [ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
-validation is not claimed because the experiment and all model inputs do not
-have a combined uncertainty budget.
+This is a benchmark comparison. Conformance to a complete
+[ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
+validation assessment is not claimed. The retained mesh record does not support
+an accepted formal discretization-uncertainty estimate, model-input uncertainty
+is not propagated, and the available experimental uncertainty is insufficient
+for a combined validation-uncertainty budget.
 
 ## Coordinate matching and metrics
 
@@ -75,6 +78,9 @@ not a calibration target and not a decomposition of its physical cause.
 | Transition SST | Suction | `44` | `281.010 W/(m2 K)` | `389.862 W/(m2 K)` | `32.232%` | `31.82%` |
 
 ![Heat-transfer-coefficient comparison](../results/figures/nasa_comparison/heat_transfer_coefficient.svg)
+
+*The HTC error bars show the reported experimental HTC uncertainty only. They
+are not a combined CFD/experimental validation-uncertainty interval.*
 
 ## Why SST remains the primary case
 

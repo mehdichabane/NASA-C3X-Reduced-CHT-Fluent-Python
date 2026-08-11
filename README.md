@@ -37,9 +37,20 @@ interpretable dimensional error for an absolute-temperature comparison.
 |---|---|
 | ![NASA wall-temperature comparison](results/figures/nasa_comparison/wall_temperature.svg) | ![NASA heat-transfer-coefficient comparison](results/figures/nasa_comparison/heat_transfer_coefficient.svg) |
 
+HTC error bars in the comparison figure represent the reported experimental HTC
+uncertainty only; they are not a combined validation-uncertainty band.
+
 | Fine mesh | Pressure ratio |
 |---|---|
 | ![Fine-grid mesh](results/figures/mesh/run145_fine_mesh_overview.png) | ![NASA pressure-ratio comparison](results/figures/nasa_comparison/pressure_ratio.svg) |
+
+**Scope of the evidence.** The archived baseline satisfies the stated
+convergence and conservation checks, the three reported global quantities change
+by less than `0.1%` from medium to fine mesh, and the sampled NASA stations are
+compared quantitatively. These results do not establish a formal
+discretization-uncertainty estimate, a combined ASME V&V 20 validation
+uncertainty, resolved internal-coolant or three-dimensional physics, or an
+initialization-to-final solver replay.
 
 ## Reduced model
 
@@ -97,9 +108,11 @@ The mapping, point counts, metrics and interpretation limits are in
 
 The repository reports a benchmark comparison, iterative/conservation
 verification checks and a three-grid mesh-sensitivity assessment. It does not
-claim a complete [ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
-validation because the experiment and model inputs do not have a combined
-uncertainty budget.
+claim conformance to a complete [ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
+validation assessment. In particular, the retained mesh record does not support
+an accepted formal discretization-uncertainty estimate, model-input uncertainty
+is not propagated, and the available experimental uncertainty is insufficient
+for a combined validation-uncertainty budget.
 
 ## What the sensitivity studies show
 
@@ -142,7 +155,7 @@ cross-case relationships in CI but does not replay the Fluent sensitivity runs.
 | Source of modeling or numerical uncertainty | Treatment in this repository |
 |---|---|
 | Spatial discretization | Three-grid solution sensitivity; no formal asymptotic GCI or discretization-uncertainty band |
-| Internal cooling `h` and `Tbulk` | Deterministic one-factor screening plus a local `h x Tbulk` interaction check; not probabilistic UQ |
+| Internal cooling `h` and `Tbulk` | Common-mode deterministic one-factor screening plus a local `h x Tbulk` interaction check; passage-to-passage uncertainty is not quantified and this is not probabilistic UQ |
 | Transition SST inlet state | Fine-grid sensitivity to `Tu_in` and turbulent-viscosity ratio; turbulence length scale is not varied independently |
 | Hot-gas `Cp`, molecular viscosity and thermal conductivity | Constant saved baseline values; sensitivity not evaluated and some original source-selection records are missing |
 | Solver-state reproducibility | Saved case/data pairs are released; an optional pinned-PyFluent helper explicitly launches Fluent 26.1 in 2D double precision and recomputes existing scalar reports, but no full initialization-to-final replay is claimed |
@@ -217,6 +230,7 @@ summarized in
 - Hot-gas `Cp`, molecular viscosity and thermal conductivity are constant baseline inputs whose sensitivity is not evaluated.
 - Input-property uncertainty is not propagated into the comparison metrics.
 - No coarse or medium Transition SST calculation is included.
+- The internal-cooling screening perturbs all ten passages coherently; passage-specific uncertainty in `h`, `Tbulk` or `C_r` is not quantified.
 - The sensitivity perturbations are deterministic screening values, not measured
   confidence intervals or a combined uncertainty budget.
 

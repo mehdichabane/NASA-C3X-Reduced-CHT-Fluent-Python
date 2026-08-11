@@ -12,7 +12,8 @@ passage-specific convection boundary conditions, so coolant flow and film
 cooling are not resolved.
 
 **Skills shown:** compressible CFD, conjugate heat transfer, mesh verification,
-experimental comparison, Python automation and regression testing.
+experimental comparison, model-sensitivity analysis, Python automation and
+regression testing.
 
 ## Fine-grid SST results
 
@@ -45,7 +46,8 @@ Included:
 - translationally periodic cascade passage;
 - gas-solid conjugate heat transfer;
 - SST `k-omega` as the primary turbulence model;
-- fine-grid Transition SST sensitivity case;
+- fine-grid Transition SST baseline and inlet-turbulence sensitivity study;
+- deterministic sensitivity studies of the prescribed internal cooling inputs;
 - second-order final discretization.
 
 Excluded:
@@ -94,6 +96,32 @@ assessment. It does not claim a complete [ASME V&V 20](https://www.asme.org/code
 validation because the experiment and model inputs do not have a combined
 uncertainty budget.
 
+## What the sensitivity studies show
+
+Two completed studies test assumptions that materially affect the thermal
+solution. They are deterministic sensitivity studies, not calibration exercises
+and not uncertainty quantification.
+
+**Internal cooling boundary conditions.** All ten prescribed internal HTC values
+and coolant bulk temperatures were perturbed around the accepted fine-grid SST
+baseline. The thermal response is strong and nearly linear over the screened
+ranges, while pressure ratio and outlet Mach remain effectively unchanged. A
+local four-corner `(+/-5% h, +/-5 K)` factorial check finds only a small bilinear
+interaction relative to the two main effects. See
+[`studies/internal_cooling_sensitivity/README.md`](studies/internal_cooling_sensitivity/README.md).
+
+**Transition SST inlet turbulence.** At fixed `Tu_in = 6.5%`, reducing the inlet
+turbulent-viscosity ratio from `10` to `5` and `1` strongly changes the
+freestream turbulence decay reaching the vane and moves the suction-side
+transition-like response downstream, with large thermal changes but much smaller
+changes in outlet Mach. At fixed viscosity ratio `10`, changing the documented
+inlet turbulence level from `6.5%` to `8.3%` produces only a small near-vane and
+thermal response because the imposed difference is strongly attenuated before
+the leading edge. These diagnostics explain model sensitivity; they do not
+identify an experimentally verified transition location or an optimal inlet
+setting. See
+[`studies/transition_sst_sensitivity/README.md`](studies/transition_sst_sensitivity/README.md).
+
 ## Run from a fresh clone
 
 Tested with Python 3.13.
@@ -137,6 +165,8 @@ summarized in
 - [Fine-grid convergence and balances](docs/convergence_acceptance.md)
 - [Three-grid mesh record](docs/meshing_recipe.md)
 - [NASA coordinate matching and error metrics](docs/nasa_comparison.md)
+- [Internal cooling boundary-condition sensitivity](studies/internal_cooling_sensitivity/README.md)
+- [Transition SST inlet-turbulence sensitivity](studies/transition_sst_sensitivity/README.md)
 - [Reproducibility status](docs/reproducibility.md)
 - [Experimental data transcription](references/experimental_data/README.md)
 
@@ -148,6 +178,8 @@ summarized in
 - Some material values lack their original source-selection record.
 - Input-property uncertainty is not propagated into the comparison metrics.
 - No coarse or medium Transition SST calculation is included.
+- The sensitivity perturbations are deterministic screening values, not measured
+  confidence intervals or a combined uncertainty budget.
 
 ## Source and licence
 

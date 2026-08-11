@@ -13,6 +13,14 @@
 internal-convection table. The hot-gas and solid values used in Fluent are
 listed in [`docs/model_setup.md`](../../docs/model_setup.md).
 
+For the generated internal-convection table, CoolProp air properties are
+evaluated at each NASA coolant bulk temperature and a fixed `101325 Pa` pressure.
+That pressure is a property-evaluation convention in the reduced preprocessing,
+not a retained Run 145 coolant-pressure measurement or a resolved coolant-flow
+boundary condition. The NASA passage Reynolds numbers are supplied independently,
+and sensitivity to the property-evaluation pressure is not included in the
+screening study.
+
 ## Thermophysical-property provenance
 
 | Domain | Property | Definition used | Role in the steady solution | Source record |

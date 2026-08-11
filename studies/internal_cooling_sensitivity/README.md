@@ -17,6 +17,8 @@ Two completed one-factor families are used:
 
 All ten passages are perturbed together. The local interaction check uses the four `(+/-5% h, +/-5 K)` corners around the same baseline; exact values are listed in `interaction_case_matrix.csv`.
 
+Because all ten passages are perturbed coherently, this screening probes common-mode scaling and offset directions. It does not quantify uncertainty in the passage-to-passage distribution of prescribed `h` or `Tbulk`, nor errors specific to individual passage correction factors `C_r`.
+
 The one-factor boundary values are listed in `case_matrix.csv`.
 
 ## Case IDs

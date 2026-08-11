@@ -21,6 +21,8 @@ GEOMETRY_PATH = ROOT / "geometry/raw/c3x_cooling_passages_figure7_uv_cm.csv"
 CR_PATH = ROOT / "references/model_inputs/c3x_internal_convection_correction_factors.csv"
 OUTPUT_PATH = ROOT / "references/model_inputs/run145_4512_internal_convection.csv"
 
+# Fixed state pressure used only to evaluate CoolProp air properties. It is not
+# presented as a measured Run 145 coolant pressure or a coolant-flow boundary.
 PROPERTY_PRESSURE_PA = 101325.0
 CORRELATION = "Nu_D = Cr * 0.022 * Pr^0.5 * Re_D^0.8"
 PROPERTY_MODEL = "CoolProp Air at T_coolant and 101325 Pa"

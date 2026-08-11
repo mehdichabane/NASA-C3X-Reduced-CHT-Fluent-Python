@@ -67,8 +67,13 @@ h = Nu_D x k_air / D
 NASA Appendix A, page 180 supplies each coolant bulk temperature and Reynolds
 number. Passage diameters come from the retained geometry. `C_r` comes from the C3X
 internal-channel table in [Trompoukis et al. (2021)](https://doi.org/10.3390/ijtpp6020020).
-CoolProp 8.0.0 supplies air properties at the bulk temperature and `101325 Pa`.
-The generated inputs are stored in
+CoolProp 8.0.0 supplies air properties at the bulk temperature and a fixed
+`101325 Pa` property-evaluation pressure. This pressure is a preprocessing
+convention for evaluating `cp`, viscosity, conductivity and Prandtl number; it
+is not presented as a measured Run 145 coolant pressure or as a coolant-flow
+boundary condition. The NASA Reynolds numbers are imposed independently of this
+property-evaluation pressure, and sensitivity to the pressure choice is not
+assessed. The generated inputs are stored in
 `references/model_inputs/run145_4512_internal_convection.csv`.
 
 ## Material values

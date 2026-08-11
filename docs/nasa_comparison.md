@@ -31,6 +31,11 @@ but it should not be interpreted alone: percentage errors can look small when
 the compared temperatures have a large absolute baseline, and the value is not
 invariant to an affine change of temperature scale.
 
+Summary bias, MAE, RMSE and MAPE give equal weight to each experimental station.
+They are station-wise statistics, not arc-length-weighted surface integrals;
+regions with denser experimental station placement therefore contribute more
+entries to the summary metrics.
+
 ## Pressure ratio
 
 | Model | Surface | Points | Bias | MAE | RMSE | MAPE |

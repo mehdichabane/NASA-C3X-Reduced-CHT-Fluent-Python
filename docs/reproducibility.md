@@ -42,6 +42,18 @@ the running Fluent version returned by the session, opens one released
 the saved state. The default fine-grid reports are external heat-transfer rate,
 mean wall temperature and outlet Mach number.
 
+The launch configuration is unit-tested in CI without a Fluent installation.
+No JSON produced by an actual licensed Fluent 26.1 execution is committed at
+present, so the repository demonstrates the audit configuration and released
+solver state, not a recorded live execution of that audit.
+
+A local live audit can be recorded explicitly with:
+
+```bash
+python -m pip install -r requirements-fluent.txt
+python scripts/verification/replay_saved_state_reports.py PATH_TO_FINE_CASE.cas.h5 --output saved_state_report_audit.json
+```
+
 This helper is intentionally outside `run_all.py` and GitHub Actions because the
 CI environment does not contain Fluent. It narrows the gap between the released
 solver state and the Python post-processing, but it is not evidence of a replay

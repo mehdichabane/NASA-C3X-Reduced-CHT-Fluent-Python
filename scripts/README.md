@@ -15,13 +15,18 @@
 | `verification/extract_restart_mesh_quality.py` | release-bundle `.cas.h5` files | all-grid extrema, threshold distributions, worst-cell coordinates + solid adjacency |
 | `verification/check_mesh_summary.py` | committed mesh-quality/sensitivity tables | consistency checks |
 | `verification/check_global_balances.py` | final Fluent reports | mass/interface/solid-energy verification |
+| `verification/check_sensitivity_studies.py` | committed internal-cooling and Transition SST case matrices/summary tables | cross-study baseline, case-coverage and response-consistency checks |
 | `verification/plot_wall_yplus.py` | fine wall export | wall-resolution figure and statistics |
 | `comparison/compare_run145.py` | rebuilt CFD profiles + NASA tables | pointwise comparison, error metrics and figures |
 
 `python scripts/run_all.py` executes the Git-contained analysis. `pytest -q`
 tests coordinate mapping, manufactured-field gradients, mesh-quality formulas,
-profile rebuilding, direct Transition SST export consistency, convergence and
-NASA comparison metrics.
+profile rebuilding, direct Transition SST export consistency, convergence, NASA
+comparison metrics and the committed sensitivity-study headline relationships.
+
+The sensitivity-study consistency check does not rerun Fluent. It protects the
+committed campaign matrices and summaries against accidental cross-case or
+headline-result inconsistencies.
 
 The restart binaries are not stored in Git, so CFF mesh extraction is run
 after the bundle has been downloaded and extracted:

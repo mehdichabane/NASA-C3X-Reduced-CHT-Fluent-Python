@@ -15,6 +15,7 @@ SCRIPTS = [
     "scripts/postprocess/build_comparison_profiles.py",
     "scripts/verification/check_mesh_summary.py",
     "scripts/verification/check_global_balances.py",
+    "scripts/verification/check_sensitivity_studies.py",
     "scripts/verification/plot_wall_yplus.py",
     "scripts/comparison/compare_run145.py",
 ]

@@ -11,9 +11,9 @@ The hot-gas passage and solid vane are resolved. The ten internal passages use
 passage-specific convection boundary conditions, so coolant flow and film
 cooling are not resolved.
 
-**Skills shown:** compressible CFD, conjugate heat transfer, mesh verification,
-experimental comparison, model-sensitivity analysis, Python automation and
-regression testing.
+**Skills shown:** compressible CFD, conjugate heat transfer, three-grid mesh
+sensitivity, numerical verification checks, experimental comparison,
+model-sensitivity analysis, Python automation and regression testing.
 
 ## Fine-grid SST results
 
@@ -102,6 +102,12 @@ Two completed studies test assumptions that materially affect the thermal
 solution. They are deterministic sensitivity studies, not calibration exercises
 and not uncertainty quantification.
 
+| Controlled perturbation | Observed response |
+|---|---|
+| Internal cooling `h/h0: 1.00 -> 0.90` | `Tw_mean +6.104 K`; external heat rate `-5.393%`; outlet Mach `+0.000804%` |
+| Transition SST `mu_t/mu_in: 10 -> 1` at `Tu_in = 6.5%` | `Tu` at 2-5 mm before LE `1.247% -> 0.364%`; transition-like suction response `x/Cx 0.653 -> 0.967`; external heat rate `-19.716%` |
+| Transition SST `Tu_in: 6.5% -> 8.3%` at `mu_t/mu_in = 10` | near-LE `Tu 1.247% -> 1.237%`; `Tw_mean -0.033%`; external heat rate `-0.122%` |
+
 **Internal cooling boundary conditions.** All ten prescribed internal HTC values
 and coolant bulk temperatures were perturbed around the accepted fine-grid SST
 baseline. The thermal response is strong and nearly linear over the screened
@@ -122,6 +128,10 @@ identify an experimentally verified transition location or an optimal inlet
 setting. See
 [`studies/transition_sst_sensitivity/README.md`](studies/transition_sst_sensitivity/README.md).
 
+The committed study matrices and summary tables are also checked by
+`scripts/verification/check_sensitivity_studies.py`; this protects the reported
+cross-case relationships in CI but does not replay the Fluent sensitivity runs.
+
 ## Run from a fresh clone
 
 Tested with Python 3.13.
@@ -134,7 +144,7 @@ python scripts/run_all.py
 python -m pytest -q
 ```
 
-`run_all.py` executes 13 project-specific processing, verification and plotting
+`run_all.py` executes 14 project-specific processing, verification and plotting
 stages. It reads the committed Fluent exports and does not launch Fluent.
 
 To rebuild the ten internal-convection inputs, install CoolProp and run the

@@ -4,6 +4,16 @@ A final state is retained when the settings remain unchanged for 20 iterations,
 the continuity residual is below `1e-3`, each engineering-monitor relative span
 is below `0.02%`, and the mass and heat balances meet the limits below.
 
+Continuity is the only equation residual used as an explicit scalar acceptance
+gate because it is the slowest-decaying residual in the retained SST final
+window. At iteration 217, the other monitored equation residuals were already
+at or below `1.27e-5`, while continuity was `9.76e-4`; at iteration 236 they
+were all below `6.84e-6` while continuity was `6.66e-4`. The complete residual
+histories are still inspected and plotted. The acceptance rule therefore does
+not treat `continuity < 1e-3` as sufficient by itself: the engineering monitors
+and conservation checks below must also pass. This is a project-specific
+acceptance rule, not a universal Fluent convergence threshold.
+
 ## SST final window: iterations 217-236
 
 The active continuity criterion was first met at iteration 216. The calculation

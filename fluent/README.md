@@ -46,8 +46,16 @@ installation from silently auditing the release with that newer version.
 
 The default report names are `fine_external_heat_rate`,
 `fine_wall_temperature_avg` and `fine_mach_outlet`; use `--report` to override
-them for another saved case. `--output result.json` writes the returned values
-to JSON as well as stdout.
+them for another saved case. To retain a local audit artifact explicitly, use:
+
+```text
+python scripts/verification/replay_saved_state_reports.py PATH_TO_FINE_CASE.cas.h5 --output saved_state_report_audit.json
+```
+
+The launch configuration is unit-tested in CI with a fake PyFluent launcher.
+No JSON from an actual licensed Fluent 26.1 execution is committed at present,
+so the repository does not claim that this optional live audit has already been
+run and archived.
 
 This helper requires a locally installed, licensed Fluent 26.1 environment and
 is not executed in GitHub Actions. It is a saved-state audit only: it does not

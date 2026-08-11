@@ -56,6 +56,13 @@ entries to the summary metrics.
 | Transition SST | Pressure | `31` | `-39.366 K` | `39.366 K` | `40.593 K` | `6.348%` |
 | Transition SST | Suction | `44` | `-41.723 K` | `41.723 K` | `52.352 K` | `6.408%` |
 
+At the reported precision, the magnitude of the wall-temperature bias equals
+the MAE for all four rows. The stationwise temperature errors are therefore
+one-signed over the sampled stations: the SST baseline is systematically hotter
+than the NASA values, while the accepted Transition SST baseline is
+systematically colder. This is a descriptive bias of the archived model states,
+not a calibration target and not a decomposition of its physical cause.
+
 ![Wall-temperature comparison](../results/figures/nasa_comparison/wall_temperature.svg)
 
 ## Heat-transfer coefficient
@@ -86,6 +93,11 @@ outlet Mach number changes much less. At viscosity ratio `10`, changing the
 documented inlet turbulence level from `6.5%` to `8.3%` produces only a small
 near-vane and thermal response because the inlet difference is strongly
 attenuated before the leading edge.
+
+All transition-response-front locations cited by that study are extracted from
+the fine mesh only. No coarse/medium Transition SST mesh-sensitivity assessment
+was performed for those coordinates, so they are fine-grid model-response
+diagnostics rather than grid-converged transition locations.
 
 These results explain a strong model sensitivity; they do not identify an
 experimentally verified transition onset, calibrate the calculation, or show

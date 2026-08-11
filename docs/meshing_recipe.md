@@ -52,19 +52,48 @@ Medium-to-fine changes in outlet Mach number, mean wall temperature and
 external heat rate are below `0.1%`. Local profiles remain more sensitive in
 the last `5%` of surface distance near the trailing edge.
 
-| Surface | Quantity | Medium-to-fine normalized MAE |
-|---|---|---:|
-| Pressure | `p/p_t` | `8.76%` |
-| Pressure | Wall temperature | `4.84%` |
-| Pressure | Heat flux | `4.06%` |
-| Pressure | HTC | `3.87%` |
-| Suction | `p/p_t` | `4.56%` |
-| Suction | Wall temperature | `3.77%` |
-| Suction | HTC | `2.74%` |
+For the local comparison, both meshes are interpolated onto the same `s/L`
+coordinate. The reported range-normalized MAE is
+
+`100 x MAE / (max(phi_fine) - min(phi_fine))`
+
+evaluated over the same surface and region. It is a profile-shape diagnostic,
+not a pointwise relative error and not a percentage error in the physical
+quantity itself. All trailing-edge ranges listed below are non-zero, so the
+zero-range fallback implemented in the post-processing is not used here.
+
+| Surface | Quantity | Medium-to-fine MAE | MAE / local fine-grid range |
+|---|---|---:|---:|
+| Pressure | `p_s/p_t,in` | `0.00764` | `8.76%` |
+| Pressure | Wall temperature | `0.927 K` | `4.84%` |
+| Pressure | Heat flux | `4.199 kW/m2` | `4.06%` |
+| Pressure | HTC | `42.99 W/(m2 K)` | `3.87%` |
+| Suction | `p_s/p_t,in` | `0.00258` | `4.56%` |
+| Suction | Wall temperature | `0.943 K` | `3.77%` |
+| Suction | Heat flux | `1.053 kW/m2` | `1.65%` |
+| Suction | HTC | `13.06 W/(m2 K)` | `2.74%` |
+
+For example, the pressure-side `8.76%` value means that the medium-to-fine
+pressure-ratio MAE is `0.00764`, which is `8.76%` of the fine-grid
+pressure-ratio range within the last `5%` of that surface. It does **not** mean
+that the medium-grid pressure is locally `8.76%` different from the fine-grid
+pressure.
 
 The full local summary is
 `results/processed/mesh_sensitivity/run145_three_grid_local_profile_summary.csv`.
 The global results therefore do not imply uniform local grid insensitivity.
+
+The post-processing also computes Richardson/GCI screening diagnostics for the
+three global quantities using an effective two-dimensional spacing proportional
+to `1/sqrt(N_cells)`. The machine-readable output therefore contains observed
+order, Richardson-extrapolated value, fine/medium GCI and asymptotic-ratio
+fields. These values are retained as exploratory diagnostics only; they are not
+accepted or reported here as formal discretization uncertainties. The retained
+meshing record cannot establish that the three meshes form a systematically
+similar refinement family with the same generation parameters and controlled
+reference-spacing ratios. The missing sizing, bias, inflation-growth and
+meshing-method records listed below are precisely why the project reports a
+three-grid sensitivity rather than a formal asymptotic GCI assessment.
 
 ## Missing setup information
 

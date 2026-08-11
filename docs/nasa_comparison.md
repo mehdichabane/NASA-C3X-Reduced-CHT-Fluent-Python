@@ -24,6 +24,13 @@ uncertainty.
 `scripts/comparison/compare_run145.py` writes the pointwise tables and summary to
 `results/processed/nasa_comparison/` and generates the three figures below.
 
+For wall temperature, MAE and RMSE in kelvin are the most directly interpretable
+dimensional error measures and are therefore reported alongside MAPE. MAPE is
+retained as a compact relative summary using absolute temperature in kelvin,
+but it should not be interpreted alone: percentage errors can look small when
+the compared temperatures have a large absolute baseline, and the value is not
+invariant to an affine change of temperature scale.
+
 ## Pressure ratio
 
 | Model | Surface | Points | Bias | MAE | RMSE | MAPE |

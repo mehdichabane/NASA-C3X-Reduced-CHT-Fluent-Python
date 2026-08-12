@@ -2,8 +2,16 @@
 *.py text eol=lf
 *.md text eol=lf
 *.csv text eol=lf
-*.dat text eol=lf
 *.txt text eol=lf
 *.png binary
 *.svg text eol=lf
 *.cff text eol=lf
+
+# Fluent solver files may be binary. Never subject them to text/EOL normalization.
+*.cas binary
+*.cas.h5 binary
+*.dat binary
+*.dat.h5 binary
+*.msh binary
+*.msh.h5 binary
+*.h5 binary

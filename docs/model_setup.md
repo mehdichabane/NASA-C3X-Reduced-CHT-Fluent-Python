@@ -65,18 +65,28 @@ h = Nu_D x k_air / D
 ```
 
 NASA Appendix A, page 180 supplies each coolant bulk temperature and Reynolds
-number. Passage diameters come from the retained geometry. `C_r` comes from the C3X
-internal-channel table in [Trompoukis et al. (2021)](https://doi.org/10.3390/ijtpp6020020).
-Those factors are adopted as a published reduced-model closure; they are not
-re-estimated from the Run 145 measurements here, and passage-specific
-uncertainty in `C_r` is not quantified. CoolProp 8.0.0 supplies air properties
-at the bulk temperature and a fixed `101325 Pa` property-evaluation pressure.
-This pressure is a preprocessing convention for evaluating `cp`, viscosity,
-conductivity and Prandtl number; it is not presented as a measured Run 145
-coolant pressure or as a coolant-flow boundary condition. The NASA Reynolds
-numbers are imposed independently of this property-evaluation pressure, and
-sensitivity to the pressure choice is not assessed. The generated inputs are
-stored in `references/model_inputs/run145_4512_internal_convection.csv`.
+number. Passage diameters come from the retained geometry. Trompoukis et al.
+(2021), Section 5,
+[doi:10.3390/ijtpp6020020](https://doi.org/10.3390/ijtpp6020020), documents this
+reduced 2D Nusselt correlation and states that `C_r` accounts for thermal
+entrance-region effects, with values spanning approximately `1.03-1.12` across
+the ten channels; that paper attributes `C_r` to Hylton et al. (1983). It does
+not tabulate the ten individual `C_r` values. The exact per-hole assignments in
+`references/model_inputs/c3x_internal_convection_correction_factors.csv` are
+therefore retained as archived project inputs whose original per-hole
+transcription record was not saved, rather than presented as independently
+re-transcribed values from Trompoukis et al. They are kept unchanged to remain
+consistent with the released Fluent states. Passage-specific uncertainty in
+`C_r` is not quantified.
+
+CoolProp 8.0.0 supplies air properties at the bulk temperature and a fixed
+`101325 Pa` property-evaluation pressure. This pressure is a preprocessing
+convention for evaluating `cp`, viscosity, conductivity and Prandtl number; it
+is not presented as a measured Run 145 coolant pressure or as a coolant-flow
+boundary condition. The NASA Reynolds numbers are imposed independently of this
+property-evaluation pressure, and sensitivity to the pressure choice is not
+assessed. The generated inputs are stored in
+`references/model_inputs/run145_4512_internal_convection.csv`.
 
 ## Material values
 
@@ -188,4 +198,5 @@ The model does not predict coolant pressure drop, coolant temperature rise,
 internal-passage development, film cooling, endwall flow, radiation, structural
 response or unsteady wake passing. The reduced internal-convection closure also
 does not quantify passage-specific uncertainty in the adopted `C_r`, `h` or
-`T_bulk` inputs.
+`T_bulk` inputs, and the original per-hole `C_r` transcription record was not
+retained.

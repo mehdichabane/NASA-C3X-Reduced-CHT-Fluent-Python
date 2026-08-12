@@ -17,11 +17,18 @@ and text exports. SVG output uses a fixed Matplotlib hash salt and omits date
 metadata, so unchanged inputs produce identical SVG files. The workflow does not
 run Fluent.
 
+The requirement files pin the project's direct Python dependencies, but they are
+not a complete transitive lockfile or a frozen operating-system image. GitHub
+Actions currently runs the checks on `ubuntu-latest` with Python `3.13`.
+Accordingly, the repository demonstrates deterministic regenerated outputs in
+the tested CI environment; it does not claim a bit-for-bit freeze of every
+transitive package or runner component.
+
 ## What can be reproduced
 
 | Item | Available evidence |
 |---|---|
-| Python processing | source scripts, pinned dependencies and regression tests |
+| Python processing | source scripts, version-pinned direct dependencies, regression tests and the CI workflow |
 | Internal convection coefficients | NASA coolant rows, geometry, `C_r`, CoolProp script and committed output |
 | SST and Transition SST comparison profiles | direct wall exports and coordinate reference |
 | Mesh-quality tables | CFF parser and released SST case files |
@@ -33,7 +40,7 @@ run Fluent.
 
 `scripts/verification/replay_saved_state_reports.py` can be run in an
 environment with a locally installed, licensed Fluent 26.1 instance. Its
-separate dependency is pinned in `requirements-fluent.txt` as
+separate direct dependency is pinned in `requirements-fluent.txt` as
 `ansys-fluent-core==0.40.2`.
 
 The helper explicitly launches Fluent `26.1.0` in 2D double precision, checks

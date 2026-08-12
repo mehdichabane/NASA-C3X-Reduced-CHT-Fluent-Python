@@ -4,7 +4,7 @@
 |---|---|
 | `c3x_archived_solid_properties.csv` | solid values recovered from the Fluent case and the conductivity law |
 | `material_property_provenance.csv` | baseline-definition source, solution role and independent literature status of each material value |
-| `c3x_internal_convection_correction_factors.csv` | archived per-hole `C_r` assignments plus their source qualification |
+| `c3x_internal_convection_correction_factors.csv` | per-hole `C_r` values transcribed from NASA-CR-168015 Figure 7 |
 | `run145_4512_internal_convection.csv` | generated CoolProp properties and convection coefficients |
 | `run145_wall_surface_coordinate_reference.csv` | pressure/suction labels for the final wall coordinates |
 | `transition_sst_settings.csv` | inlet, Transition SST and discretization settings recovered from the saved case and transcript |
@@ -21,24 +21,45 @@ condition. The NASA passage Reynolds numbers are supplied independently, and
 sensitivity to the property-evaluation pressure is not included in the
 screening study.
 
-## Internal-convection correction-factor source qualification
+## Internal-convection source record
 
-Trompoukis et al. (2021), Section 5,
-[doi:10.3390/ijtpp6020020](https://doi.org/10.3390/ijtpp6020020), documents the
-reduced 2D correlation
-`Nu_D = 0.022 C_r Pr^0.5 Re_D^0.8` and states that `C_r` accounts for thermal
-entrance-region effects, with values spanning approximately `1.03-1.12` across
-the ten C3X channels. That paper attributes `C_r` to Hylton et al. (1983), but
-it does not tabulate the ten individual `C_r` assignments.
+Hylton et al., NASA-CR-168015 (1983), directly documents the internal cooling
+closure used by the experiment. In the heat-transfer measurement section it
+gives
 
-Accordingly, `c3x_internal_convection_correction_factors.csv` is the repository's
-authoritative record of the per-hole assignments used by the released Fluent
-states. The individual values are not attributed to a table in Trompoukis et al.;
-that publication is cited for the correlation, physical role and approximate
-range of `C_r`. The archived assignments remain unchanged so the generated
-boundary inputs remain consistent with the released solver states. Changing
-them would alter the prescribed cooling boundary conditions and would require
-new Fluent runs rather than a documentation-only correction.
+```text
+Nu_D = C_r * 0.022 * Pr^0.5 * Re_D^0.8
+```
+
+and states that `C_r` corrects the fully developed smooth-pipe expression for
+thermal entrance-region effects. For the experimental `Pr`, `Re_D` and `x/D`
+range, the report states that `C_r` is approximately `1.03-1.12` and attributes
+the correction to its Ref. 22, Crawford and Kays, *Convective Heat and Mass
+Transfer* (1980).
+
+More importantly for the released model, NASA Figure 7 (report p. 16) directly
+tabulates the ten C3X passage diameters and their individual `C_r` values. The
+values in `c3x_internal_convection_correction_factors.csv` are therefore direct
+transcriptions of the primary NASA report, not repository-only assignments:
+
+```text
+holes 1-7 : C_r = 1.118
+holes 8-9 : C_r = 1.056
+hole 10   : C_r = 1.025
+```
+
+The Run 145 coolant bulk temperatures and passage Reynolds numbers are
+transcribed from Appendix A, report p. 181. `run145_4512_internal_convection.csv`
+combines those measurements with the Figure 7 diameters and `C_r` values and
+CoolProp air properties. This correction changes source attribution and page
+metadata only; it does not change the prescribed cooling inputs used by the
+released Fluent states.
+
+Trompoukis et al. (2021),
+[doi:10.3390/ijtpp6020020](https://doi.org/10.3390/ijtpp6020020), remains a
+useful later C3X reference, but it is not needed as the primary source for the
+per-hole `C_r` values or for the correlation because both are documented in
+NASA-CR-168015 itself.
 
 ## Thermophysical-property definition and citation status
 

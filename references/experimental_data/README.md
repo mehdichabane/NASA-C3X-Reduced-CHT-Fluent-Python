@@ -34,16 +34,20 @@ h_CFD = q_into_vane / (811 K - T_wall)
 ## Reduced internal convection
 
 The directly transcribed NASA coolant quantities remain in
-`run145_4512_coolant_flow.csv`. The derived passage-specific convection table is
-a model input, not an experimental measurement, and is therefore stored under
+`run145_4512_coolant_flow.csv`. They come from the Run 145 coolant-flow table in
+Appendix A, report page 181. The derived passage-specific convection table is a
+model input, not an experimental measurement, and is therefore stored under
 `references/model_inputs/run145_4512_internal_convection.csv`. Its complete
 CoolProp-based reconstruction is implemented in
 `scripts/preprocess/build_internal_convection_inputs.py`.
+
+Passage diameters and the individual `C_r` correction factors used by that
+reconstruction are direct transcriptions of NASA Figure 7 (report p. 16).
 
 ## Other files
 
 - `run145_4512_pressure.csv`: external static-pressure measurements;
 - `run145_4512_coolant_flow.csv`: coolant-flow quantities transcribed from the
-  Run 145 Appendix A table;
+  Run 145 Appendix A table on report page 181;
 - `c3x_heat_transfer_uncertainty_table_VI.csv`: uncertainty intervals used for
   the HTC comparison.

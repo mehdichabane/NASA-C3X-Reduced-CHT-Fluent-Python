@@ -20,6 +20,12 @@ the United States Government for which public use is permitted. The repository
 retains source attribution and does not claim authorship of the underlying NASA
 measurements or geometry.
 
+The report is also the primary source for the reduced internal-convection
+correlation used here and for the ten per-hole `C_r` correction factors. Figure 7
+reports the individual C3X passage geometry and `C_r` values; the
+heat-transfer-measurement section documents the smooth-pipe Nusselt correlation
+and the thermal-entry role of `C_r`.
+
 ## Ansys material
 
 Ansys, Ansys Fluent, Workbench and associated names and logos are trademarks or
@@ -31,12 +37,11 @@ the repository's MIT licence.
 ## Other cited publications
 
 Third-party publications are cited only for the specific information they
-support. In particular, Trompoukis et al. (2021) is cited for the reduced
-internal-convection correlation, the role of `C_r` and its approximate range;
-the ten individual per-hole assignments used by the released Fluent states are
-repository-archived model inputs and are not attributed to a table in that
-publication. The cited publications themselves are not redistributed or
-relicensed by this repository.
+support. Trompoukis et al. (2021) is retained as a later C3X reference, but the
+repository no longer uses it as the primary provenance record for the
+internal-convection correlation or the ten individual `C_r` values because those
+are documented directly in NASA-CR-168015. The cited publications themselves
+are not redistributed or relicensed by this repository.
 
 ## No endorsement
 

@@ -64,29 +64,34 @@ Nu_D = C_r x 0.022 x Pr^0.5 x Re_D^0.8
 h = Nu_D x k_air / D
 ```
 
-NASA Appendix A, page 180 supplies each coolant bulk temperature and Reynolds
-number. Passage diameters come from the retained geometry. Trompoukis et al.
-(2021), Section 5,
-[doi:10.3390/ijtpp6020020](https://doi.org/10.3390/ijtpp6020020), documents this
-reduced 2D Nusselt correlation and states that `C_r` accounts for thermal
-entrance-region effects, with values spanning approximately `1.03-1.12` across
-the ten channels; that paper attributes `C_r` to Hylton et al. (1983). It does
-not tabulate the ten individual per-hole assignments. The authoritative per-hole
-values used by this repository are therefore the archived assignments in
-`references/model_inputs/c3x_internal_convection_correction_factors.csv`. They
-are not presented as a direct transcription of a table in Trompoukis et al.;
-the publication supports the correlation, physical role and approximate range.
-The values are kept unchanged to remain consistent with the released Fluent
-states. Passage-specific uncertainty in `C_r` is not quantified.
+The source chain for this reduced internal-convection closure is direct in
+NASA-CR-168015. The heat-transfer measurement section gives the Nusselt
+correlation above, defines `C_r` as the thermal-entry correction to the
+fully-developed smooth-pipe expression, and states that its experimental range
+is approximately `1.03-1.12`. NASA attributes that correction to Ref. 22,
+Crawford and Kays, *Convective Heat and Mass Transfer* (1980).
 
-CoolProp 8.0.0 supplies air properties at the bulk temperature and a fixed
-`101325 Pa` property-evaluation pressure. This pressure is a preprocessing
-convention for evaluating `cp`, viscosity, conductivity and Prandtl number; it
-is not presented as a measured Run 145 coolant pressure or as a coolant-flow
-boundary condition. The NASA Reynolds numbers are imposed independently of this
-property-evaluation pressure, and sensitivity to the pressure choice is not
-assessed. The generated inputs are stored in
+NASA Figure 7 (report p. 16) directly tabulates the C3X passage geometry and
+per-hole `C_r` values. The repository transcribes `C_r = 1.118` for holes 1-7,
+`1.056` for holes 8-9 and `1.025` for hole 10. These are primary-source
+transcriptions, not values inferred from a later publication or recovered only
+from the Fluent state.
+
+NASA Appendix A, report p. 181, supplies each Run 145 coolant bulk temperature
+and passage Reynolds number. CoolProp 8.0.0 supplies air properties at the bulk
+temperature and a fixed `101325 Pa` property-evaluation pressure. This pressure
+is a preprocessing convention for evaluating `cp`, viscosity, conductivity and
+Prandtl number; it is not presented as a measured Run 145 coolant pressure or
+as a coolant-flow boundary condition. The NASA Reynolds numbers are imposed
+independently of this property-evaluation pressure, and sensitivity to the
+pressure choice is not assessed. The generated inputs are stored in
 `references/model_inputs/run145_4512_internal_convection.csv`.
+
+Trompoukis et al. (2021),
+[doi:10.3390/ijtpp6020020](https://doi.org/10.3390/ijtpp6020020), is retained as
+a later C3X reference, but it is not the primary provenance record for the
+correlation or the ten `C_r` values because NASA-CR-168015 documents both
+directly.
 
 ## Material values
 

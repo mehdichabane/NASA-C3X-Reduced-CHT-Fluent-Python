@@ -31,3 +31,11 @@ def test_nasa_dimensionalized_thermal_values() -> None:
     np.testing.assert_allclose(
         thermal["h_W_m2K"], thermal["h_norm"] * 1135.0, rtol=0.0, atol=1.1e-3
     )
+
+
+def test_run145_coolant_table_source_page() -> None:
+    coolant = pd.read_csv(DATA / "run145_4512_coolant_flow.csv")
+    assert coolant["hole_no"].tolist() == list(range(1, 11))
+    assert set(coolant["report_page"]) == {181}
+    assert coolant["average_temperature_K"].iloc[0] == 395.38
+    assert coolant["average_temperature_K"].iloc[-1] == 506.46

@@ -6,9 +6,10 @@ The geometry source is Hylton et al., NASA-CR-168015.
 coordinates transcribed from Table III.
 
 `raw/c3x_cooling_passages_figure7_uv_cm.csv` contains the ten cooling-passage
-locations and diameters transcribed from Figure 7. It contains geometry only;
-the internal-convection correction factors are stored separately under
-`references/model_inputs/`.
+locations and diameters transcribed from Figure 7. Figure 7 also reports the
+per-hole internal-convection correction factors `C_r`; those values are kept in
+a separate model-input table at
+`references/model_inputs/c3x_internal_convection_correction_factors.csv`.
 
 The raw coordinates are retained in centimetres so they can be checked
 directly against the NASA report.

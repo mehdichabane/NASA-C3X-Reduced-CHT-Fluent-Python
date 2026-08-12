@@ -1,11 +1,11 @@
 run,code,hole_no,average_temperature_F,average_temperature_K,Re_x_1e_minus_4,coolant_flow_lbm_sec_raw,coolant_flow_kg_sec_raw,source,report_page,notes,coolant_flow_kg_sec,coolant_flow_lbm_sec
-145,4512,1,252.01,395.38,9.964,0.0246,0.0112,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.0112,0.0246
-145,4512,2,254.6,396.82,10.263,0.0254,0.0115,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.0115,0.0254
-145,4512,3,220.74,378.01,10.31,0.0247,0.0112,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.0112,0.0247
-145,4512,4,232.63,384.61,10.547,0.0255,0.0116,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.0116,0.0255
-145,4512,5,199.62,366.27,11.358,0.0265,0.012,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.012,0.0265
-145,4512,6,297.48,420.64,10.323,0.0266,0.0121,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.0121,0.0266
-145,4512,7,227.36,381.68,10.71,0.0258,0.0117,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.0117,0.0258
-145,4512,8,273.95,407.57,6.931,0.00866,0.00393,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.00393,0.00866
-145,4512,9,373.33,462.78,3.906,0.00533,0.00242,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.00242,0.00533
-145,4512,10,451.23,506.46,3.046,0.0028,0.00127,NASA-CR-168015 Appendix A,180,"Manual transcription from NASA-CR-168015 Appendix A, p. 180.",0.00127,0.0028
+145,4512,1,252.01,395.38,9.964,0.0246,0.0112,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.0112,0.0246
+145,4512,2,254.6,396.82,10.263,0.0254,0.0115,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.0115,0.0254
+145,4512,3,220.74,378.01,10.31,0.0247,0.0112,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.0112,0.0247
+145,4512,4,232.63,384.61,10.547,0.0255,0.0116,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.0116,0.0255
+145,4512,5,199.62,366.27,11.358,0.0265,0.012,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.012,0.0265
+145,4512,6,297.48,420.64,10.323,0.0266,0.0121,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.0121,0.0266
+145,4512,7,227.36,381.68,10.71,0.0258,0.0117,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.0117,0.0258
+145,4512,8,273.95,407.57,6.931,0.00866,0.00393,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.00393,0.00866
+145,4512,9,373.33,462.78,3.906,0.00533,0.00242,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.00242,0.00533
+145,4512,10,451.23,506.46,3.046,0.0028,0.00127,NASA-CR-168015 Appendix A,181,"Manual transcription from NASA-CR-168015 Appendix A, p. 181.",0.00127,0.0028

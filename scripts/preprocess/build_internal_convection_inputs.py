@@ -1,9 +1,9 @@
 """Rebuild the ten reduced internal-convection boundary inputs.
 
 The NASA Run 145 coolant temperatures and Reynolds numbers are combined with
-the published passage diameters, source-informed correction factors, and
-CoolProp 8.0.0 air properties. Use ``--check`` to compare a fresh rebuild
-against the committed model-input table, or ``--write`` to regenerate it.
+the NASA Figure 7 passage diameters and correction factors and CoolProp 8.0.0
+air properties. Use ``--check`` to compare a fresh rebuild against the
+committed model-input table, or ``--write`` to regenerate it.
 """
 
 from __future__ import annotations
@@ -26,11 +26,14 @@ OUTPUT_PATH = ROOT / "references/model_inputs/run145_4512_internal_convection.cs
 PROPERTY_PRESSURE_PA = 101325.0
 CORRELATION = "Nu_D = Cr * 0.022 * Pr^0.5 * Re_D^0.8"
 PROPERTY_MODEL = "CoolProp Air at T_coolant and 101325 Pa"
-SOURCE = "NASA coolant data: NASA-CR-168015 Appendix A"
+SOURCE = (
+    "NASA-CR-168015: Appendix A Run 145 coolant data; "
+    "Figure 7 passage geometry and C_r"
+)
 NOTES = (
-    "NASA p. 180 supplies T_coolant and Re_D. "
-    "scripts/preprocess/build_internal_convection_inputs.py combines them "
-    "with passage diameter, C_r and CoolProp air properties."
+    "NASA p. 181 supplies T_coolant and Re_D; Figure 7 supplies passage "
+    "diameter and C_r. scripts/preprocess/build_internal_convection_inputs.py "
+    "combines them with CoolProp air properties."
 )
 
 AirPropertyProvider = Callable[

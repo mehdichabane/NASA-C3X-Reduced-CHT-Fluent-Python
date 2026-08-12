@@ -85,7 +85,13 @@ to their implementations are in [`docs/model_setup.md`](docs/model_setup.md).
 
 Medium-to-fine changes are `0.0972%` for outlet Mach, `0.0332%` for mean
 external wall temperature and `0.0837%` for external heat-transfer rate. These
-values are a three-grid sensitivity result, not a formal asymptotic GCI.
+sub-`0.1%` values apply to those three global quantities only: local profiles
+remain more mesh-sensitive near the trailing edge, where the pressure-side
+pressure-ratio diagnostic reaches an `8.76%` range-normalized medium-to-fine
+MAE over the final `5%` of surface distance. This is a profile-shape diagnostic,
+not a pointwise `8.76%` pressure error. The results are a three-grid sensitivity
+assessment, not a formal asymptotic GCI; details are in
+[`docs/meshing_recipe.md`](docs/meshing_recipe.md).
 
 The fine SST calculation continued for 20 iterations after the active
 continuity criterion was first met. The final-window monitor spans and the mass,

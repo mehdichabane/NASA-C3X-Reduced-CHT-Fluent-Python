@@ -95,6 +95,23 @@ reference-spacing ratios. The missing sizing, bias, inflation-growth and
 meshing-method records listed below are precisely why the project reports a
 three-grid sensitivity rather than a formal asymptotic GCI assessment.
 
+## Transition SST mesh qualification
+
+The fine mesh satisfies the usual near-wall criterion for the Transition SST
+model with `y+_max = 0.45189`. Fluent 26.1 also recommends a wall-normal
+expansion ratio below `1.1` and, for a turbine blade, roughly `100-150`
+streamwise cells on each side as best-practice guidance for transition
+prediction. See the Fluent Theory Guide section on
+[Transition SST mesh requirements](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_th/flu_th_sec_turb_sst_grid.html).
+
+The original inflation growth rate, edge-division counts, bias factors and other
+mesh-generation settings were not retained, so this repository cannot
+demonstrate that the accepted fine mesh satisfies all of those
+Transition-SST-specific recommendations. No coarse or medium Transition SST
+solutions were run either. Consequently, the extracted transition-like response
+locations are treated as fine-grid model-response diagnostics, not as
+Transition-SST grid-converged locations.
+
 ## Missing setup information
 
 These original GUI settings were not saved:

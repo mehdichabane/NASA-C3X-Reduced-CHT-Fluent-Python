@@ -82,6 +82,9 @@ sensitivity-study CSVs are also not replayed by the Python workflow. CI checks
 the internal consistency and headline relationships of those committed study
 outputs; it does not establish solver-run equivalence for the sensitivity cases.
 
-Several material constants are recoverable from the saved case but lack their
-original source-selection record. Their status is listed in
+The released Fluent state is the authoritative baseline-definition record for
+material constants used by the archived calculations. Independent literature
+citations are claimed only where they can be verified directly; the
+thermophysical-property sensitivity of the remaining archived baseline choices
+is outside the current screening scope. Their exact status is listed in
 [`references/model_inputs/README.md`](../references/model_inputs/README.md).

@@ -30,10 +30,13 @@ the repository's MIT licence.
 
 ## Other cited publications
 
-Values adopted from third-party publications, including the reduced internal
-convection correction factors attributed to Trompoukis et al., remain factual
-model inputs with their original citations. The cited publications themselves
-are not redistributed or relicensed by this repository.
+Third-party publications are cited only for the specific information they
+support. In particular, Trompoukis et al. (2021) is cited for the reduced
+internal-convection correlation, the role of `C_r` and its approximate range;
+the ten individual per-hole assignments used by the released Fluent states are
+repository-archived model inputs and are not attributed to a table in that
+publication. The cited publications themselves are not redistributed or
+relicensed by this repository.
 
 ## No endorsement
 

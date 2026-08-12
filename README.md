@@ -163,7 +163,7 @@ cross-case relationships in CI but does not replay the Fluent sensitivity runs.
 | Spatial discretization | Three-grid solution sensitivity; no formal asymptotic GCI or discretization-uncertainty band |
 | Internal cooling `h` and `Tbulk` | Common-mode deterministic one-factor screening plus a local `h x Tbulk` interaction check; passage-to-passage uncertainty is not quantified and this is not probabilistic UQ |
 | Transition SST inlet state | Fine-grid sensitivity to `Tu_in` and turbulent-viscosity ratio; turbulence length scale is not varied independently |
-| Hot-gas `Cp`, molecular viscosity and thermal conductivity | Constant saved baseline values; sensitivity not evaluated and some original source-selection records are missing |
+| Hot-gas `Cp`, molecular viscosity and thermal conductivity | Constant values defined by the released Fluent baseline; property-choice sensitivity is not evaluated and independent literature citations are asserted only where directly documented |
 | Solver-state reproducibility | Saved case/data pairs are released; an optional pinned-PyFluent helper explicitly launches Fluent 26.1 in 2D double precision and recomputes existing scalar reports, but no full initialization-to-final replay is claimed |
 | Experimental/model-input uncertainty | Not propagated into a combined validation uncertainty budget |
 
@@ -232,7 +232,6 @@ summarized in
 - The model is steady and two-dimensional.
 - Internal cooling is represented by prescribed convection boundaries.
 - The original interactive meshing history was not saved.
-- Some material values lack their original source-selection record.
 - Hot-gas `Cp`, molecular viscosity and thermal conductivity are constant baseline inputs whose sensitivity is not evaluated.
 - Input-property uncertainty is not propagated into the comparison metrics.
 - No coarse or medium Transition SST calculation is included.

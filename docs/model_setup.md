@@ -71,13 +71,13 @@ number. Passage diameters come from the retained geometry. Trompoukis et al.
 reduced 2D Nusselt correlation and states that `C_r` accounts for thermal
 entrance-region effects, with values spanning approximately `1.03-1.12` across
 the ten channels; that paper attributes `C_r` to Hylton et al. (1983). It does
-not tabulate the ten individual `C_r` values. The exact per-hole assignments in
-`references/model_inputs/c3x_internal_convection_correction_factors.csv` are
-therefore retained as archived project inputs whose original per-hole
-transcription record was not saved, rather than presented as independently
-re-transcribed values from Trompoukis et al. They are kept unchanged to remain
-consistent with the released Fluent states. Passage-specific uncertainty in
-`C_r` is not quantified.
+not tabulate the ten individual per-hole assignments. The authoritative per-hole
+values used by this repository are therefore the archived assignments in
+`references/model_inputs/c3x_internal_convection_correction_factors.csv`. They
+are not presented as a direct transcription of a table in Trompoukis et al.;
+the publication supports the correlation, physical role and approximate range.
+The values are kept unchanged to remain consistent with the released Fluent
+states. Passage-specific uncertainty in `C_r` is not quantified.
 
 CoolProp 8.0.0 supplies air properties at the bulk temperature and a fixed
 `101325 Pa` property-evaluation pressure. This pressure is a preprocessing
@@ -101,10 +101,12 @@ assessed. The generated inputs are stored in
 | Hot gas | Dynamic viscosity | `3.33e-05 Pa s` |
 | Hot gas | Thermal conductivity | `0.05234 W/(m K)` |
 
-The original source-selection records for several constants were not saved.
-[`references/model_inputs/README.md`](../references/model_inputs/README.md)
-lists which values have a direct literature match and which are only recoverable
-from the saved Fluent case.
+The released Fluent state is the authoritative baseline-definition record for
+these constants. Independent literature citations are asserted only where they
+can be documented directly; the conductivity law, for example, independently
+matches the published C3X ASTM 310 relation cited above. The machine-readable
+baseline-definition and citation status is in
+[`references/model_inputs/README.md`](../references/model_inputs/README.md).
 
 The hot-gas specific heat, molecular viscosity and thermal conductivity are
 retained as constant baseline inputs in the saved model. Their sensitivity is
@@ -198,5 +200,4 @@ The model does not predict coolant pressure drop, coolant temperature rise,
 internal-passage development, film cooling, endwall flow, radiation, structural
 response or unsteady wake passing. The reduced internal-convection closure also
 does not quantify passage-specific uncertainty in the adopted `C_r`, `h` or
-`T_bulk` inputs, and the original per-hole `C_r` transcription record was not
-retained.
+`T_bulk` inputs.

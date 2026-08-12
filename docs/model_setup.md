@@ -143,6 +143,17 @@ transition-onset momentum-thickness Reynolds number from its empirical
 correlation based on inlet turbulence intensity. The extracted record is in
 [`transition_sst_settings.csv`](../references/model_inputs/transition_sst_settings.csv).
 
+The imposed `6.5%` inlet turbulence intensity is not preserved to the vane in
+the archived baseline. The fine-grid freestream diagnostic gives a median
+`Tu = 1.2473%` and `mu_t/mu = 7.851` in the `2-5 mm` bin immediately upstream
+of the geometric leading edge. NASA documents `6.5%` as an average cascade
+inlet turbulence level, not as a leading-edge target for this reduced domain.
+The decay and its strong sensitivity to inlet turbulent-viscosity ratio are
+documented in
+[`studies/transition_sst_sensitivity/README.md`](../studies/transition_sst_sensitivity/README.md).
+These diagnostics characterize model behavior; they do not establish an
+experimentally verified transition location or a calibrated inlet state.
+
 For these inlet settings and the present fine grid, Transition SST produced
 similar pressure errors but larger wall-temperature and HTC errors. No coarse
 or medium Transition SST cases were run.

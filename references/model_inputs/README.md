@@ -4,7 +4,7 @@
 |---|---|
 | `c3x_archived_solid_properties.csv` | solid values recovered from the Fluent case and the conductivity law |
 | `material_property_provenance.csv` | source status and role of each material value |
-| `c3x_internal_convection_correction_factors.csv` | `C_r` values and DOI for the ten cooling boundaries |
+| `c3x_internal_convection_correction_factors.csv` | archived per-hole `C_r` assignments plus their provenance qualification |
 | `run145_4512_internal_convection.csv` | generated CoolProp properties and convection coefficients |
 | `run145_wall_surface_coordinate_reference.csv` | pressure/suction labels for the final wall coordinates |
 | `transition_sst_settings.csv` | inlet, Transition SST and discretization settings recovered from the saved case and transcript |
@@ -21,6 +21,25 @@ boundary condition. The NASA passage Reynolds numbers are supplied independently
 and sensitivity to the property-evaluation pressure is not included in the
 screening study.
 
+## Internal-convection correction-factor provenance
+
+Trompoukis et al. (2021), Section 5,
+[doi:10.3390/ijtpp6020020](https://doi.org/10.3390/ijtpp6020020), documents the
+reduced 2D correlation
+`Nu_D = 0.022 C_r Pr^0.5 Re_D^0.8` and states that `C_r` accounts for thermal
+entrance-region effects, with values spanning approximately `1.03-1.12` across
+the ten C3X channels. That paper attributes `C_r` to Hylton et al. (1983), but
+it does not tabulate the ten individual `C_r` values.
+
+The exact per-hole assignments in
+`c3x_internal_convection_correction_factors.csv` are therefore treated as
+archived project inputs whose original per-hole transcription record was not
+retained. They are not presented as independently re-transcribed values from
+Trompoukis et al. The values are kept unchanged here so the generated boundary
+inputs remain consistent with the released Fluent states; changing them would
+change the prescribed cooling boundary conditions and would require new solver
+runs rather than a documentation-only correction.
+
 ## Thermophysical-property provenance
 
 | Domain | Property | Definition used | Role in the steady solution | Source record |
@@ -34,7 +53,8 @@ screening study.
 | Hot gas | Thermal conductivity | `0.05234 W/(m K)` | Gas-side heat transfer | Not retained |
 
 The exact values and source status are stored in
-`material_property_provenance.csv`. NIST AIRPROPS is used only as a general
-dry-air comparator, not as the missing original source of the archived gas
-constants. No uncertainty distribution is assigned to the undocumented choices,
-so the reported NASA comparison errors apply to the archived model definition.
+`material_property_provenance.csv`. No external source is assigned retroactively
+to values whose original source-selection record is missing, and no uncertainty
+distribution is assigned to those undocumented choices. The reported NASA
+comparison errors therefore apply to the archived model definition rather than
+to a propagated property-uncertainty range.

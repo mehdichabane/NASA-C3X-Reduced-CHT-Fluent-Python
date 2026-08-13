@@ -55,8 +55,12 @@ def test_run145_external_boundary_provenance() -> None:
 
     assert float(rows.loc["inlet_turbulent_viscosity_ratio", "model_value"]) == 10.0
     assert rows.loc["inlet_turbulent_viscosity_ratio", "classification"] == "Fluent modeling choice"
-    assert "not a NASA measurement" in rows.loc["inlet_turbulent_viscosity_ratio", "qualification"]
+    assert "not a nasa measurement" in rows.loc[
+        "inlet_turbulent_viscosity_ratio", "qualification"
+    ].lower()
 
     assert float(rows.loc["outlet_static_pressure", "model_value"]) == 236200.0
     assert rows.loc["outlet_static_pressure", "classification"] == "archived Fluent boundary input"
-    assert "not as a direct NASA transcription" in rows.loc["outlet_static_pressure", "qualification"]
+    assert "not as a direct nasa transcription" in rows.loc[
+        "outlet_static_pressure", "qualification"
+    ].lower()

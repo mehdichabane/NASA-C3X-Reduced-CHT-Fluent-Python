@@ -1,16 +1,58 @@
 # Comparison with NASA Run 145 measurements
 
 Pressure, wall-temperature and HTC stations come from Appendix A, page 180 of
-Hylton et al., NASA-CR-168015. HTC uncertainty intervals come from Table VI,
-report page 27. The transcribed source rows retain those page references in
-`references/experimental_data/`.
+Hylton et al., NASA-CR-168015. Regional external-HTC uncertainty intervals come
+from Table VI, report page 27. Additional experimental uncertainties reported
+in the Data Uncertainties subsection and Table VII are transcribed in
+`references/experimental_data/c3x_experimental_uncertainty_summary.csv`.
 
 This is a benchmark comparison. Conformance to a complete
 [ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
-validation assessment is not claimed. The retained mesh record does not support
-an accepted formal discretization-uncertainty estimate, model-input uncertainty
-is not propagated, and the available experimental uncertainty is insufficient
-for a combined validation-uncertainty budget.
+validation assessment is not claimed. NASA supplies multiple experimental
+uncertainty estimates, but the retained mesh record does not support an accepted
+formal discretization-uncertainty estimate and model-input uncertainty is not
+propagated. The repository therefore does not construct a combined
+validation-uncertainty budget.
+
+## NASA experimental uncertainty record
+
+NASA's Data Uncertainties subsection reports the component uncertainties that
+feed the experimental reduction. The values transcribed here are:
+
+| Quantity | Reported uncertainty |
+|---|---:|
+| External vane surface temperature | about `±1 °C` |
+| Free-stream gas temperature | about `±11 °C` |
+| External airfoil profile | about `±0.008 cm` |
+| Cooling-hole location | about `±0.013 cm` |
+| Cooling-hole diameter | `±0.005 cm` |
+| Internal cooling-hole HTC calculation | estimated `±3%` |
+| Vane-material thermal conductivity used in the experimental reduction | about `±3%` |
+| Pressure measurement | `±0.7 kPa` |
+
+Table VII separately reports uncertainty in test parameters:
+
+| Test parameter | Reported uncertainty |
+|---|---:|
+| Reynolds number, `Re` | `±3.1%` |
+| Mach number, `MN` | `±0.9%` |
+| Wall-to-gas temperature ratio, `Tw/Tg` | `±2.0%` |
+| Inlet turbulence intensity, `Tu` | `±10.0%` |
+
+NASA states that the key uncertainty analysis uses the Kline and McClintock
+method (Ref. 23); the `Tu` value is reported as being based on prior experience
+with the LDA system. These values are source metadata in the present repository,
+not stochastic inputs propagated through Fluent.
+
+Table VI is already the resulting *regional external-HTC uncertainty* for the
+C3X experimental reduction. The component uncertainties above are therefore not
+added again to the Table VI HTC intervals. Doing so would double-count sources
+already represented in NASA's external-HTC uncertainty analysis.
+
+NASA also cautions that these values describe uncertainty in the absolute level
+when the data are used for verification. Some systematic contributions affect
+multiple runs similarly, so uncertainty in run-to-run trends can be smaller than
+the absolute-level uncertainty.
 
 ## Coordinate matching and metrics
 
@@ -20,9 +62,9 @@ used. Bias is defined as CFD minus NASA.
 
 The SST profile comes from the final fine-grid wall export. Transition SST uses
 the direct 819-face Fluent wall export at iteration 556. HTC uncertainty bands
-are assigned by experimental surface position `s/L`. The reported interval fraction
-uses experimental HTC uncertainty only; it is not a combined validation
-uncertainty.
+are assigned by experimental surface position `s/L`. The reported interval
+fraction uses Table VI experimental HTC uncertainty only; it is not a combined
+validation uncertainty.
 
 `scripts/comparison/compare_run145.py` writes the pointwise tables and summary to
 `results/processed/nasa_comparison/` and generates the three figures below.
@@ -79,8 +121,8 @@ not a calibration target and not a decomposition of its physical cause.
 
 ![Heat-transfer-coefficient comparison](../results/figures/nasa_comparison/heat_transfer_coefficient.svg)
 
-*The HTC error bars show the reported experimental HTC uncertainty only. They
-are not a combined CFD/experimental validation-uncertainty interval.*
+*The HTC error bars show the reported Table VI experimental HTC uncertainty
+only. They are not a combined CFD/experimental validation-uncertainty interval.*
 
 ## Why SST remains the primary case
 

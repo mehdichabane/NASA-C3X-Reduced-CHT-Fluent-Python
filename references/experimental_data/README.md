@@ -1,8 +1,9 @@
 # Run 145 experimental data
 
 The experimental source is Hylton et al., NASA-CR-168015. The files in this
-folder are compact transcriptions of the public Run 145 measurements and coolant
-quantities used by the Python workflow.
+folder are compact transcriptions of the public Run 145 measurements, coolant
+quantities and experimental-uncertainty information used or referenced by the
+Python workflow.
 
 ## External thermal data
 
@@ -31,6 +32,50 @@ q_into_vane = -q_fluent,fluid-side
 h_CFD = q_into_vane / (811 K - T_wall)
 ```
 
+## Experimental uncertainty record
+
+NASA-CR-168015 contains more uncertainty information than the regional external
+HTC intervals alone. `c3x_experimental_uncertainty_summary.csv` transcribes the
+additional values explicitly reported in the Data Uncertainties subsection and
+Table VII:
+
+| Quantity | NASA uncertainty | Report page |
+|---|---:|---:|
+| External vane surface temperature | about `±1 °C` | `24` |
+| Free-stream gas temperature | about `±11 °C` | `24` |
+| External airfoil profile | about `±0.008 cm` | `24` |
+| Cooling-hole location | about `±0.013 cm` | `24` |
+| Cooling-hole diameter | `±0.005 cm` | `24` |
+| Internal cooling-hole HTC calculation | estimated `±3%` | `24` |
+| Vane-material thermal conductivity used in the experimental reduction | about `±3%` | `24` |
+| Pressure measurement | `±0.7 kPa` | `27` |
+| Reynolds number, `Re` | `±3.1%` | `28`, Table VII |
+| Mach number, `MN` | `±0.9%` | `28`, Table VII |
+| Wall-to-gas temperature ratio, `Tw/Tg` | `±2.0%` | `28`, Table VII |
+| Inlet turbulence intensity, `Tu` | `±10.0%` | `28`, Table VII |
+
+NASA states that the key uncertainty analysis uses the Kline and McClintock
+method (its Ref. 23). The `Tu` value is reported separately as being based on
+significant prior experience with the LDA system.
+
+The existing `c3x_heat_transfer_uncertainty_table_VI.csv` is a different level
+of uncertainty information: Table VI reports the *resulting regional uncertainty
+in the external C3X heat-transfer coefficient* after the experimental reduction.
+The component uncertainties above must therefore not be added again to the
+Table VI HTC intervals. In this repository, Table VI remains the only uncertainty
+used to draw HTC error bars and to calculate the fraction of CFD stations inside
+the reported experimental HTC interval.
+
+NASA also notes that these uncertainties are intended to indicate uncertainty in
+the absolute level when the data are used for verification. Some common
+systematic contributions can affect multiple runs similarly, so uncertainty in
+run-to-run trends may be smaller than the absolute-level values.
+
+None of the values in `c3x_experimental_uncertainty_summary.csv` is propagated
+through the CFD model in the current repository. They document the experimental
+evidence and its limitations; they are not a combined CFD/experimental
+validation-uncertainty budget.
+
 ## Reduced internal convection
 
 The directly transcribed NASA coolant quantities remain in
@@ -49,5 +94,7 @@ reconstruction are direct transcriptions of NASA Figure 7 (report p. 16).
 - `run145_4512_pressure.csv`: external static-pressure measurements;
 - `run145_4512_coolant_flow.csv`: coolant-flow quantities transcribed from the
   Run 145 Appendix A table on report page 181;
-- `c3x_heat_transfer_uncertainty_table_VI.csv`: uncertainty intervals used for
-  the HTC comparison.
+- `c3x_heat_transfer_uncertainty_table_VI.csv`: regional external-HTC
+  uncertainty intervals from NASA Table VI used for the HTC comparison;
+- `c3x_experimental_uncertainty_summary.csv`: additional measurement,
+  geometry, reduction-input and test-parameter uncertainties reported by NASA.

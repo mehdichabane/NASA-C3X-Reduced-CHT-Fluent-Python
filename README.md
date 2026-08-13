@@ -2,17 +2,36 @@
 
 [![Rebuild and test analysis](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml)
 
-Steady two-dimensional compressible RANS and conjugate heat-transfer model of
-the NASA C3X turbine vane, solved with Ansys Fluent 26.1 and checked with
-Python. The repository is intended for readers who already know basic CFD and
-Fluent; it is not a Fluent tutorial.
+Reduced benchmark of NASA C3X Run 145 using steady two-dimensional compressible
+RANS and conjugate heat transfer in Ansys Fluent 26.1, with Python-based
+verification, experimental comparison, sensitivity analysis and regression-tested
+post-processing.
 
-The hot-gas passage and solid vane are resolved. The ten internal passages use
-passage-specific convection boundary conditions, so coolant flow and film
-cooling are not resolved.
+## At a glance
 
-**Skills shown:** compressible CFD, conjugate heat transfer, three-grid mesh
-sensitivity, numerical verification checks, experimental comparison,
+- **Problem.** Compare a reduced midspan C3X vane model against public NASA Run
+  145 pressure, wall-temperature and heat-transfer measurements while keeping
+  the limits of the reduced physics explicit.
+- **Built.** The hot-gas passage and solid vane are resolved. The ten internal
+  passages use NASA-derived, passage-specific convection boundary conditions.
+  SST `k-omega` is the primary model; Transition SST and internal-cooling inputs
+  are examined through separate sensitivity studies. A Python workflow rebuilds
+  the processed results and figures and checks convergence, conservation, mesh
+  sensitivity and cross-case consistency.
+- **Strongest evidence.** The fine-grid SST case gives wall-temperature MAE of
+  `8.887 K` pressure / `12.999 K` suction, HTC MAPE of `7.795% / 11.535%` and
+  pressure-ratio MAPE of `0.926% / 3.980%`. Mass, interface and solid-energy
+  balances close within `0.0019%`, maximum wall `y+` is `0.452`, and the three
+  reported global quantities change by less than `0.1%` from medium to fine
+  mesh.
+- **Main limitation.** Coolant flow, film cooling and three-dimensional effects
+  are not resolved. The retained mesh history does not support a formal
+  discretization-uncertainty estimate, model-input uncertainty is not propagated
+  into a combined ASME V&V 20 validation uncertainty, and no complete
+  initialization-to-final Fluent replay is claimed.
+
+**Engineering scope:** compressible CFD, conjugate heat transfer, three-grid
+mesh sensitivity, numerical verification, experimental comparison,
 model-sensitivity analysis, Python automation and regression testing.
 
 ## Fine-grid SST results

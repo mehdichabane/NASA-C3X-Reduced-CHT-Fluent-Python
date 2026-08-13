@@ -14,6 +14,14 @@ formal discretization-uncertainty estimate and model-input uncertainty is not
 propagated. The repository therefore does not construct a combined
 validation-uncertainty budget.
 
+The NASA Run 145 exit Mach number is an operating-point anchor rather than an
+independent validation observable in this model. The Fluent pressure outlet was
+adjusted using the NASA `M2 = 0.90` target, so the resulting fine-grid
+`Mout = 0.901294` is reported as an operating-point consistency and convergence
+check. It is not included among the independent experimental comparison metrics
+below. The complete pressure-selection history is in
+[`outlet_pressure_selection.md`](outlet_pressure_selection.md).
+
 ## NASA experimental uncertainty record
 
 NASA's Data Uncertainties subsection reports the component uncertainties that

@@ -52,15 +52,47 @@ def test_run145_external_boundary_provenance() -> None:
     assert "direct NASA" in rows.loc["inlet_total_temperature", "classification"]
     assert float(rows.loc["inlet_turbulence_intensity", "model_value"]) == 6.5
     assert "direct NASA" in rows.loc["inlet_turbulence_intensity", "classification"]
+    assert "experimental anchor" in rows.loc[
+        "inlet_turbulence_intensity", "qualification"
+    ].lower()
 
     assert float(rows.loc["inlet_turbulent_viscosity_ratio", "model_value"]) == 10.0
     assert rows.loc["inlet_turbulent_viscosity_ratio", "classification"] == "Fluent modeling choice"
-    assert "not a nasa measurement" in rows.loc[
+    vr_qualification = rows.loc["inlet_turbulent_viscosity_ratio", "qualification"].lower()
+    assert "not a nasa measurement" in vr_qualification
+    assert "not inferred from nasa tu" in vr_qualification
+    assert "not calibrated" in vr_qualification
+    assert "10, 5 and 1" in rows.loc[
         "inlet_turbulent_viscosity_ratio", "qualification"
-    ].lower()
+    ]
 
     assert float(rows.loc["outlet_static_pressure", "model_value"]) == 236200.0
     assert rows.loc["outlet_static_pressure", "classification"] == "archived Fluent boundary input"
     assert "not as a direct nasa transcription" in rows.loc[
         "outlet_static_pressure", "qualification"
     ].lower()
+
+
+def test_transition_sst_turbulence_inputs_keep_experiment_and_model_separate() -> None:
+    settings = pd.read_csv(MODEL_INPUTS / "transition_sst_settings.csv")
+    rows = settings.set_index("setting")
+
+    assert float(rows.loc["inlet_intensity", "value"]) == 6.5
+    assert "NASA-CR-168015 Table IX" in rows.loc["inlet_intensity", "source"]
+    assert "experimental anchor" in rows.loc["inlet_intensity", "notes"].lower()
+
+    assert float(rows.loc["inlet_viscosity_ratio", "value"]) == 10.0
+    vr_source = rows.loc["inlet_viscosity_ratio", "source"].lower()
+    vr_notes = rows.loc["inlet_viscosity_ratio", "notes"].lower()
+    assert "nasa" not in vr_source
+    assert "ansys fluent 26.1" in vr_source
+    assert "modeling input" in vr_notes
+    assert "not a nasa measurement" in vr_notes
+    assert "not inferred from nasa tu uncertainty" in vr_notes
+    assert "1-10" in vr_notes
+
+    assert float(rows.loc["inlet_intermittency", "value"]) == 1.0
+    assert "not a nasa measurement" in rows.loc[
+        "inlet_intermittency", "notes"
+    ].lower()
+    assert "model-generated transition input" in rows.loc["inlet_retheta", "notes"].lower()

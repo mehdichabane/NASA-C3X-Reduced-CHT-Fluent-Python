@@ -1,0 +1,13 @@
+quantity,uncertainty_value,uncertainty_unit,qualifier,scope,source,report_page,method_context,notes
+external_vane_surface_temperature,1.0,degC,on_the_order_of,measurement,NASA-CR-168015 Data Uncertainties,24,Kline and McClintock method (Ref. 23),NASA states the surface-temperature measurement uncertainty is on the order of +/-1 degC (2 degF).
+free_stream_gas_temperature,11.0,degC,approximately,measurement,NASA-CR-168015 Data Uncertainties,24,Kline and McClintock method (Ref. 23),NASA attributes the lower precision to facility-combustor fluctuations and gives approximately +/-11 degC (20 degF).
+external_airfoil_profile,0.008,cm,approximately,geometry_measurement,NASA-CR-168015 Data Uncertainties,24,Kline and McClintock method (Ref. 23),Includes the external airfoil profile and thermocouple grooves.
+cooling_hole_location,0.013,cm,on_the_order_of,geometry_measurement,NASA-CR-168015 Data Uncertainties,24,Kline and McClintock method (Ref. 23),Uncertainty in radial cooling-hole location within the airfoil.
+cooling_hole_diameter,0.005,cm,stated,geometry_measurement,NASA-CR-168015 Data Uncertainties,24,Kline and McClintock method (Ref. 23),NASA also gives 0.002 in.
+internal_cooling_htc_calculation,3.0,percent,estimated,derived_experimental_input,NASA-CR-168015 Data Uncertainties,24,Kline and McClintock method (Ref. 23),Uncertainty associated with the radial cooling-hole heat-transfer-coefficient calculation used by the experimental reduction.
+vane_material_thermal_conductivity,3.0,percent,on_the_order_of,experimental_reduction_input,NASA-CR-168015 Data Uncertainties,24,Kline and McClintock method (Ref. 23),Uncertainty associated with the vane-material thermal conductivity used by the experimental finite-element reduction.
+pressure_measurement,0.7,kPa,stated,measurement,NASA-CR-168015 Data Uncertainties,27,Kline and McClintock method (Ref. 23),NASA states the Scanivalve pressure measurements are calibrated against a precision Mensor quartz manometer and have +/-0.7 kPa (0.1 psi) uncertainty.
+reynolds_number,3.1,percent,table_VII,test_parameter,NASA-CR-168015 Table VII,28,Kline and McClintock method (Ref. 23),Uncertainty in Reynolds number Re.
+mach_number,0.9,percent,table_VII,test_parameter,NASA-CR-168015 Table VII,28,Kline and McClintock method (Ref. 23),Uncertainty in Mach number MN.
+wall_to_gas_temperature_ratio,2.0,percent,table_VII,test_parameter,NASA-CR-168015 Table VII,28,Kline and McClintock method (Ref. 23),Uncertainty in Tw/Tg.
+inlet_turbulence_intensity,10.0,percent,table_VII,test_parameter,NASA-CR-168015 Table VII,28,LDA experience,NASA states the Tu uncertainty is based on significant previous experience with the LDA system.

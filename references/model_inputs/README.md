@@ -4,6 +4,7 @@
 |---|---|
 | `c3x_archived_solid_properties.csv` | solid values recovered from the Fluent case and the conductivity law |
 | `material_property_provenance.csv` | baseline-definition source, solution role and independent literature status of each material value |
+| `thermophysical_literature_matches.csv` | exact and derived literature matches for the archived thermophysical constants, with match scope |
 | `c3x_internal_convection_correction_factors.csv` | per-hole `C_r` values transcribed from NASA-CR-168015 Figure 7 |
 | `run145_4512_external_boundary_provenance.csv` | NASA operating-point values, Fluent external boundary inputs and their provenance classification |
 | `run145_4512_internal_convection.csv` | generated CoolProp properties and convection coefficients |
@@ -89,22 +90,45 @@ useful later C3X reference, but it is not needed as the primary source for the
 per-hole `C_r` values or for the correlation because both are documented in
 NASA-CR-168015 itself.
 
-## Thermophysical-property definition and citation status
+## Thermophysical-property definition and literature matches
 
-| Domain | Property | Definition used | Role in the steady solution | Baseline record / independent citation |
-|---|---|---:|---|---|
-| Solid | Density | `8030 kg/m3` | Pseudo-transient path only | Released Fluent state |
-| Solid | Specific heat | `473 J/(kg K)` | Pseudo-transient path only | Released Fluent state |
-| Solid | Conductivity | `k_s(T)=6.811+0.020176T` W/(m K) | Steady conduction and wall temperature | Released Fluent state; independently matches Prapamonthon et al. (2018), Table 2, doi:10.3390/en11041000 |
-| Hot gas | Density | Ideal gas, `M=28.96 kg/kmol` | Compressible-flow response | Released Fluent state |
-| Hot gas | Specific heat | `1075 J/(kg K)` | Energy equation | Released Fluent state |
-| Hot gas | Dynamic viscosity | `3.33e-05 Pa s` | Reynolds number and turbulence transport | Released Fluent state |
-| Hot gas | Thermal conductivity | `0.05234 W/(m K)` | Gas-side heat transfer | Released Fluent state |
+The released Fluent state remains the authoritative definition of the archived
+baseline constants. The literature records below are independent matches used to
+make the model-input trail auditable; they do **not** prove which source was
+consulted when the original Fluent material definitions were selected.
 
-The released Fluent state is the authoritative definition of the archived
-baseline constants. Independent literature citations are asserted only where
-they are directly documented rather than assigned retroactively. The hot-gas
-property choices are not included in the present deterministic sensitivity
-screening, so the NASA comparison metrics apply to this archived baseline model
-definition rather than to a propagated thermophysical-property uncertainty
-range. Machine-readable status is in `material_property_provenance.csv`.
+| Domain | Property | Definition used | Independent match and scope |
+|---|---|---:|---|
+| Solid | Density | `8030 kg/m3` | Exact C3X-literature match in Zheng et al. (2015), doi:10.1615/HeatTransRes.2015007514. That paper uses a different `cp` and conductivity law, so only density is matched. |
+| Solid | Specific heat | `473 J/(kg K)` | Exact prior C3X-model match in Bianchini, Facchini & Mangani (2009), 8th European Turbomachinery Congress, University of Florence FLORE record [hdl:2158/420656](https://hdl.handle.net/2158/420656). |
+| Solid | Conductivity | `k_s(T)=6.811+0.020176T` W/(m K) | Exact C3X-literature match in Prapamonthon et al. (2018), Table 2, doi:10.3390/en11041000. This citation is restricted to the conductivity law. |
+| Hot gas | Density | Ideal gas, `M=28.96 kg/kmol` | Exact prior C3X-model molecular-weight match in Bianchini, Facchini & Mangani (2009). |
+| Hot gas | Specific heat | `1075 J/(kg K)` | Exact prior C3X-model match in Bianchini, Facchini & Mangani (2009). |
+| Hot gas | Dynamic viscosity | `3.33e-05 Pa s` | Exact prior C3X-model match in Bianchini, Facchini & Mangani (2009). |
+| Hot gas | Thermal conductivity | `0.05234 W/(m K)` | Derived rounding match to Bianchini, Facchini & Mangani (2009): their `cp=1075 J/(kg K)`, `mu=3.33e-05 Pa s` and `Pr=0.684` imply `k=cp*mu/Pr=0.0523355263 W/(m K)`, which rounds to `0.05234`. The paper does not directly tabulate that conductivity value. |
+
+Bianchini, Facchini & Mangani's 2009 C3X paper is archived by the University of
+Florence as an open-access final refereed postprint. Its thermophysical setup
+states `M=28.96 kg/kmol`, `cp=1075 J/(kg K)`, `mu=3.33e-05 kg/(m s)`,
+`Pr=0.684`, and a constant ASTM 310 vane specific heat of `473 J/(kg K)`.
+Those are direct literature matches to four archived constants; the gas
+conductivity match is derived from the published `cp`, `mu` and `Pr` triple.
+
+The density requires a separate qualification. Zheng et al. (2015) uses
+`rho=8030 kg/m3` for the NASA C3X ASTM 310 vane, providing an exact independent
+C3X match, but uses `cp=502 J/(kg K)` and another conductivity law. It therefore
+does not support the archived `473 J/(kg K)` value or the present conductivity
+relation.
+
+Likewise, Prapamonthon et al. (2018) must not be read as validating the entire
+material table. Its Table 2 uses steel `rho=7854 kg/m3` and
+`cp=434 J/(kg K)`, and air `cp=1004.4 J/(kg K)`,
+`k=0.0261 W/(m K)` and `mu=1.7831e-05 kg/(m s)`. The exact overlap with this
+repository is the solid conductivity law only.
+
+The full machine-readable qualification is in
+`thermophysical_literature_matches.csv` and `material_property_provenance.csv`.
+The hot-gas property choices are still not included in the present deterministic
+sensitivity screening, so the NASA comparison metrics apply to the archived
+baseline model definition rather than to a propagated thermophysical-property
+uncertainty range.

@@ -7,6 +7,7 @@
 | `thermophysical_literature_matches.csv` | exact and derived literature matches for the archived thermophysical constants, with match scope |
 | `c3x_internal_convection_correction_factors.csv` | per-hole `C_r` values transcribed from NASA-CR-168015 Figure 7 |
 | `run145_4512_external_boundary_provenance.csv` | NASA operating-point values, Fluent external boundary inputs and their provenance classification |
+| `run145_outlet_pressure_selection.csv` | historical pressure-outlet selection record and local isentropic operating-point update |
 | `run145_4512_internal_convection.csv` | generated CoolProp properties and convection coefficients |
 | `run145_wall_surface_coordinate_reference.csv` | pressure/suction labels for the final wall coordinates |
 | `transition_sst_settings.csv` | inlet, Transition SST and discretization settings recovered from the saved case and transcript |
@@ -32,14 +33,34 @@ The value also corresponds to Fluent's default turbulent-viscosity ratio when
 using the intensity/viscosity-ratio specification method. Its influence is
 explicitly screened in the Transition SST sensitivity study.
 
-The pressure-outlet value `236200 Pa` is likewise classified by provenance rather
-than retroactively attributed to the experiment. NASA explains that its reported
-exit Mach number uses measured inlet total pressure and average measured
-exit-plane static pressure, but Table IX does not tabulate that exit static
-pressure numerically for Run 145. The repository therefore treats `236200 Pa`
-as the released Fluent baseline pressure-outlet setting. No direct NASA
-transcription or unverified isentropic derivation is claimed for that number.
-With the Fluent operating pressure set to `0 Pa`, this pressure-outlet setting is
+The pressure-outlet selection has a different provenance. NASA's Test Conditions
+section states that exit Mach numbers are based on measured inlet total pressure
+and average measured exit-plane static pressure and that, at a given Reynolds
+number, the exit-Mach level was independently established by adjusting cascade
+exit pressure with a controllable exhaust valve. Table IX supplies the Run 145
+target `M2 = 0.90`, but it does not tabulate the corresponding measured exit
+static pressure.
+
+The retained project development record shows that the Fluent pressure outlet
+was therefore adjusted to reproduce that experimental operating point rather
+than transcribed from a NASA exit-pressure table. A provisional second-order
+state at `241200 Pa` gave mass-weighted `Mout = 0.88064076`. A local isentropic
+pressure-ratio update with `gamma = 1.4` and target `M2 = 0.90` gave
+`236228.236 Pa`; this was rounded to `236200 Pa`. Continuing Fluent at the
+rounded setting gave a recorded `Mout = 0.89951531` (`0.0539%` relative
+difference from the target). The current released fine SST baseline retains the
+same `236200 Pa` boundary setting and gives `Mout = 0.901294`.
+
+Accordingly, `236200 Pa` is classified as an **operating-point adjustment to the
+NASA exit-Mach target**. It is not a direct NASA exit-pressure transcription.
+Once that target has been used to choose the pressure outlet, outlet-Mach
+agreement is an operating-point consistency check rather than an independent
+validation metric. The thermal measurements were not used to select the outlet
+pressure. The calculation and selection history are documented in
+[`../../docs/outlet_pressure_selection.md`](../../docs/outlet_pressure_selection.md)
+and `run145_outlet_pressure_selection.csv`.
+
+With the Fluent operating pressure set to `0 Pa`, the pressure-outlet setting is
 numerically an absolute static pressure.
 
 For the generated internal-convection table, CoolProp air properties are

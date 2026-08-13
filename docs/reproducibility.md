@@ -19,7 +19,7 @@ run Fluent.
 
 The requirement files pin the project's direct Python dependencies, but they are
 not a complete transitive lockfile or a frozen operating-system image. GitHub
-Actions currently runs the checks on `ubuntu-latest` with Python `3.13`.
+Actions runs the checks on ubuntu-24.04 with Python 3.13.
 Accordingly, the repository demonstrates deterministic regenerated outputs in
 the tested CI environment; it does not claim a bit-for-bit freeze of every
 transitive package or runner component.

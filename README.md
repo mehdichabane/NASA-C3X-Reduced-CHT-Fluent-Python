@@ -107,6 +107,14 @@ and HTC stations used here. CFD profiles are matched by axial coordinate on the
 pressure and suction sides. `scripts/comparison/compare_run145.py` calculates
 bias, MAE, RMSE, maximum absolute error and MAPE.
 
+NASA's experimental uncertainty record is also retained. Table VI supplies the
+regional external-HTC uncertainty used for the plotted error bars, while the
+Data Uncertainties subsection and Table VII provide measurement, geometry,
+experimental-reduction and test-parameter uncertainties. Those additional
+values are transcribed in
+[`references/experimental_data/c3x_experimental_uncertainty_summary.csv`](references/experimental_data/c3x_experimental_uncertainty_summary.csv)
+and interpreted in [`docs/nasa_comparison.md`](docs/nasa_comparison.md).
+
 Transition SST gives similar pressure errors but much larger thermal errors. It
 is kept as a sensitivity case rather than used as the primary thermal result.
 The mapping, point counts, metrics and interpretation limits are in
@@ -115,10 +123,11 @@ The mapping, point counts, metrics and interpretation limits are in
 The repository reports a benchmark comparison, iterative/conservation
 verification checks and a three-grid mesh-sensitivity assessment. It does not
 claim conformance to a complete [ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
-validation assessment. In particular, the retained mesh record does not support
-an accepted formal discretization-uncertainty estimate, model-input uncertainty
-is not propagated, and the available experimental uncertainty is insufficient
-for a combined validation-uncertainty budget.
+validation assessment. NASA experimental uncertainties are documented, but the
+retained mesh record does not support an accepted formal
+discretization-uncertainty estimate and model-input uncertainty is not
+propagated. The repository therefore does not construct a combined
+validation-uncertainty budget.
 
 ## What the sensitivity studies show
 
@@ -164,8 +173,9 @@ cross-case relationships in CI but does not replay the Fluent sensitivity runs.
 | Internal cooling `h` and `Tbulk` | Common-mode deterministic one-factor screening plus a local `h x Tbulk` interaction check; passage-to-passage uncertainty is not quantified and this is not probabilistic UQ |
 | Transition SST inlet state | Fine-grid sensitivity to `Tu_in` and turbulent-viscosity ratio; turbulence length scale is not varied independently |
 | Hot-gas `Cp`, molecular viscosity and thermal conductivity | Constant values defined by the released Fluent baseline; property-choice sensitivity is not evaluated and independent literature citations are asserted only where directly documented |
+| Experimental uncertainty | NASA Table VI regional HTC intervals plus component/test-parameter uncertainties are transcribed; only Table VI is used in the plotted HTC interval check, and none is combined with CFD uncertainty into a validation budget |
 | Solver-state reproducibility | Saved case/data pairs are released; an optional pinned-PyFluent helper explicitly launches Fluent 26.1 in 2D double precision and recomputes existing scalar reports, but no full initialization-to-final replay is claimed |
-| Experimental/model-input uncertainty | Not propagated into a combined validation uncertainty budget |
+| Model-input uncertainty | Not propagated into a combined validation uncertainty budget |
 
 This table separates quantities that were actually screened from assumptions
 that remain unquantified. The latter should not be read as negligible merely

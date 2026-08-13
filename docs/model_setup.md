@@ -11,22 +11,52 @@ The gas passage and solid vane are solved. The ten cooling passages are present
 in the solid geometry, but each internal wall uses a prescribed convection
 condition instead of resolved coolant flow.
 
-## Geometry and operating point
+## Geometry and reporting conventions
 
-| Item | Value |
-|---|---:|
-| Cascade pitch | `117.730 mm` |
-| Gas-solid interface | conformal |
-| Periodicity | translational |
-| Internal passages | `10` |
-| Reference depth | `1.00 m` |
-| Inlet total pressure | `403800 Pa` |
-| Inlet total temperature | `792 K` |
-| Inlet turbulence intensity | `6.5%` |
-| Inlet turbulent viscosity ratio | `10` |
-| Outlet static pressure | `236200 Pa` |
-| Experimental exit Mach number | about `0.90` |
-| Fine SST outlet Mach number | `0.901294` |
+| Item | Value | Status / source |
+|---|---:|---|
+| Cascade pitch | `117.730 mm` | NASA-CR-168015 Table IV (`11.773 cm`) |
+| Gas-solid interface | conformal | Fluent model implementation |
+| Periodicity | translational | Fluent model implementation using the NASA pitch |
+| Internal passages | `10` | NASA C3X geometry / Figure 7 |
+| Reference depth | `1.00 m` | 2D Fluent reporting convention |
+
+## Run 145 external operating point and Fluent boundary inputs
+
+The experimental operating point and the imposed Fluent inputs are deliberately
+separated below. A machine-readable provenance table is stored in
+[`run145_4512_external_boundary_provenance.csv`](../references/model_inputs/run145_4512_external_boundary_provenance.csv).
+
+| Quantity | Value used / reported | Role | Provenance |
+|---|---:|---|---|
+| Inlet total pressure | `403800 Pa` | imposed pressure-inlet input | Rounded implementation of NASA Table IX `PTI = 58.57 psia` (`403825.9 Pa`) |
+| Inlet total temperature | `792 K` | imposed pressure-inlet input | Direct NASA Table IX Run 145 / code 4512 value |
+| Experimental inlet Mach | `0.16` | reference only | Direct NASA Table IX value; not imposed independently at the pressure inlet |
+| Inlet turbulence intensity | `6.5%` | imposed turbulence input | Direct NASA Table IX average inlet `Tu` |
+| Inlet turbulent viscosity ratio | `10` | imposed turbulence-model input | Released Fluent setup; modeling choice, not a NASA measurement |
+| Outlet static pressure | `236200 Pa` | imposed pressure-outlet input | Released Fluent baseline setting; not directly tabulated for Run 145 in NASA Table IX |
+| Experimental exit Mach | `0.90` | experimental reference | Direct NASA Table IX value |
+| Fine SST outlet Mach | `0.901294` | computed result | Accepted fine-grid SST solution |
+
+NASA Table IX reports Run 145 / code 4512 as `PTI = 58.57 psia`,
+`TTI = 792 K`, `M1 = 0.16`, `M2 = 0.90` and `Tu = 6.5%`. The pressure-inlet
+total pressure used in Fluent, `403800 Pa`, is therefore a `0.0064%` rounding
+of the direct NASA value rather than an independently selected pressure.
+
+NASA also explains that its reported exit Mach number is based on measured inlet
+total pressure and the average measured exit-plane static pressure. However,
+Table IX does not tabulate that exit static pressure numerically for Run 145.
+The archived `236200 Pa` pressure-outlet value is therefore retained and
+reported as the released Fluent baseline boundary condition; no unverified NASA
+transcription or retroactive isentropic derivation is assigned to it. With the
+Fluent operating pressure set to `0 Pa`, the pressure-outlet value is numerically
+an absolute static pressure.
+
+The inlet turbulent-viscosity ratio `10` is likewise not an experimental NASA
+quantity. It is a Fluent turbulence-boundary modeling input retained in the
+released states. Fluent's intensity/viscosity-ratio specification uses `10` as
+the default turbulent-viscosity ratio; its influence is explicitly examined in
+the Transition SST sensitivity study rather than treated as measured data.
 
 The direct fine-grid contour reaches about Mach `1.04` locally. Ideal-gas
 density and the energy equation are therefore retained. Integrated mass and
@@ -155,9 +185,12 @@ started from that field. Its transition equations changed to bounded second
 order at iteration 386, and the final state is iteration 556.
 
 The saved Transition SST inlet uses `6.5%` turbulence intensity, a turbulent
-viscosity ratio of `10` and intermittency `1.0`. Fluent derives the inlet
-transition-onset momentum-thickness Reynolds number from its empirical
-correlation based on inlet turbulence intensity. The extracted record is in
+viscosity ratio of `10` and intermittency `1.0`. Of these, `6.5%` is the NASA
+Run 145 average inlet turbulence level, whereas viscosity ratio `10` and
+intermittency `1.0` are Fluent model inputs retained in the archived setup.
+Fluent derives the inlet transition-onset momentum-thickness Reynolds number
+from its empirical correlation based on inlet turbulence intensity. The
+extracted record is in
 [`transition_sst_settings.csv`](../references/model_inputs/transition_sst_settings.csv).
 
 The imposed `6.5%` inlet turbulence intensity is not preserved to the vane in

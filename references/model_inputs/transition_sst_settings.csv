@@ -1,11 +1,11 @@
 category,setting,value,units,source,notes
 solver,viscous_model,Transition SST (4 eqn),-,warm-start transcript,Enabled from the fine SST state at iteration 236
-boundary,inlet_total_pressure,403800,Pa,saved Transition SST case,Pressure inlet total pressure
-boundary,inlet_total_temperature,792,K,saved Transition SST case,Pressure inlet total temperature
-boundary,inlet_flow_direction,1;0;0,-,saved Transition SST case,Cartesian direction components
-turbulence,inlet_intensity,6.5,percent,saved Transition SST case,Pressure inlet turbulence specification
-turbulence,inlet_viscosity_ratio,10,-,saved Transition SST case,Pressure inlet turbulence specification
-transition,inlet_intermittency,1.0,-,saved Transition SST case,Pressure inlet transition value
+boundary,inlet_total_pressure,403800,Pa,"NASA-CR-168015 Table IX + saved Transition SST case","Run 145 PTI = 58.57 psia = 403825.9 Pa; Fluent uses the rounded 403800 Pa pressure-inlet value"
+boundary,inlet_total_temperature,792,K,"NASA-CR-168015 Table IX + saved Transition SST case",Direct Run 145 total-temperature value used at the pressure inlet
+boundary,inlet_flow_direction,1;0;0,-,saved Transition SST case,Cartesian direction components; Fluent model input rather than a NASA measurement
+turbulence,inlet_intensity,6.5,percent,"NASA-CR-168015 Table IX + saved Transition SST case","Direct Run 145 average inlet turbulence intensity used as a scalar Fluent inlet condition; not a measured leading-edge value"
+turbulence,inlet_viscosity_ratio,10,-,"saved Transition SST case; Ansys Fluent boundary-condition formulation","Fluent modeling input, not a NASA measurement; 10 is the Fluent default viscosity ratio for intensity/viscosity-ratio specification"
+transition,inlet_intermittency,1.0,-,saved Transition SST case,Fluent Transition SST model input; not a NASA measurement
 transition,inlet_retheta,Fluent correlation from inlet turbulence intensity,-,Ansys Fluent Transition SST formulation,No independent numeric inlet value was specified
 numerics,transition_equations_stabilization,first-order upwind,-,warm-start transcript,Used before the change at iteration 386
 numerics,transition_equations_final,bounded second order,-,warm-start transcript,Used from iteration 386 to 556

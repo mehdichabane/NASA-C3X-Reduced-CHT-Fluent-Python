@@ -5,6 +5,7 @@
 | `c3x_archived_solid_properties.csv` | solid values recovered from the Fluent case and the conductivity law |
 | `material_property_provenance.csv` | baseline-definition source, solution role and independent literature status of each material value |
 | `c3x_internal_convection_correction_factors.csv` | per-hole `C_r` values transcribed from NASA-CR-168015 Figure 7 |
+| `run145_4512_external_boundary_provenance.csv` | NASA operating-point values, Fluent external boundary inputs and their provenance classification |
 | `run145_4512_internal_convection.csv` | generated CoolProp properties and convection coefficients |
 | `run145_wall_surface_coordinate_reference.csv` | pressure/suction labels for the final wall coordinates |
 | `transition_sst_settings.csv` | inlet, Transition SST and discretization settings recovered from the saved case and transcript |
@@ -12,6 +13,33 @@
 `scripts/preprocess/build_internal_convection_inputs.py --check` rebuilds the
 internal-convection table. The hot-gas and solid values used in Fluent are
 listed in [`docs/model_setup.md`](../../docs/model_setup.md).
+
+## External operating-point and boundary-condition provenance
+
+`run145_4512_external_boundary_provenance.csv` separates direct NASA operating
+point values from Fluent-specific model inputs and computed outputs.
+
+NASA-CR-168015 Table IX (report p. 30) gives Run 145 / code 4512 as
+`PTI = 58.57 psia`, `TTI = 792 K`, `M1 = 0.16`, `M2 = 0.90` and
+`Tu = 6.5%`. The Fluent pressure-inlet value `403800 Pa` is the rounded SI
+implementation of `58.57 psia = 403825.9 Pa`; the difference is about
+`0.0064%`.
+
+The inlet turbulent-viscosity ratio `10` is not a NASA measurement. It is a
+Fluent turbulence-boundary modeling input retained in the released solver state.
+The value also corresponds to Fluent's default turbulent-viscosity ratio when
+using the intensity/viscosity-ratio specification method. Its influence is
+explicitly screened in the Transition SST sensitivity study.
+
+The pressure-outlet value `236200 Pa` is likewise classified by provenance rather
+than retroactively attributed to the experiment. NASA explains that its reported
+exit Mach number uses measured inlet total pressure and average measured
+exit-plane static pressure, but Table IX does not tabulate that exit static
+pressure numerically for Run 145. The repository therefore treats `236200 Pa`
+as the released Fluent baseline pressure-outlet setting. No direct NASA
+transcription or unverified isentropic derivation is claimed for that number.
+With the Fluent operating pressure set to `0 Pa`, this pressure-outlet setting is
+numerically an absolute static pressure.
 
 For the generated internal-convection table, CoolProp air properties are
 evaluated at each NASA coolant bulk temperature and a fixed `101325 Pa` pressure.

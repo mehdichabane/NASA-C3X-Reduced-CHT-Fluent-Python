@@ -84,7 +84,7 @@ outputs; it does not establish solver-run equivalence for the sensitivity cases.
 
 The released Fluent state is the authoritative baseline-definition record for
 material constants used by the archived calculations. Independent literature
-citations are claimed only where they can be verified directly; the
-thermophysical-property sensitivity of the remaining archived baseline choices
-is outside the current screening scope. Their exact status is listed in
+matches are recorded with explicit exact or derived scope in
+`references/model_inputs/`; thermophysical-property sensitivity remains outside
+the current screening scope. Their exact status is listed in
 [`references/model_inputs/README.md`](../references/model_inputs/README.md).

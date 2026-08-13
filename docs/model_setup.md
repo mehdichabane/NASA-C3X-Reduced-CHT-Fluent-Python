@@ -136,11 +136,19 @@ directly.
 | Hot gas | Dynamic viscosity | `3.33e-05 Pa s` |
 | Hot gas | Thermal conductivity | `0.05234 W/(m K)` |
 
-The released Fluent state is the authoritative baseline-definition record for
-these constants. Independent literature citations are asserted only where they
-can be documented directly; the conductivity law, for example, independently
-matches the published C3X ASTM 310 relation cited above. The machine-readable
-baseline-definition and citation status is in
+The released Fluent state remains the authoritative baseline-definition record
+for these constants. Independent literature matches are recorded with explicit
+scope: exact C3X or prior-C3X-model matches are documented for solid density,
+solid specific heat, gas molecular weight, gas specific heat, gas dynamic
+viscosity and the solid conductivity law; the archived gas thermal conductivity
+is recorded only as a derived rounding match from the published `cp`, `mu` and
+`Pr` triple. These matches make the baseline auditable but do not establish
+which source was consulted when the original Fluent material definitions were
+selected. The machine-readable qualification is in
+[`material_property_provenance.csv`](../references/model_inputs/material_property_provenance.csv)
+and
+[`thermophysical_literature_matches.csv`](../references/model_inputs/thermophysical_literature_matches.csv),
+with a summary in
 [`references/model_inputs/README.md`](../references/model_inputs/README.md).
 
 The hot-gas specific heat, molecular viscosity and thermal conductivity are

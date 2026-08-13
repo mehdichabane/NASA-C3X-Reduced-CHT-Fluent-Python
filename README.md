@@ -172,7 +172,7 @@ cross-case relationships in CI but does not replay the Fluent sensitivity runs.
 | Spatial discretization | Three-grid solution sensitivity; no formal asymptotic GCI or discretization-uncertainty band |
 | Internal cooling `h` and `Tbulk` | Common-mode deterministic one-factor screening plus a local `h x Tbulk` interaction check; passage-to-passage uncertainty is not quantified and this is not probabilistic UQ |
 | Transition SST inlet state | Fine-grid sensitivity to `Tu_in` and turbulent-viscosity ratio; turbulence length scale is not varied independently |
-| Hot-gas `Cp`, molecular viscosity and thermal conductivity | Constant values defined by the released Fluent baseline; property-choice sensitivity is not evaluated and independent literature citations are asserted only where directly documented |
+| Hot-gas `Cp`, molecular viscosity and thermal conductivity | Constant values defined by the released Fluent baseline; property-choice sensitivity is not evaluated; independent literature matches are recorded with explicit exact/derived scope in `references/model_inputs/` |
 | Experimental uncertainty | NASA Table VI regional HTC intervals plus component/test-parameter uncertainties are transcribed; only Table VI is used in the plotted HTC interval check, and none is combined with CFD uncertainty into a validation budget |
 | Solver-state reproducibility | Saved case/data pairs are released; an optional pinned-PyFluent helper explicitly launches Fluent 26.1 in 2D double precision and recomputes existing scalar reports, but no full initialization-to-final replay is claimed |
 | Model-input uncertainty | Not propagated into a combined validation uncertainty budget |

@@ -67,9 +67,52 @@ def test_run145_external_boundary_provenance() -> None:
     ]
 
     assert float(rows.loc["outlet_static_pressure", "model_value"]) == 236200.0
-    assert rows.loc["outlet_static_pressure", "classification"] == "archived Fluent boundary input"
-    assert "not as a direct nasa transcription" in rows.loc[
-        "outlet_static_pressure", "qualification"
+    assert rows.loc[
+        "outlet_static_pressure", "classification"
+    ] == "operating-point adjustment to NASA exit Mach"
+    outlet_qualification = rows.loc["outlet_static_pressure", "qualification"].lower()
+    assert "not a direct nasa exit-pressure transcription" in outlet_qualification
+    assert "operating-point consistency check" in outlet_qualification
+    assert "not an independent validation metric" in outlet_qualification
+
+    assert float(rows.loc["experimental_exit_mach", "model_value"]) == 0.90
+    assert "operating-point target" in rows.loc[
+        "experimental_exit_mach", "qualification"
+    ].lower()
+    assert "not an independent validation metric" in rows.loc[
+        "fine_sst_exit_mach", "qualification"
+    ].lower()
+
+
+def test_run145_outlet_pressure_selection_history() -> None:
+    history = pd.read_csv(MODEL_INPUTS / "run145_outlet_pressure_selection.csv")
+    rows = history.set_index("stage")
+
+    p_old = float(rows.loc["provisional_second_order", "outlet_static_pressure_Pa"])
+    m_old = float(rows.loc["provisional_second_order", "outlet_mach_mass_weighted"])
+    m_target = float(rows.loc["provisional_second_order", "target_exit_mach"])
+    gamma = float(rows.loc["provisional_second_order", "gamma"])
+
+    ratio = (
+        (1.0 + (gamma - 1.0) / 2.0 * m_target**2)
+        / (1.0 + (gamma - 1.0) / 2.0 * m_old**2)
+    )
+    inferred_pressure = p_old * ratio ** (-gamma / (gamma - 1.0))
+
+    recorded_estimate = float(
+        rows.loc["isentropic_update_estimate", "outlet_static_pressure_Pa"]
+    )
+    np.testing.assert_allclose(inferred_pressure, recorded_estimate, rtol=0.0, atol=1e-9)
+    assert round(recorded_estimate, -2) == 236200.0
+
+    assert float(rows.loc["accepted_operating_point", "outlet_static_pressure_Pa"]) == 236200.0
+    assert np.isclose(
+        float(rows.loc["accepted_operating_point", "outlet_mach_mass_weighted"]),
+        0.89951531,
+    )
+    assert float(rows.loc["current_fine_sst", "outlet_static_pressure_Pa"]) == 236200.0
+    assert "not an independent validation metric" in rows.loc[
+        "current_fine_sst", "qualification"
     ].lower()
 
 

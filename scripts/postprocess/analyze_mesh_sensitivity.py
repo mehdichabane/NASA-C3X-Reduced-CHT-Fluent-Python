@@ -259,7 +259,7 @@ def build_global_metrics(global_data: pd.DataFrame) -> pd.DataFrame:
                 "richardson_extrapolated": extrapolated,
                 "gci_fine_medium_percent": gci_fine_medium,
                 "asymptotic_ratio": asymptotic_ratio,
-                "gci_status": "not_reported" if quantity == "outlet_mach" else "screening",
+                "gci_status": "screening",
             }
         )
     return pd.DataFrame(rows)

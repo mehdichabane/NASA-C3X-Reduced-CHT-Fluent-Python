@@ -39,7 +39,7 @@ model-sensitivity analysis, Python automation and regression testing.
 | Quantity | Result |
 |---|---:|
 | Final iteration | `236` |
-| Outlet Mach number | `0.901` |
+| Outlet Mach (operating-point check) | `0.901` |
 | Wall-temperature MAE / MAPE | `8.887 K / 1.448%` pressure; `12.999 K / 2.005%` suction |
 | HTC MAPE | `7.795%` pressure / `11.535%` suction |
 | Pressure-ratio MAPE | `0.926%` pressure / `3.980%` suction |
@@ -47,6 +47,11 @@ model-sensitivity analysis, Python automation and regression testing.
 | Fluid-solid interface mismatch | `5.6e-6%` |
 | Solid heat imbalance | `0.0019%` |
 | Maximum wall `y+` | `0.452` |
+
+The `236200 Pa` pressure outlet was adjusted to the NASA Run 145 `M2 = 0.90`
+operating-point target. Outlet-Mach agreement is therefore a consistency check,
+not an independent validation metric; the selection record is in
+[`docs/outlet_pressure_selection.md`](docs/outlet_pressure_selection.md).
 
 Wall-temperature MAPE is retained as a compact relative summary, but the
 headline result also reports MAE in kelvin because it is the more directly
@@ -248,6 +253,7 @@ summarized in
 ## Technical notes
 
 - [Model definition and implementation](docs/model_setup.md)
+- [Run 145 outlet-pressure selection](docs/outlet_pressure_selection.md)
 - [Fine-grid convergence and balances](docs/convergence_acceptance.md)
 - [Three-grid mesh record](docs/meshing_recipe.md)
 - [NASA coordinate matching and error metrics](docs/nasa_comparison.md)

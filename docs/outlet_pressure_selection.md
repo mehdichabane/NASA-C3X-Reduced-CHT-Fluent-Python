@@ -64,10 +64,16 @@ this gives
 p_new = 236228.236 Pa
 ```
 
-which was rounded to `236200 Pa` before the next Fluent continuation. The
-resulting recorded mass-weighted outlet Mach was `0.89951531`, an absolute Mach
-difference of `0.00048469` from the `0.90` target (`0.0539%` relative to the
-target).
+`gamma = 1.4` is recorded here because it is the value used in that historical
+one-step estimate. The estimate was only a local control update used to propose
+the next pressure-outlet value; it is not introduced as a separate gas-property
+definition for the released Fluent baseline and it is not an uncertainty model.
+The actual acceptance check was the subsequent Fluent response.
+
+The estimate was rounded to `236200 Pa` before the next Fluent continuation.
+The resulting recorded mass-weighted outlet Mach was `0.89951531`, an absolute
+Mach difference of `0.00048469` from the `0.90` target (`0.0539%` relative to
+the target).
 
 The machine-readable selection history is in
 [`../references/model_inputs/run145_outlet_pressure_selection.csv`](../references/model_inputs/run145_outlet_pressure_selection.csv).

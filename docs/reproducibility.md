@@ -43,23 +43,34 @@ environment with a locally installed, licensed Fluent 26.1 instance. Its
 separate direct dependency is pinned in `requirements-fluent.txt` as
 `ansys-fluent-core==0.40.2`.
 
-The helper explicitly launches Fluent `26.1.0` in 2D double precision, checks
-the running Fluent version returned by the session, opens one released
-`.cas.h5/.dat.h5` pair and recomputes existing scalar report definitions from
-the saved state. The default fine-grid reports are external heat-transfer rate,
-mean wall temperature and outlet Mach number.
+The helper explicitly launches Fluent `26.1.0` in 2D double precision with
+`ui_mode="no_gui"`, checks the running Fluent version returned by the session,
+opens one released `.cas.h5/.dat.h5` pair and recomputes existing scalar report
+definitions from the saved state. The default fine-grid reports are external
+heat-transfer rate, mean wall temperature and outlet Mach number.
 
-The launch configuration is unit-tested in CI without a Fluent installation.
-No JSON produced by an actual licensed Fluent 26.1 execution is committed at
-present, so the repository demonstrates the audit configuration and released
-solver state, not a recorded live execution of that audit.
+Before launching Fluent, the helper checks that the conventionally matching
+`.dat.h5` file is beside the requested `.cas.h5` file. A retained JSON audit
+records the SHA-256 digest of both inputs as well as the requested and actual
+Fluent version, dimension, precision and UI mode. The hashes can therefore be
+checked directly against `fluent/restart_manifest.csv`.
 
-A local live audit can be recorded explicitly with:
+The launch configuration and local hashing helpers are unit-tested in CI without
+a Fluent installation. No JSON produced by an actual licensed Fluent 26.1
+execution is committed at present, so the repository demonstrates the audit
+configuration and released solver state, not a recorded live execution of that
+audit.
+
+Recommended fine-grid live audits are:
 
 ```bash
 python -m pip install -r requirements-fluent.txt
-python scripts/verification/replay_saved_state_reports.py PATH_TO_FINE_CASE.cas.h5 --output saved_state_report_audit.json
+python scripts/verification/replay_saved_state_reports.py c3x_run145_nasa_exact_fine_SST_final_iter236.cas.h5 --output run145_sst_fine_saved_state_audit.json
+python scripts/verification/replay_saved_state_reports.py c3x_run145_transition_sst_fine_final_iter556.cas.h5 --output run145_transition_sst_fine_saved_state_audit.json
 ```
+
+The matching `.dat.h5` files must remain beside the case files with the canonical
+filenames listed in `fluent/restart_manifest.csv`.
 
 This helper is intentionally outside `run_all.py` and GitHub Actions because the
 CI environment does not contain Fluent. It narrows the gap between the released

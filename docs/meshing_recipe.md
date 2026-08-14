@@ -118,15 +118,15 @@ Direct inspection of the released fine CFF mesh gives:
 The accepted Transition SST direct wall export gives
 `y+` min / area mean / max of `0.007890 / 0.251092 / 0.398393`.
 
-Fluent 2026 R1 recommends, as Transition SST mesh best practice, maximum
-`y+` of about `1`, a wall-normal expansion ratio below `1.1`, and approximately
-`100-150` streamwise cells on each side of a turbine blade. The realized mesh
-therefore **comfortably satisfies the wall-resolution and streamwise-count
-recommendations but does not satisfy the recommended wall-normal expansion
-ratio**: the retained inflation stack is approximately `1.20`, not `<1.1`.
-Fluent's own flat-plate study reports a small but noticeable upstream transition
-shift at expansion factor `1.2` and warns that wall-normal sensitivity can
-increase in pressure-gradient flows.
+The [Fluent 2026 R1 Transition SST mesh requirements](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_th/flu_th_sec_turb_sst_grid.html)
+recommend, as best practice, maximum `y+` of about `1`, a wall-normal expansion
+ratio below `1.1`, and approximately `100-150` streamwise cells on each side of
+a turbine blade. The realized mesh therefore **comfortably satisfies the
+wall-resolution and streamwise-count recommendations but does not satisfy the
+recommended wall-normal expansion ratio**: the retained inflation stack is
+approximately `1.20`, not `<1.1`. Fluent's own flat-plate study reports a small
+but noticeable upstream transition shift at expansion factor `1.2` and warns
+that wall-normal sensitivity can increase in pressure-gradient flows.
 
 No coarse or medium Transition SST solutions were run. Consequently, the
 extracted transition-like response locations remain fine-grid model-response

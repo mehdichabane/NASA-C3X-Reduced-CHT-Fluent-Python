@@ -203,7 +203,7 @@ cross-case relationships in CI but does not replay the Fluent sensitivity runs.
 | Transition SST inlet state | Fine-grid sensitivity to `Tu_in` and turbulent-viscosity ratio; turbulence length scale is not varied independently |
 | Hot-gas `Cp`, molecular viscosity and thermal conductivity | Constant values defined by the released Fluent baseline; property-choice sensitivity is not evaluated; independent literature matches are recorded with explicit exact/derived scope in `references/model_inputs/` |
 | Experimental uncertainty | NASA Table VI regional HTC intervals plus component/test-parameter uncertainties are transcribed; only Table VI is used in the plotted HTC interval check, and none is combined with CFD uncertainty into a validation budget |
-| Solver-state reproducibility | Saved case/data pairs are released; an optional pinned-PyFluent helper explicitly launches Fluent 26.1 in 2D double precision and recomputes existing scalar reports, but no full initialization-to-final replay is claimed |
+| Solver-state reproducibility | Saved case/data pairs are released; archived live Fluent 26.1/PyFluent audits reopen the released fine SST and fine Transition SST states and recompute stored scalar reports, but no full initialization-to-final replay is claimed |
 | Model-input uncertainty | Not propagated into a combined validation uncertainty budget |
 
 This table separates quantities that were actually screened from assumptions
@@ -241,13 +241,15 @@ fine Transition SST case. Filenames, iterations, cell counts and SHA-256 values
 are in [`fluent/restart_manifest.csv`](fluent/restart_manifest.csv). Reopening
 steps are in [`fluent/README.md`](fluent/README.md).
 
-For a local licensed Fluent 26.1 installation, the optional
-`scripts/verification/replay_saved_state_reports.py` helper uses the PyFluent
-version pinned in `requirements-fluent.txt` to launch a 2D double-precision
+For a local licensed Fluent 26.1 installation,
+`scripts/verification/replay_saved_state_reports.py` uses the PyFluent version
+pinned in `requirements-fluent.txt` to launch a headless 2D double-precision
 session, open a released case/data pair and recompute existing scalar report
-definitions. It is not part of CI and is not a replay from initialization. The
-launch configuration is unit-tested in CI; no JSON from an actual licensed
-Fluent 26.1 execution is committed, so a live saved-state audit is not claimed.
+definitions. Live executions for the released fine SST and final fine Transition
+SST states are committed under
+[`results/processed/verification/live_saved_state_audits/`](results/processed/verification/live_saved_state_audits/),
+and CI checks their recorded case/data hashes against the restart manifest.
+These audits reopen saved states only; they are not replays from initialization.
 
 The saved states can be reopened and the realized Fluent meshes can be audited
 directly. The original SpaceClaim and Ansys Meshing construction history was not

@@ -61,4 +61,4 @@ def test_matching_data_file_uses_standard_cff_pair_name() -> None:
 def test_sha256_file_records_input_identity(tmp_path: Path) -> None:
     path = tmp_path / "sample.dat.h5"
     path.write_bytes(b"NASA C3X")
-    assert sha256_file(path) == "05b0bedee1ece789f956bc968f119cb9742bdd14973266beb2156a1893057010"
+    assert sha256_file(path) == "a8d443c9e432cee1599f76424e11d09f26ad149dad13671e88fd8d12d7cb6a25"

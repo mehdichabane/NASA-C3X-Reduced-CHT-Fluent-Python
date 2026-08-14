@@ -38,25 +38,36 @@ section states that exit Mach numbers are based on measured inlet total pressure
 and average measured exit-plane static pressure and that, at a given Reynolds
 number, the exit-Mach level was independently established by adjusting cascade
 exit pressure with a controllable exhaust valve. Table IX supplies the Run 145
-target `M2 = 0.90`, but it does not tabulate the corresponding measured exit
-static pressure.
+nominal operating point `M2 = 0.90`, but it does not tabulate the corresponding
+measured exit static pressure.
+
+NASA `M2` and the Fluent outlet-Mach report are not definition-identical. NASA's
+quantity is pressure-derived from the measured inlet total pressure and average
+measured exit-plane static pressure. The saved Fluent `fine_mach_outlet` report
+is a `surface-massavg` of the local Mach field on the outlet, which weights the
+quantity by surface mass flux.
 
 The retained project development record shows that the Fluent pressure outlet
-was therefore adjusted to reproduce that experimental operating point rather
-than transcribed from a NASA exit-pressure table. A provisional second-order
-state at `241200 Pa` gave mass-weighted `Mout = 0.88064076`. A local isentropic
-pressure-ratio update with `gamma = 1.4` and target `M2 = 0.90` gave
+was therefore selected until the **Fluent mass-weighted outlet Mach was
+numerically consistent with the nominal NASA `M2 = 0.90` operating point**, not
+because `236200 Pa` was transcribed from a NASA exit-pressure table. A
+provisional second-order state at `241200 Pa` gave Fluent mass-weighted
+`Mout = 0.88064076`. A local isentropic pressure-ratio control update with
+`gamma = 1.4`, using nominal NASA `M2 = 0.90` numerically as the target, gave
 `236228.236 Pa`; this was rounded to `236200 Pa`. Continuing Fluent at the
-rounded setting gave a recorded `Mout = 0.89951531` (`0.0539%` relative
-difference from the target). The current released fine SST baseline retains the
-same `236200 Pa` boundary setting and gives `Mout = 0.901294`.
+rounded setting gave mass-weighted `Mout = 0.89951531`. The `0.0539%` normalized
+numerical mismatch to `0.90` is an operating-point consistency indicator between
+differently defined quantities, not a validation error or experimental
+uncertainty. The current released fine SST baseline retains the same
+`236200 Pa` boundary setting and gives mass-weighted `Mout = 0.901294`.
 
 Accordingly, `236200 Pa` is classified as an **operating-point adjustment to the
-NASA exit-Mach target**. It is not a direct NASA exit-pressure transcription.
-Once that target has been used to choose the pressure outlet, outlet-Mach
-agreement is an operating-point consistency check rather than an independent
-validation metric. The thermal measurements were not used to select the outlet
-pressure. The calculation and selection history are documented in
+nominal NASA exit-Mach condition**. It is not a direct NASA exit-pressure
+transcription. Numerical proximity between NASA `M2` and the Fluent
+surface-mass-averaged Mach is an operating-point consistency check rather than a
+like-for-like Mach validation comparison or an independent validation metric.
+The thermal measurements were not used to select the outlet pressure. The
+calculation and selection history are documented in
 [`../../docs/outlet_pressure_selection.md`](../../docs/outlet_pressure_selection.md)
 and `run145_outlet_pressure_selection.csv`.
 

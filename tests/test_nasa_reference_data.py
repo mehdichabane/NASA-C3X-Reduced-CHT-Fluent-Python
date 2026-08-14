@@ -82,6 +82,10 @@ def test_run145_external_boundary_provenance() -> None:
     assert "not an independent validation metric" in rows.loc[
         "fine_sst_exit_mach", "qualification"
     ].lower()
+    exit_mach_source = rows.loc["fine_sst_exit_mach", "source_detail"].lower()
+    assert "mass-weighted outlet mach" in exit_mach_source
+    assert "surface-massavg" in exit_mach_source
+    assert "area-weighted outlet mach" not in exit_mach_source
 
 
 def test_run145_outlet_pressure_selection_history() -> None:
@@ -139,3 +143,23 @@ def test_transition_sst_turbulence_inputs_keep_experiment_and_model_separate() -
         "inlet_intermittency", "notes"
     ].lower()
     assert "model-generated transition input" in rows.loc["inlet_retheta", "notes"].lower()
+
+
+def test_transition_sst_discretization_provenance() -> None:
+    settings = pd.read_csv(MODEL_INPUTS / "transition_sst_settings.csv")
+    rows = settings.set_index("setting")
+
+    mean_flow = rows.loc["mean_flow_transition_run", "value"].lower()
+    assert "pressure: second order" in mean_flow
+    assert "density/momentum/energy: second order upwind" in mean_flow
+
+    stabilization = rows.loc["transition_equations_stabilization"]
+    assert stabilization["value"] == "k, omega, intermittency, Re_theta_t: First Order Upwind"
+    assert "scheme index 0" in stabilization["notes"].lower()
+    assert "iteration 386" in stabilization["notes"].lower()
+
+    final = rows.loc["transition_equations_final"]
+    assert final["value"] == "k, omega, intermittency, Re_theta_t: Second Order Upwind"
+    assert "scheme index 1" in final["notes"].lower()
+    assert "unchanged iteration-386 solution" in final["notes"].lower()
+    assert "bounded second order" not in final["value"].lower()

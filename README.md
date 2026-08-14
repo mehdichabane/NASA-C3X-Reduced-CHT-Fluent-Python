@@ -25,7 +25,7 @@ post-processing.
   reported global quantities change by less than `0.1%` from medium to fine
   mesh.
 - **Main limitation.** Coolant flow, film cooling and three-dimensional effects
-  are not resolved. The retained mesh history does not support a formal
+  are not resolved. The retained mesh-generation record does not support a formal
   discretization-uncertainty estimate, model-input uncertainty is not propagated
   into a combined ASME V&V 20 validation uncertainty, and no complete
   initialization-to-final Fluent replay is claimed.
@@ -39,7 +39,7 @@ model-sensitivity analysis, Python automation and regression testing.
 | Quantity | Result |
 |---|---:|
 | Final iteration | `236` |
-| Outlet Mach (operating-point check) | `0.901` |
+| Mass-weighted outlet Mach (operating-point check) | `0.901` |
 | Wall-temperature MAE / MAPE | `8.887 K / 1.448%` pressure; `12.999 K / 2.005%` suction |
 | HTC MAPE | `7.795%` pressure / `11.535%` suction |
 | Pressure-ratio MAPE | `0.926%` pressure / `3.980%` suction |
@@ -49,8 +49,10 @@ model-sensitivity analysis, Python automation and regression testing.
 | Maximum wall `y+` | `0.452` |
 
 The `236200 Pa` pressure outlet was adjusted to the NASA Run 145 `M2 = 0.90`
-operating-point target. Outlet-Mach agreement is therefore a consistency check,
-not an independent validation metric; the selection record is in
+operating-point target. The Fluent `fine_mach_outlet` report is a
+`surface-massavg` of Mach number on the outlet. Its agreement with the nominal
+NASA operating-point Mach is therefore a consistency check, not an independent
+validation metric; the selection record is in
 [`docs/outlet_pressure_selection.md`](docs/outlet_pressure_selection.md).
 
 Wall-temperature MAPE is retained as a compact relative summary, but the
@@ -107,21 +109,21 @@ to their implementations are in [`docs/model_setup.md`](docs/model_setup.md).
 | Medium | `23,781` | `473` | `161` |
 | Fine | `44,760` | `819` | `236` |
 
-Medium-to-fine changes are `0.0972%` for outlet Mach, `0.0332%` for mean
-external wall temperature and `0.0837%` for external heat-transfer rate. These
-sub-`0.1%` values apply to those three global quantities only: local profiles
-remain more mesh-sensitive near the trailing edge, where the pressure-side
-pressure-ratio diagnostic reaches an `8.76%` range-normalized medium-to-fine
-MAE over the final `5%` of surface distance. This is a profile-shape diagnostic,
-not a pointwise `8.76%` pressure error. The results are a three-grid sensitivity
-assessment, not a formal asymptotic GCI; details are in
+Medium-to-fine changes are `0.0972%` for mass-weighted outlet Mach, `0.0332%`
+for mean external wall temperature and `0.0837%` for external heat-transfer
+rate. These sub-`0.1%` values apply to those three global quantities only: local
+profiles remain more mesh-sensitive near the trailing edge, where the
+pressure-side pressure-ratio diagnostic reaches an `8.76%` range-normalized
+medium-to-fine MAE over the final `5%` of surface distance. This is a
+profile-shape diagnostic, not a pointwise `8.76%` pressure error. The results are
+a three-grid sensitivity assessment, not a formal asymptotic GCI; details are in
 [`docs/meshing_recipe.md`](docs/meshing_recipe.md).
 
 The fine SST calculation continued for 20 iterations after the active
 continuity criterion was first met. The final-window monitor spans and the mass,
 interface and solid-energy balances are listed in
-[`docs/convergence_acceptance.md`](docs/convergence_acceptance.md). Mesh quality
-and missing GUI settings are recorded in
+[`docs/convergence_acceptance.md`](docs/convergence_acceptance.md). Mesh quality,
+realized-mesh diagnostics and missing GUI generation settings are recorded in
 [`docs/meshing_recipe.md`](docs/meshing_recipe.md).
 
 ## Comparison with Run 145 measurements
@@ -148,7 +150,7 @@ The repository reports a benchmark comparison, iterative/conservation
 verification checks and a three-grid mesh-sensitivity assessment. It does not
 claim conformance to a complete [ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
 validation assessment. NASA experimental uncertainties are documented, but the
-retained mesh record does not support an accepted formal
+retained mesh-generation record does not support an accepted formal
 discretization-uncertainty estimate and model-input uncertainty is not
 propagated. The repository therefore does not construct a combined
 validation-uncertainty budget.
@@ -244,10 +246,10 @@ definitions. It is not part of CI and is not a replay from initialization. The
 launch configuration is unit-tested in CI; no JSON from an actual licensed
 Fluent 26.1 execution is committed, so a live saved-state audit is not claimed.
 
-The saved states can be reopened. The original SpaceClaim and Ansys Meshing GUI
-history was not retained. No complete replay from initialization, with a
-transcript and final-state equivalence checks, is included. The exact status is
-summarized in
+The saved states can be reopened and the realized Fluent meshes can be audited
+directly. The original SpaceClaim and Ansys Meshing construction history was not
+retained. No complete replay from initialization, with a transcript and
+final-state equivalence checks, is included. The exact status is summarized in
 [`docs/reproducibility.md`](docs/reproducibility.md).
 
 ## Technical notes
@@ -266,7 +268,7 @@ summarized in
 
 - The model is steady and two-dimensional.
 - Internal cooling is represented by prescribed convection boundaries.
-- The original interactive meshing history was not saved.
+- The original interactive meshing construction history was not saved, although the realized Fluent meshes are retained.
 - Hot-gas `Cp`, molecular viscosity and thermal conductivity are constant baseline inputs whose sensitivity is not evaluated.
 - Input-property uncertainty is not propagated into the comparison metrics.
 - No coarse or medium Transition SST calculation is included.

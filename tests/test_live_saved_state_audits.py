@@ -1,6 +1,6 @@
 import csv
 import json
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT_DIR = ROOT / "results" / "processed" / "verification" / "live_saved_state_audits"
@@ -44,8 +44,8 @@ def test_fine_sst_live_audit_matches_restart_manifest() -> None:
     row = manifest_rows()["fine"]
     assert_common_audit_fields(payload)
 
-    assert Path(str(payload["case_file"])).name == row["case_file"]
-    assert Path(str(payload["data_file"])).name == row["data_file"]
+    assert PureWindowsPath(str(payload["case_file"])).name == row["case_file"]
+    assert PureWindowsPath(str(payload["data_file"])).name == row["data_file"]
     assert payload["case_sha256"] == row["sha256_case"]
     assert payload["data_sha256"] == row["sha256_data"]
 
@@ -55,7 +55,7 @@ def test_transition_sst_live_audit_matches_restart_manifest() -> None:
     row = manifest_rows()["transition_sst_fine"]
     assert_common_audit_fields(payload)
 
-    assert Path(str(payload["case_file"])).name == row["case_file"]
-    assert Path(str(payload["data_file"])).name == row["data_file"]
+    assert PureWindowsPath(str(payload["case_file"])).name == row["case_file"]
+    assert PureWindowsPath(str(payload["data_file"])).name == row["data_file"]
     assert payload["case_sha256"] == row["sha256_case"]
     assert payload["data_sha256"] == row["sha256_data"]

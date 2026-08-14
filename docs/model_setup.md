@@ -188,8 +188,8 @@ minimum orthogonal quality is `0.128589`, maximum equiangle skewness is
 `0.802574`, maximum Fluent aspect ratio is `418.787`, and external-wall `y+`
 min / mean / max is `0.01044 / 0.30441 / 0.45189`.
 
-All-grid quality distributions and the missing GUI settings are in
-[`meshing_recipe.md`](meshing_recipe.md).
+All-grid quality distributions, realized-mesh diagnostics and the missing GUI
+generation settings are in [`meshing_recipe.md`](meshing_recipe.md).
 
 ## Fluent settings and run decisions
 
@@ -204,12 +204,22 @@ All-grid quality distributions and the missing GUI settings are in
 | Sensitivity model | Transition SST |
 | Gradient | least-squares cell based |
 | Pressure | second order |
-| Density, momentum, energy and turbulence | second-order upwind |
+| Final density, momentum and energy convection | second-order upwind |
 
 The SST calculation used first-order schemes to establish a stable field, then
-continued with second-order settings to iteration 236. The Transition SST case
-started from that field. Its transition equations changed to bounded second
-order at iteration 386, and the final state is iteration 556.
+continued with second-order settings to iteration 236. Transition SST (4 eqn)
+was then enabled from that accepted state. The retained Fluent transcript shows
+that the Transition SST warm-start state was written before the four
+`turbulence/transition` transport-equation schemes were deliberately changed.
+Immediately afterward, `k`, `omega`, intermittency and transition
+momentum-thickness Reynolds number were set to Fluent scheme index `0` (First
+Order Upwind) for stabilization and retained at first order through iteration
+386. After the first-order iteration-386 checkpoint was written, those same four
+equations were changed to scheme index `1` (Second Order Upwind). The
+iteration-386 solution was written again before further iteration and then
+continued with the second-order settings to iteration 556. Pressure, density,
+momentum and energy retained their existing second-order settings throughout
+this Transition SST chronology.
 
 The saved Transition SST inlet uses `6.5%` turbulence intensity, a turbulent
 viscosity ratio of `10` and intermittency `1.0`. Of these, `6.5%` is the NASA

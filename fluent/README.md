@@ -27,11 +27,11 @@ The bundle supports reopening the saved states and auditing the SST CFF meshes.
 It does not reproduce the original interactive meshing sequence or demonstrate
 that a new initialization converges to the saved fine SST state.
 
-## Optional PyFluent saved-state report audit
+## PyFluent saved-state report audit
 
-A small optional helper can reopen a saved case/data pair through PyFluent and
-recompute report definitions that already exist in the saved case. Install the
-separate pinned solver-side dependency first:
+A small helper can reopen a saved case/data pair through PyFluent and recompute
+report definitions that already exist in the saved case. Install the separate
+pinned solver-side dependency first:
 
 ```text
 python -m pip install -r requirements-fluent.txt
@@ -52,8 +52,7 @@ input files so a retained audit can be matched directly to
 
 The default report names are `fine_external_heat_rate`,
 `fine_wall_temperature_avg` and `fine_mach_outlet`; use `--report` to override
-them for another saved case. To retain local audit artifacts explicitly, the
-recommended fine-grid commands are:
+them for another saved case. The fine-grid commands are:
 
 ```text
 python scripts/verification/replay_saved_state_reports.py c3x_run145_nasa_exact_fine_SST_final_iter236.cas.h5 --output run145_sst_fine_saved_state_audit.json
@@ -63,15 +62,22 @@ python scripts/verification/replay_saved_state_reports.py c3x_run145_transition_
 Run those commands from a directory where each matching `.dat.h5` file remains
 beside its `.cas.h5` file, or provide the corresponding full case-file path.
 
-The launch configuration and local hash helpers are unit-tested in CI with a
-fake PyFluent launcher. Until JSON from an actual licensed Fluent 26.1 execution
-is committed, the repository does not claim that this optional live audit has
-already been run and archived.
+Live Fluent 26.1 executions for the released fine SST and final fine Transition
+SST states are now archived under
+[`results/processed/verification/live_saved_state_audits/`](../results/processed/verification/live_saved_state_audits/).
+Their recorded case/data SHA-256 values match this directory's restart manifest.
+The recomputed reports are:
 
-This helper requires a locally installed, licensed Fluent 26.1 environment and
-is not executed in GitHub Actions. It is a saved-state audit only: it does not
-regenerate the mesh, initialize the solver, replay iterations, export the full
-wall data set, or establish final-state equivalence from initialization.
+| Saved state | External heat rate [W] | Mean wall temperature [K] | Mass-weighted outlet Mach |
+|---|---:|---:|---:|
+| fine SST, iter 236 | `35819.60242176461` | `655.619216610248` | `0.9012944409738727` |
+| fine Transition SST, iter 556 | `28548.27415186197` | `608.87899709921` | `0.9033510682539843` |
+
+The launch configuration, local hash helpers and archived-audit provenance are
+unit-tested in CI; Fluent itself is not executed in GitHub Actions. These are
+saved-state audits only: they do not regenerate the mesh, initialize the solver,
+replay iterations, export the full wall data set, or establish final-state
+equivalence from initialization.
 
 ## Transition SST restart
 

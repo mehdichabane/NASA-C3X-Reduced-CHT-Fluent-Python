@@ -48,10 +48,13 @@ model-sensitivity analysis, Python automation and regression testing.
 | Solid heat imbalance | `0.0019%` |
 | Maximum wall `y+` | `0.452` |
 
-The `236200 Pa` pressure outlet was adjusted to the NASA Run 145 `M2 = 0.90`
-operating-point target. The Fluent `fine_mach_outlet` report is a
-`surface-massavg` of Mach number on the outlet. Its agreement with the nominal
-NASA operating-point Mach is therefore a consistency check, not an independent
+The `236200 Pa` pressure outlet was selected until the Fluent mass-weighted
+outlet Mach was numerically consistent with the nominal NASA Run 145
+`M2 = 0.90` operating point. NASA `M2` is pressure-derived from measured inlet
+total pressure and average measured exit-plane static pressure, whereas the
+saved Fluent `fine_mach_outlet` report is a `surface-massavg` of local Mach on
+the outlet. Their numerical proximity is therefore an operating-point
+consistency check, not a like-for-like Mach validation error or an independent
 validation metric; the selection record is in
 [`docs/outlet_pressure_selection.md`](docs/outlet_pressure_selection.md).
 

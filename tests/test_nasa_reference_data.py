@@ -69,32 +69,45 @@ def test_run145_external_boundary_provenance() -> None:
     assert float(rows.loc["outlet_static_pressure", "model_value"]) == 236200.0
     assert rows.loc[
         "outlet_static_pressure", "classification"
-    ] == "operating-point adjustment to NASA exit Mach"
+    ] == "operating-point adjustment to nominal NASA exit Mach"
     outlet_qualification = rows.loc["outlet_static_pressure", "qualification"].lower()
     assert "not a direct nasa exit-pressure transcription" in outlet_qualification
     assert "operating-point consistency check" in outlet_qualification
     assert "not an independent validation metric" in outlet_qualification
+    assert "not definition-identical" in outlet_qualification
+    assert "not a like-for-like mach error" in outlet_qualification
 
     assert float(rows.loc["experimental_exit_mach", "model_value"]) == 0.90
-    assert "operating-point target" in rows.loc[
+    experimental_exit_source = rows.loc["experimental_exit_mach", "source_detail"].lower()
+    experimental_exit_qualification = rows.loc[
         "experimental_exit_mach", "qualification"
     ].lower()
+    assert "average measured exit-plane static pressure" in experimental_exit_source
+    assert "pressure-derived" in experimental_exit_qualification
+    assert "not definition-identical" in experimental_exit_qualification
+
     assert "not an independent validation metric" in rows.loc[
         "fine_sst_exit_mach", "qualification"
     ].lower()
     exit_mach_source = rows.loc["fine_sst_exit_mach", "source_detail"].lower()
+    exit_mach_qualification = rows.loc["fine_sst_exit_mach", "qualification"].lower()
     assert "mass-weighted outlet mach" in exit_mach_source
     assert "surface-massavg" in exit_mach_source
     assert "area-weighted outlet mach" not in exit_mach_source
+    assert "pressure-derived" in exit_mach_qualification
+    assert "not a like-for-like validation error" in exit_mach_qualification
 
 
 def test_run145_outlet_pressure_selection_history() -> None:
     history = pd.read_csv(MODEL_INPUTS / "run145_outlet_pressure_selection.csv")
     rows = history.set_index("stage")
 
+    assert "nominal_nasa_M2" in history.columns
+    assert "target_exit_mach" not in history.columns
+
     p_old = float(rows.loc["provisional_second_order", "outlet_static_pressure_Pa"])
     m_old = float(rows.loc["provisional_second_order", "outlet_mach_mass_weighted"])
-    m_target = float(rows.loc["provisional_second_order", "target_exit_mach"])
+    m_target = float(rows.loc["provisional_second_order", "nominal_nasa_M2"])
     gamma = float(rows.loc["provisional_second_order", "gamma"])
 
     ratio = (
@@ -114,10 +127,15 @@ def test_run145_outlet_pressure_selection_history() -> None:
         float(rows.loc["accepted_operating_point", "outlet_mach_mass_weighted"]),
         0.89951531,
     )
+    accepted_qualification = rows.loc["accepted_operating_point", "qualification"].lower()
+    assert "differently defined quantities" in accepted_qualification
+    assert "not a validation error" in accepted_qualification
+
     assert float(rows.loc["current_fine_sst", "outlet_static_pressure_Pa"]) == 236200.0
-    assert "not an independent validation metric" in rows.loc[
-        "current_fine_sst", "qualification"
-    ].lower()
+    current_qualification = rows.loc["current_fine_sst", "qualification"].lower()
+    assert "surface-mass-averaged" in current_qualification
+    assert "pressure-derived" in current_qualification
+    assert "not an independent or like-for-like validation metric" in current_qualification
 
 
 def test_transition_sst_turbulence_inputs_keep_experiment_and_model_separate() -> None:

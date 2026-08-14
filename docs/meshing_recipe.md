@@ -91,38 +91,67 @@ fields. These values are retained as exploratory diagnostics only; they are not
 accepted or reported here as formal discretization uncertainties. The retained
 meshing record cannot establish that the three meshes form a systematically
 similar refinement family with the same generation parameters and controlled
-reference-spacing ratios. The missing sizing, bias, inflation-growth and
-meshing-method records listed below are precisely why the project reports a
-three-grid sensitivity rather than a formal asymptotic GCI assessment.
+reference-spacing ratios. The missing sizing, bias and meshing-method records
+listed below are precisely why the project reports a three-grid sensitivity
+rather than a formal asymptotic GCI assessment.
 
 ## Transition SST mesh qualification
 
-The fine mesh satisfies the usual near-wall criterion for the Transition SST
-model with `y+_max = 0.45189`. Fluent 26.1 also recommends a wall-normal
-expansion ratio below `1.1` and, for a turbine blade, roughly `100-150`
-streamwise cells on each side as best-practice guidance for transition
-prediction. See the Fluent Theory Guide section on
-[Transition SST mesh requirements](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_th/flu_th_sec_turb_sst_grid.html).
+The original Workbench/Ansys Meshing construction history was not retained, but
+the **realized mesh solved by Fluent is preserved in the CFF case files**. A CFF
+case stores node coordinates plus face/cell/node connectivity, so several
+Transition-SST-specific resolution quantities can be audited directly from the
+saved mesh rather than inferred from the missing GUI recipe.
 
-The original inflation growth rate, edge-division counts, bias factors and other
-mesh-generation settings were not retained, so this repository cannot
-demonstrate that the accepted fine mesh satisfies all of those
-Transition-SST-specific recommendations. No coarse or medium Transition SST
-solutions were run either. Consequently, the extracted transition-like response
-locations are treated as fine-grid model-response diagnostics, not as
-Transition-SST grid-converged locations.
+Direct inspection of the released fine CFF mesh gives:
+
+- `819` external vane wall faces in total;
+- `373` pressure-side and `446` suction-side wall faces/cells when the retained
+  wall-face centres are mapped to the repository C3X pressure/suction profile;
+- a first wall-normal layer thickness of approximately `1.0 micrometre`;
+- `30` successive inflation layers whose realized wall-normal thicknesses follow
+  an approximately `1.20` geometric expansion (`1.000, 1.200, 1.440, 1.728, ...`
+  micrometres before the post-inflation jump);
+- byte-identical CFF mesh datasets between the released fine SST iteration-236
+  state and the released Transition SST iteration-556 state.
+
+The accepted Transition SST direct wall export gives
+`y+` min / area mean / max of `0.007890 / 0.251092 / 0.398393`.
+
+The [Fluent 2026 R1 Transition SST mesh requirements](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_th/flu_th_sec_turb_sst_grid.html)
+recommend, as best practice, maximum `y+` of about `1`, a wall-normal expansion
+ratio below `1.1`, and approximately `100-150` streamwise cells on each side of
+a turbine blade. The realized mesh therefore **comfortably satisfies the
+wall-resolution and streamwise-count recommendations but does not satisfy the
+recommended wall-normal expansion ratio**: the retained inflation stack is
+approximately `1.20`, not `<1.1`. Fluent's own flat-plate study reports a small
+but noticeable upstream transition shift at expansion factor `1.2` and warns
+that wall-normal sensitivity can increase in pressure-gradient flows.
+
+No coarse or medium Transition SST solutions were run. Consequently, the
+extracted transition-like response locations remain fine-grid model-response
+diagnostics, not grid-converged or experimentally established transition
+locations. The stronger conclusion supported by the retained files is not
+"Transition SST mesh quality is unknown"; it is that the realized mesh can be
+substantially audited, passes two major best-practice checks, and has a specific
+known limitation in its `~1.20` wall-normal expansion.
 
 ## Missing setup information
 
-These original GUI settings were not saved:
+The following **mesh-generation inputs/history** were not retained as an
+editable Workbench/Ansys Meshing recipe:
 
-- inflation growth rate;
-- global and local element sizes;
-- edge-division counts and bias factors;
+- the original inflation-control object and entered growth-rate setting;
+- global and local element-size controls;
+- edge-division and bias-control objects;
 - curvature and proximity controls;
-- meshing method and smoothing settings;
+- meshing-method and smoothing-control settings;
 - operation order in SpaceClaim and Ansys Meshing;
 - the original Workbench project history.
 
-The saved meshes can be reopened and inspected, but they cannot be recreated
-bit-for-bit from the source curves alone.
+This does not erase the realized mesh information stored in the Fluent CFF case:
+for example, the actual first-layer height, inflation-layer progression,
+streamwise wall-face counts and connectivity can be recovered directly. What
+cannot be done from the retained source curves alone is to recreate the original
+interactive meshing procedure bit-for-bit and prove that it would regenerate the
+same CFF mesh.

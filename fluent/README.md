@@ -64,10 +64,35 @@ wall data set, or establish final-state equivalence from initialization.
 
 ## Transition SST restart
 
-The fine-grid Transition SST case starts from the fine SST state at iteration
-236. The transition equations use first-order upwind during stabilization and
-bounded second order from iteration 386. Iterations 537-556 form the final
-unchanged window. Only the fine grid was run with Transition SST. The transcript,
-monitor file and direct wall export are included in the restart bundle; the CSV
-exports used by the Python workflow are under
-`data/fluent_exports/transition_sst/`.
+The fine-grid Transition SST case starts from the accepted fine SST state at
+iteration 236. The retained Fluent transcript records the solver chronology
+rather than leaving it to filename inference:
+
+- Transition SST (4 eqn) is enabled from the iteration-236 fine SST state;
+- the Transition SST warm-start case/data pair is written before the deliberate
+  stabilization change;
+- `k`, `omega`, intermittency and transition momentum-thickness Reynolds number
+  are then changed to Fluent scheme index `0` (First Order Upwind) and retained
+  at first order through iteration 386;
+- after writing the first-order iteration-386 checkpoint, those same four
+  equations are changed to scheme index `1` (Second Order Upwind);
+- the iteration-386 state is written again before any further iteration, then
+  continued with those second-order settings to iteration 556;
+- iteration 536 is retained as a converged candidate and iterations 537-556 form
+  the final unchanged confirmation window.
+
+The [Fluent 2026 R1 discretization-scheme index table](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_tcl/x1-1000010.html)
+identifies index `0` as First Order Upwind, index `1` as Second Order Upwind and
+index `12` as Second Order. These labels are therefore tied to the retained
+scheme indices rather than inferred from the filenames.
+
+Pressure interpolation and the density, momentum and energy convective schemes
+remain at their existing second-order settings throughout the retained
+Transition SST chronology. The saved `fine_mach_outlet` report definition is a
+`surface-massavg` of Mach number on the outlet.
+
+Only the fine grid was run with Transition SST. The transcript, monitor file and
+direct wall export are included in the restart bundle; the CSV exports used by
+the Python workflow are under `data/fluent_exports/transition_sst/`. The
+original Workbench/Ansys Meshing construction history is not in the bundle, but
+the realized Fluent CFF mesh and final solver state are preserved.

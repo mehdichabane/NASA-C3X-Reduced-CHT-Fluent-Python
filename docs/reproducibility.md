@@ -33,10 +33,10 @@ transitive package or runner component.
 | SST and Transition SST comparison profiles | direct wall exports and coordinate reference |
 | Mesh-quality tables | CFF parser and released SST case files |
 | Solid temperature gradient | solid temperatures, CFF adjacency and linear-field test |
-| Saved Fluent states | matching case/data pairs and SHA-256 manifest |
+| Saved Fluent states | matching case/data pairs, SHA-256 manifest and archived live Fluent 26.1 saved-state report audits for the released fine SST and fine Transition SST states |
 | Sensitivity-study consistency | committed case matrices and summary tables checked in CI for baseline agreement, expected case coverage and reported cross-case trends |
 
-## Optional solver-side saved-state audit
+## Solver-side saved-state audit
 
 `scripts/verification/replay_saved_state_reports.py` can be run in an
 environment with a locally installed, licensed Fluent 26.1 instance. Its
@@ -55,13 +55,21 @@ records the SHA-256 digest of both inputs as well as the requested and actual
 Fluent version, dimension, precision and UI mode. The hashes can therefore be
 checked directly against `fluent/restart_manifest.csv`.
 
-The launch configuration and local hashing helpers are unit-tested in CI without
-a Fluent installation. No JSON produced by an actual licensed Fluent 26.1
-execution is committed at present, so the repository demonstrates the audit
-configuration and released solver state, not a recorded live execution of that
-audit.
+Live executions have now been archived for both released fine-grid states under
+[`results/processed/verification/live_saved_state_audits/`](../results/processed/verification/live_saved_state_audits/):
 
-Recommended fine-grid live audits are:
+| Saved state | External heat rate [W] | Mean wall temperature [K] | Mass-weighted outlet Mach |
+|---|---:|---:|---:|
+| fine SST, iter 236 | `35819.60242176461` | `655.619216610248` | `0.9012944409738727` |
+| fine Transition SST, iter 556 | `28548.27415186197` | `608.87899709921` | `0.9033510682539843` |
+
+For both audits, the requested and actual Fluent version is `26.1.0`, the session
+is 2D double precision with `ui_mode="no_gui"`, and the recorded case/data hashes
+match the corresponding entries in `fluent/restart_manifest.csv`. The launch
+configuration, local hashing helpers and archived-artifact provenance checks are
+covered by CI tests; Fluent itself is not launched in CI.
+
+The commands used by the helper are:
 
 ```bash
 python -m pip install -r requirements-fluent.txt
@@ -73,10 +81,11 @@ The matching `.dat.h5` files must remain beside the case files with the canonica
 filenames listed in `fluent/restart_manifest.csv`.
 
 This helper is intentionally outside `run_all.py` and GitHub Actions because the
-CI environment does not contain Fluent. It narrows the gap between the released
-solver state and the Python post-processing, but it is not evidence of a replay
-from initialization and does not regenerate the full set of wall and flux
-exports used by the repository.
+CI environment does not contain Fluent. The archived executions demonstrate that
+the released fine-grid solver states can be reopened through the pinned PyFluent
+path and that their stored scalar report definitions can be recomputed. They are
+not evidence of a replay from initialization and do not regenerate the full set
+of wall and flux exports used by the repository.
 
 ## What cannot be replayed from the repository
 

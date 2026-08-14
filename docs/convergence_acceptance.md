@@ -41,7 +41,7 @@ The solid receives `35,819.602 W/m` through the external interface and rejects
 ## Transition SST final window: iterations 537-556
 
 The case starts from the fine SST field. The transition equations changed to
-bounded second order at iteration 386.
+Second Order Upwind at iteration 386.
 
 | Check | Result | Limit |
 |---|---:|---:|

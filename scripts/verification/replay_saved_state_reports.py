@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
 
 FLUENT_PRODUCT_VERSION = "26.1.0"
+FLUENT_UI_MODE = "no_gui"
 DEFAULT_REPORTS = (
     "fine_external_heat_rate",
     "fine_wall_temperature_avg",
@@ -58,12 +60,31 @@ def fluent_version_text(value: Any) -> str:
     return str(getattr(value, "value", value))
 
 
+def matching_data_file(case_file: Path) -> Path:
+    """Return the conventional matching Fluent data-file path for a CFF case file."""
+    if not case_file.name.endswith(".cas.h5"):
+        raise ValueError("Expected a Fluent .cas.h5 filename.")
+    return case_file.with_name(
+        case_file.name.removesuffix(".cas.h5") + ".dat.h5"
+    )
+
+
+def sha256_file(path: Path) -> str:
+    """Return the SHA-256 digest of a local file without loading it all into memory."""
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 def launch_saved_state_session(pyfluent: Any) -> Any:
     """Launch the same Fluent release, dimension and precision used by the benchmark."""
     return pyfluent.launch_fluent(
         product_version=FLUENT_PRODUCT_VERSION,
         dimension=pyfluent.Dimension.TWO,
         precision=pyfluent.Precision.DOUBLE,
+        ui_mode=FLUENT_UI_MODE,
     )
 
 
@@ -74,6 +95,13 @@ def main() -> None:
         raise SystemExit(f"Case file does not exist: {case_file}")
     if not case_file.name.endswith(".cas.h5"):
         raise SystemExit("Expected a Fluent .cas.h5 file.")
+
+    data_file = matching_data_file(case_file)
+    if not data_file.is_file():
+        raise SystemExit(
+            "Matching Fluent data file does not exist beside the case file: "
+            f"{data_file}"
+        )
 
     try:
         import ansys.fluent.core as pyfluent
@@ -100,10 +128,14 @@ def main() -> None:
         )
         payload = {
             "case_file": str(case_file),
+            "data_file": str(data_file),
+            "case_sha256": sha256_file(case_file),
+            "data_sha256": sha256_file(data_file),
             "requested_fluent_version": FLUENT_PRODUCT_VERSION,
             "actual_fluent_version": actual_version_text,
             "dimension": "2D",
             "precision": "double",
+            "ui_mode": FLUENT_UI_MODE,
             "report_definitions": list(args.report),
             "computed": json_ready(computed),
             "scope": (

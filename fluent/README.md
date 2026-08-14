@@ -81,6 +81,11 @@ rather than leaving it to filename inference:
 - iteration 536 is retained as a converged candidate and iterations 537-556 form
   the final unchanged confirmation window.
 
+The [Fluent 2026 R1 discretization-scheme index table](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_tcl/x1-1000010.html)
+identifies index `0` as First Order Upwind, index `1` as Second Order Upwind and
+index `12` as Second Order. These labels are therefore tied to the retained
+scheme indices rather than inferred from the filenames.
+
 Pressure interpolation and the density, momentum and energy convective schemes
 remain at their existing second-order settings throughout the retained
 Transition SST chronology. The saved `fine_mach_outlet` report definition is a

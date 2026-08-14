@@ -38,24 +38,35 @@ python -m pip install -r requirements-fluent.txt
 python scripts/verification/replay_saved_state_reports.py PATH_TO_FINE_CASE.cas.h5
 ```
 
-`requirements-fluent.txt` pins `ansys-fluent-core==0.40.2`. The helper then
-requests Fluent `26.1.0` explicitly in **2D double precision**, checks the
-reported running Fluent version, and records the version/dimension/precision in
-its JSON/stdout audit payload. This prevents a machine with a newer Fluent
-installation from silently auditing the release with that newer version.
+`requirements-fluent.txt` pins `ansys-fluent-core==0.40.2`. The helper requests
+Fluent `26.1.0` explicitly in **2D double precision with `ui_mode="no_gui"`**,
+checks the reported running Fluent version, and records the
+version/dimension/precision/UI mode in its JSON/stdout audit payload. This
+prevents a machine with a newer Fluent installation from silently auditing the
+release with that newer version and keeps the audit headless.
+
+The helper also requires the conventionally matching `.dat.h5` file beside the
+case file before it launches Fluent. The JSON records SHA-256 hashes of both
+input files so a retained audit can be matched directly to
+[`restart_manifest.csv`](restart_manifest.csv).
 
 The default report names are `fine_external_heat_rate`,
 `fine_wall_temperature_avg` and `fine_mach_outlet`; use `--report` to override
-them for another saved case. To retain a local audit artifact explicitly, use:
+them for another saved case. To retain local audit artifacts explicitly, the
+recommended fine-grid commands are:
 
 ```text
-python scripts/verification/replay_saved_state_reports.py PATH_TO_FINE_CASE.cas.h5 --output saved_state_report_audit.json
+python scripts/verification/replay_saved_state_reports.py c3x_run145_nasa_exact_fine_SST_final_iter236.cas.h5 --output run145_sst_fine_saved_state_audit.json
+python scripts/verification/replay_saved_state_reports.py c3x_run145_transition_sst_fine_final_iter556.cas.h5 --output run145_transition_sst_fine_saved_state_audit.json
 ```
 
-The launch configuration is unit-tested in CI with a fake PyFluent launcher.
-No JSON from an actual licensed Fluent 26.1 execution is committed at present,
-so the repository does not claim that this optional live audit has already been
-run and archived.
+Run those commands from a directory where each matching `.dat.h5` file remains
+beside its `.cas.h5` file, or provide the corresponding full case-file path.
+
+The launch configuration and local hash helpers are unit-tested in CI with a
+fake PyFluent launcher. Until JSON from an actual licensed Fluent 26.1 execution
+is committed, the repository does not claim that this optional live audit has
+already been run and archived.
 
 This helper requires a locally installed, licensed Fluent 26.1 environment and
 is not executed in GitHub Actions. It is a saved-state audit only: it does not

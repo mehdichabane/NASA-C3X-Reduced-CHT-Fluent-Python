@@ -1,0 +1,37 @@
+{
+  "actual_fluent_version": "26.1.0",
+  "case_file": "C:\\Users\\mehdi\\NASA-C3X-audit-clean\\restart-audit\\c3x_restart_files\\c3x_run145_nasa_exact_fine_SST_final_iter236.cas.h5",
+  "case_sha256": "ea02ff1184a5d2d3dbf98c83f44d7c34744f7cac2a22d992e5a283fd94d1944f",
+  "computed": [
+    {
+      "fine_external_heat_rate": [
+        35819.60242176461,
+        "W"
+      ]
+    },
+    {
+      "fine_wall_temperature_avg": [
+        655.619216610248,
+        "K"
+      ]
+    },
+    {
+      "fine_mach_outlet": [
+        0.9012944409738727,
+        ""
+      ]
+    }
+  ],
+  "data_file": "C:\\Users\\mehdi\\NASA-C3X-audit-clean\\restart-audit\\c3x_restart_files\\c3x_run145_nasa_exact_fine_SST_final_iter236.dat.h5",
+  "data_sha256": "4cab13f7f98b06adc479a0005f2cac24cf8443d7e0d1616c74f94870761e97ff",
+  "dimension": "2D",
+  "precision": "double",
+  "report_definitions": [
+    "fine_external_heat_rate",
+    "fine_wall_temperature_avg",
+    "fine_mach_outlet"
+  ],
+  "requested_fluent_version": "26.1.0",
+  "scope": "saved-state report recomputation only; no initialization, iteration replay, mesh regeneration or equivalence claim",
+  "ui_mode": "no_gui"
+}

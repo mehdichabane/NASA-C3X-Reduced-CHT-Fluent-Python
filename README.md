@@ -44,10 +44,10 @@ error (MAPE).
 | Solid heat imbalance | `0.001921%` |
 | Maximum wall `y+` | `0.45189` |
 
-The outlet Mach is an **operating-point check**, not an independent validation
-metric. NASA `M2 = 0.90` is pressure-derived, while the Fluent value is a
-mass-flux-weighted average of local outlet Mach. The back-pressure adjustment is
-documented in [`docs/outlet_pressure_selection.md`](docs/outlet_pressure_selection.md).
+NASA `M2 = 0.90` is used to set the operating point. The experimental
+comparisons use surface pressure, wall temperature and external HTC. The
+back-pressure adjustment is documented in
+[`docs/outlet_pressure_selection.md`](docs/outlet_pressure_selection.md).
 
 | Wall temperature | Heat-transfer coefficient |
 |---|---|

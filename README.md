@@ -147,6 +147,7 @@ solver replays. See [`docs/reproducibility.md`](docs/reproducibility.md).
 ## Documentation map
 
 - [Engineering decision record](ENGINEERING_DECISIONS.md)
+- [Retrospective development history](docs/project_history.md)
 - [Model definition and implementation](docs/model_setup.md)
 - [Run 145 outlet-pressure selection](docs/outlet_pressure_selection.md)
 - [Fine-grid convergence and balances](docs/convergence_acceptance.md)

@@ -31,17 +31,17 @@ external-wall `y+` minimum, area-weighted mean and maximum are
 `scripts/verification/extract_restart_mesh_quality.py` reads the CFF cases and
 calculates equiangle skewness, orthogonal quality and Fluent aspect ratio.
 
-| Mesh | OQ `< 0.10` | Skewness `> 0.75` | AR `> 100` | AR `> 500` | AR `> 1000` |
+| Mesh | Orthogonal quality `< 0.10` | Skewness `> 0.75` | Aspect ratio `> 100` | Aspect ratio `> 500` | Aspect ratio `> 1000` |
 |---|---:|---:|---:|---:|---:|
 | Coarse | `19 (0.130%)` | `0` | `4,198 (28.642%)` | `1,403 (9.572%)` | `243 (1.658%)` |
 | Medium | `14 (0.059%)` | `0` | `5,177 (21.769%)` | `927 (3.898%)` | `0` |
 | Fine | `0` | `1 (0.002%)` | `6,552 (14.638%)` | `0` | `0` |
 
-The coarse and medium meshes contain a small tail of cells with OQ below `0.1`
-(minimum `0.049` and `0.051` respectively), whereas the fine mesh has none
-below `0.1` (minimum `0.129`); this is another reason to interpret the grid
-family as a practical sensitivity study rather than a formally controlled
-refinement sequence.
+The coarse and medium meshes contain a small tail of cells with orthogonal
+quality below `0.1` (minimum `0.049` and `0.051` respectively), whereas the fine
+mesh has none below `0.1` (minimum `0.129`); this is another reason to interpret
+the grid family as a practical sensitivity study rather than a formally
+controlled refinement sequence.
 
 The high aspect ratios occur mainly in anisotropic hot-gas cells. Mesh quality
 is considered together with positive volumes, periodicity, wall resolution,
@@ -104,7 +104,7 @@ rather than a formal asymptotic GCI assessment.
 ## Transition SST mesh qualification
 
 The original Workbench/Ansys Meshing construction history was not retained, but
-the **realised mesh solved by Fluent is preserved in the CFF case files**. A CFF
+the realised mesh solved by Fluent is preserved in the CFF case files. A CFF
 case stores node coordinates plus face/cell/node connectivity, so several
 Transition-SST-specific resolution quantities can be audited directly from the
 saved mesh rather than inferred from the missing GUI recipe.
@@ -127,12 +127,12 @@ The accepted Transition SST direct wall export gives
 The [Fluent 2026 R1 Transition SST mesh requirements](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_th/flu_th_sec_turb_sst_grid.html)
 recommend, as best practice, maximum `y+` of about `1`, a wall-normal expansion
 ratio below `1.1`, and approximately `100–150` streamwise cells on each side of
-a turbine blade. The realised mesh therefore **comfortably satisfies the
-wall-resolution and streamwise-count recommendations but does not satisfy the
-recommended wall-normal expansion ratio**: the retained inflation stack is
-approximately `1.20`, not `<1.1`. Fluent's own flat-plate study reports a small
-but noticeable upstream transition shift at expansion factor `1.2` and warns
-that wall-normal sensitivity can increase in pressure-gradient flows.
+a turbine blade. The realised mesh comfortably satisfies the wall-resolution
+and streamwise-count recommendations but does not satisfy the recommended
+wall-normal expansion ratio: the retained inflation stack is approximately
+`1.20`, not `<1.1`. Fluent's own flat-plate study reports a small but noticeable
+upstream transition shift at expansion factor `1.2` and warns that wall-normal
+sensitivity can increase in pressure-gradient flows.
 
 No coarse or medium Transition SST solutions were run, so the extracted
 transition-like response locations remain fine-grid diagnostics. The saved mesh
@@ -142,8 +142,8 @@ remains a limitation for Transition SST.
 
 ## Missing setup information
 
-The following **mesh-generation inputs/history** were not retained as an
-editable Workbench/Ansys Meshing recipe:
+The following mesh-generation inputs/history were not retained as an editable
+Workbench/Ansys Meshing recipe:
 
 - the original inflation-control object and entered growth-rate setting;
 - global and local element-size controls;

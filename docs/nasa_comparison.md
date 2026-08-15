@@ -1,9 +1,10 @@
 # Comparison with NASA Run 145 measurements
 
-Pressure, wall-temperature and HTC stations come from Appendix A, page 180 of
-Hylton et al., NASA-CR-168015. Regional external-HTC uncertainty intervals come
-from Table VI, report page 27. Additional experimental uncertainties reported
-in the Data Uncertainties subsection and Table VII are transcribed in
+Pressure, wall-temperature and heat-transfer-coefficient (HTC) stations come
+from Appendix A, page 180 of Hylton et al., NASA-CR-168015. Regional external-
+HTC uncertainty intervals come from Table VI, report page 27. Additional
+experimental uncertainties reported in the Data Uncertainties subsection and
+Table VII are transcribed in
 `references/experimental_data/c3x_experimental_uncertainty_summary.csv`.
 
 The outlet Mach is used only to match the nominal Run 145 operating point. NASA
@@ -37,9 +38,10 @@ Table VII separately reports uncertainty in test parameters:
 | Inlet turbulence intensity, `Tu` | `±10.0%` |
 
 NASA states that the key uncertainty analysis uses the Kline and McClintock
-method (Ref. 23); the `Tu` value is based on prior experience with the LDA
-system. Table VI already gives the resulting regional external-HTC uncertainty,
-so the component values above are not added again to those intervals.
+method (Ref. 23); the `Tu` value is based on prior experience with the laser
+Doppler anemometry (LDA) system. Table VI already gives the resulting regional
+external-HTC uncertainty, so the component values above are not added again to
+those intervals.
 
 NASA also notes that some systematic contributions affect multiple runs in a
 similar way, so uncertainty in run-to-run trends can be smaller than uncertainty
@@ -59,10 +61,11 @@ intervals.
 `scripts/comparison/compare_run145.py` writes the pointwise tables and summary to
 `results/processed/nasa_comparison/` and generates the three figures below.
 
-For wall temperature, MAE and RMSE in kelvin are reported alongside MAPE. MAPE
-is kept as a compact relative summary using absolute temperature in kelvin, but
-it should not be read alone because the large absolute temperature baseline can
-make percentage errors look small.
+For wall temperature, mean absolute error (MAE) and root-mean-square error
+(RMSE) in kelvin are reported alongside mean absolute percentage error (MAPE).
+MAPE is kept as a compact relative summary using absolute temperature in kelvin,
+but it should not be read alone because the large absolute temperature baseline
+can make percentage errors look small.
 
 Summary bias, MAE, RMSE and MAPE give equal weight to each experimental station.
 They are station-wise statistics rather than arc-length-weighted surface

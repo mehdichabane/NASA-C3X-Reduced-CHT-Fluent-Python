@@ -95,7 +95,7 @@ state with the same pressure reports `0.90129444`.
 | Stage | Outlet pressure | Fluent outlet Mach |
 |---|---:|---:|
 | provisional state | `241200 Pa` | `0.88064076` |
-| isentropic estimate | `236228.236 Pa` | — |
+| isentropic estimate | `236228.236 Pa` | `n/a (estimate only)` |
 | applied setting | `236200 Pa` | `0.89951531` |
 | retained fine SST state | `236200 Pa` | `0.90129444` |
 
@@ -151,9 +151,9 @@ raw exports under [`../data/fluent_exports/`](../data/fluent_exports/).
 
 ## Public repository timeline
 
-The first public commit was `12a311d`, **“Publish NASA C3X Run 145 benchmark,”**
-on 7 August 2026. That snapshot already contained the reduced RANS/CHT model,
-three SST grids, fine Transition SST result, NASA comparisons, convergence and
+The first public commit was `12a311d`, `Publish NASA C3X Run 145 benchmark`, on
+7 August 2026. That snapshot already contained the reduced RANS/CHT model, three
+SST grids, fine Transition SST result, NASA comparisons, convergence and
 conservation checks, Fluent exports, Python analysis and tests. The initial
 restart release followed with the retained case/data states and checksums.
 

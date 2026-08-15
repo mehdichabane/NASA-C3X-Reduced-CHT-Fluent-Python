@@ -1,4 +1,4 @@
-"""Build a NASA-informed interpretation of the internal-cooling HTC sensitivity."""
+"""Apply NASA's reported internal-HTC magnitude to the existing h sensitivity."""
 
 from __future__ import annotations
 
@@ -26,49 +26,41 @@ QUANTITIES = {
         "mean_external_wall_temperature",
         "K",
         "CFD integral",
-        "use_as_input_sensitivity",
     ),
     "external_heat_rate_W_per_m": (
         "external_heat_transfer_rate",
         "W/m",
         "CFD integral",
-        "use_as_input_sensitivity",
     ),
     "wall_temperature_bias_pressure_K": (
         "wall_temperature_bias_pressure",
         "K",
         "NASA wall temperature",
-        "use_as_input_sensitivity",
     ),
     "wall_temperature_bias_suction_K": (
         "wall_temperature_bias_suction",
         "K",
         "NASA wall temperature",
-        "use_as_input_sensitivity",
     ),
     "wall_temperature_mape_pressure_percent": (
         "wall_temperature_mape_pressure",
         "percent",
         "NASA wall temperature",
-        "use_as_input_sensitivity",
     ),
     "wall_temperature_mape_suction_percent": (
         "wall_temperature_mape_suction",
         "percent",
         "NASA wall temperature",
-        "use_as_input_sensitivity",
     ),
     "htc_mape_pressure_percent": (
         "external_htc_mape_pressure",
         "percent",
         "NASA external HTC",
-        "sensitivity_only_do_not_combine_with_table_vi",
     ),
     "htc_mape_suction_percent": (
         "external_htc_mape_suction",
         "percent",
         "NASA external HTC",
-        "sensitivity_only_do_not_combine_with_table_vi",
     ),
 }
 
@@ -125,7 +117,7 @@ def build_envelope(
     delta_h_scale = uncertainty_percent / 100.0
     rows: list[dict[str, float | str]] = []
 
-    for column, (label, unit, scope, validation_use) in QUANTITIES.items():
+    for column, (label, unit, scope) in QUANTITIES.items():
         derivative_per_h_scale = (
             float(plus[column]) - float(minus[column])
         ) / (h_plus - h_minus)
@@ -147,7 +139,6 @@ def build_envelope(
                 "envelope_min": min(value_minus, value_plus),
                 "envelope_max": max(value_minus, value_plus),
                 "half_width": abs(value_plus - baseline_value),
-                "validation_use": validation_use,
             }
         )
 
@@ -163,7 +154,7 @@ def main() -> None:
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     envelope.to_csv(OUTPUT_FILE, index=False, float_format="%.12g")
     print(
-        "Wrote NASA-informed internal-HTC sensitivity envelope "
+        "Wrote internal-HTC sensitivity envelope "
         f"using +/-{uncertainty_percent:g}% to {OUTPUT_FILE.relative_to(ROOT)}."
     )
 

@@ -1,6 +1,8 @@
 # Internal cooling boundary-condition sensitivity
 
-This study tests how the fine-grid SST thermal comparison changes when the prescribed internal cooling conditions are perturbed. It is a sensitivity study, not an uncertainty quantification: the perturbation ranges below are screening values and are not presented as measured confidence intervals.
+This study tests how the fine-grid SST thermal comparison changes when the
+prescribed internal cooling conditions are perturbed. The cases are deterministic
+screening runs; the ranges below are not measured confidence intervals.
 
 ## Baseline
 
@@ -17,7 +19,10 @@ Two completed one-factor families are used:
 
 All ten passages are perturbed together. The local interaction check uses the four `(±5% h, ±5 K)` corners around the same baseline; exact values are listed in `interaction_case_matrix.csv`.
 
-Because all ten passages are perturbed coherently, this screening probes common-mode scaling and offset directions. It does not quantify uncertainty in the passage-to-passage distribution of prescribed `h` or `Tbulk`, nor errors specific to individual passage correction factors `C_r`.
+Because all ten passages are perturbed coherently, this screening probes
+common-mode scaling and offset directions. Passage-to-passage uncertainty and
+errors specific to individual passage correction factors `C_r` are outside this
+matrix.
 
 The one-factor boundary values are listed in `case_matrix.csv`.
 

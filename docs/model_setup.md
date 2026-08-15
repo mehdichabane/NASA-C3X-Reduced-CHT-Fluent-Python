@@ -50,11 +50,9 @@ outlet Mach is treated as an operating-point check rather than an independent
 validation metric; the adjustment history is documented in
 [`outlet_pressure_selection.md`](outlet_pressure_selection.md).
 
-The inlet turbulent-viscosity ratio `10` is likewise not an experimental NASA
-quantity. It is a Fluent turbulence-boundary modelling input retained in the
-released states. Fluent's intensity/viscosity-ratio specification uses `10` as
-the default turbulent-viscosity ratio; its influence is explicitly examined in
-the Transition SST sensitivity study rather than treated as measured data.
+The inlet turbulent-viscosity ratio `10` is a retained Fluent modelling input.
+Fluent's intensity/viscosity-ratio specification uses `10` as the default value;
+its influence is examined in the Transition SST sensitivity study.
 
 The direct fine-grid contour reaches about Mach `1.04` locally. Ideal-gas
 density and the energy equation are therefore retained. Integrated mass and
@@ -107,12 +105,10 @@ from the Fluent state.
 
 NASA Appendix A, report p. 181, supplies each Run 145 coolant bulk temperature
 and passage Reynolds number. CoolProp 8.0.0 supplies air properties at the bulk
-temperature and a fixed `101325 Pa` property-evaluation pressure. This pressure
-is a preprocessing convention for evaluating `cp`, viscosity, conductivity and
-Prandtl number; it is not presented as a measured Run 145 coolant pressure or
-as a coolant-flow boundary condition. The NASA Reynolds numbers are imposed
-independently of this property-evaluation pressure, and sensitivity to the
-pressure choice is not assessed. The generated inputs are stored in
+temperature and `101325 Pa` for preprocessing. The NASA Reynolds numbers are
+imposed independently, so this pressure is only a property-evaluation convention
+and is not used as a coolant-flow boundary condition. Its sensitivity is not
+assessed. The generated inputs are stored in
 `references/model_inputs/run145_4512_internal_convection.csv`.
 
 ## Material values
@@ -132,14 +128,9 @@ The values above reproduce the material definitions in the released Fluent
 state. Independent C3X and prior-C3X literature matches for several constants
 are summarised in
 [`references/model_inputs/README.md`](../references/model_inputs/README.md).
-Those comparisons are consistency checks on the released setup; they do not
-establish which source was used when the original material definitions were
-entered.
-
-The hot-gas specific heat, molecular viscosity and thermal conductivity are
-retained as constant baseline inputs. Their sensitivity is not evaluated here,
-so the reported comparison does not include uncertainty associated with those
-property choices.
+These are consistency checks on the archived setup. The hot-gas specific heat,
+molecular viscosity and thermal conductivity remain constant baseline inputs;
+their sensitivity is not evaluated here.
 
 ## Mesh and near-wall resolution
 

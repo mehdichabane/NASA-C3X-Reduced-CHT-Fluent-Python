@@ -56,7 +56,7 @@ Table VII:
 
 NASA states that the key uncertainty analysis uses the Kline and McClintock
 method (its Ref. 23). The `Tu` value is reported separately as being based on
-significant prior experience with the LDA system.
+significant prior experience with the laser Doppler anemometry (LDA) system.
 
 The existing `c3x_heat_transfer_uncertainty_table_VI.csv` is a different level
 of uncertainty information: Table VI reports the *resulting regional uncertainty
@@ -70,11 +70,6 @@ NASA also notes that these uncertainties are intended to indicate uncertainty in
 the absolute level when the data are used for verification. Some common
 systematic contributions can affect multiple runs similarly, so uncertainty in
 run-to-run trends may be smaller than the absolute-level values.
-
-None of the values in `c3x_experimental_uncertainty_summary.csv` is propagated
-through the CFD model in the current repository. They document the experimental
-evidence and its limitations; they are not a combined CFD/experimental
-validation-uncertainty budget.
 
 ## Reduced internal convection
 

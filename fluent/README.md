@@ -24,8 +24,6 @@ The word `ACCEPTED` remains in the coarse and medium filenames because the data
 files refer to those case names.
 
 The bundle supports reopening the saved states and auditing the SST CFF meshes.
-It does not reproduce the original interactive meshing sequence or demonstrate
-that a new initialisation converges to the saved fine SST state.
 
 ## PyFluent saved-state report audit
 
@@ -39,11 +37,11 @@ python scripts/verification/replay_saved_state_reports.py PATH_TO_FINE_CASE.cas.
 ```
 
 `requirements-fluent.txt` pins `ansys-fluent-core==0.40.2`. The helper requests
-Fluent `26.1.0` explicitly in **2D double precision with `ui_mode="no_gui"`**,
-checks the reported running Fluent version, and records the
-version/dimension/precision/UI mode in its JSON/stdout audit payload. This
-prevents a machine with a newer Fluent installation from silently auditing the
-release with that newer version and keeps the audit headless.
+Fluent `26.1.0` explicitly in 2D double precision with `ui_mode="no_gui"`, checks
+the reported running Fluent version, and records the version, dimension,
+precision and UI mode in its JSON/stdout audit payload. This prevents a machine
+with a newer Fluent installation from silently auditing the release with that
+newer version and keeps the audit headless.
 
 The helper also requires the conventionally matching `.dat.h5` file beside the
 case file before it launches Fluent. The JSON records SHA-256 hashes of both
@@ -74,10 +72,9 @@ The recomputed reports are:
 | fine Transition SST, iter 556 | `28548.27415186197` | `608.87899709921` | `0.9033510682539843` |
 
 The launch configuration, local hash helpers and archived-audit provenance are
-unit-tested in CI; Fluent itself is not executed in GitHub Actions. These are
-saved-state audits only: they do not regenerate the mesh, initialise the solver,
-replay iterations, export the full wall data set, or establish final-state
-equivalence from initialisation.
+unit-tested in CI; Fluent itself is not executed in GitHub Actions. The audits
+reopen retained states and recompute scalar reports rather than replaying the
+solver from initialisation.
 
 ## Transition SST restart
 

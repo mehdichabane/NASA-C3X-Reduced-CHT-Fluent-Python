@@ -1,4 +1,4 @@
-# NASA C3X Run 145 — reduced RANS/CHT benchmark
+# NASA C3X Run 145 : reduced RANS/CHT benchmark
 
 [![Rebuild and test analysis](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml)
 

@@ -26,16 +26,17 @@ profile rebuilding, direct Transition SST export consistency, convergence, NASA
 comparison metrics, the saved-state audit launch configuration and the committed
 sensitivity-study headline relationships.
 
-The sensitivity-study consistency check does not rerun Fluent. It protects the
-committed campaign matrices and summaries against accidental cross-case or
-headline-result inconsistencies.
+The sensitivity-study consistency check validates the committed campaign
+matrices and summaries for baseline consistency, case coverage and reported
+response relationships.
 
-The optional `replay_saved_state_reports.py` helper is deliberately not part of
-`run_all.py` or CI because it requires a locally installed, licensed Fluent
-26.1 session. Its separate dependency is pinned in `requirements-fluent.txt` as
+The optional `replay_saved_state_reports.py` helper is outside `run_all.py` and
+CI because it requires a locally installed, licensed Fluent 26.1 session. Its
+separate dependency is pinned in `requirements-fluent.txt` as
 `ansys-fluent-core==0.40.2`. The helper requests Fluent `26.1.0` explicitly in
 2D double precision and checks the running version before reading the saved
-state. It does not replay the solve from initialisation.
+state. Project-wide reproducibility scope is documented in
+[`docs/reproducibility.md`](../docs/reproducibility.md).
 
 The restart binaries are not stored in Git, so CFF mesh extraction is run
 after the bundle has been downloaded and extracted:
@@ -65,5 +66,5 @@ audit helper:
 python -m pip install -r requirements-fluent.txt
 ```
 
-This dependency is intentionally not installed in CI because the CI environment
-does not provide a licensed Fluent executable.
+The CI runner does not provide a licensed Fluent executable, so this dependency
+is kept outside the CI environment.

@@ -37,6 +37,12 @@ calculates equiangle skewness, orthogonal quality and Fluent aspect ratio.
 | Medium | `14 (0.059%)` | `0` | `5,177 (21.769%)` | `927 (3.898%)` | `0` |
 | Fine | `0` | `1 (0.002%)` | `6,552 (14.638%)` | `0` | `0` |
 
+The coarse and medium meshes contain a small tail of cells with OQ below `0.1`
+(minimum `0.049` and `0.051` respectively), whereas the fine mesh has none
+below `0.1` (minimum `0.129`); this is another reason to interpret the grid
+family as a practical sensitivity study rather than a formally controlled
+refinement sequence.
+
 The high aspect ratios occur mainly in anisotropic hot-gas cells. Mesh quality
 is considered together with positive volumes, periodicity, wall resolution,
 convergence, conservation and three-grid solution sensitivity.

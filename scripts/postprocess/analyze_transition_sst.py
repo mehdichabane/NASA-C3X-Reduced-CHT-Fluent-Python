@@ -234,7 +234,7 @@ def plot_monitors(monitors: pd.DataFrame) -> None:
         axis.grid(axis="y", linewidth=0.6, alpha=0.22)
         axis.spines["top"].set_visible(False)
         axis.spines["right"].set_visible(False)
-    axes[0].text(SECOND_ORDER_START, 0.04, "bounded second order", rotation=90, va="bottom", ha="right", transform=axes[0].get_xaxis_transform())
+    axes[0].text(SECOND_ORDER_START, 0.04, "Second Order Upwind", rotation=90, va="bottom", ha="right", transform=axes[0].get_xaxis_transform())
     axes[0].text(536, 0.04, "candidate + 20 confirmation", rotation=90, va="bottom", ha="right", transform=axes[0].get_xaxis_transform())
     axes[-1].set_xlabel("Iteration")
     save_figure(figure, FIGURE_CONVERGENCE / "run145_transition_sst_monitors.png")

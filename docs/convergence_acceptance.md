@@ -14,7 +14,7 @@ not treat `continuity < 1e-3` as sufficient by itself: the engineering monitors
 and conservation checks below must also pass. This is a project-specific
 acceptance rule, not a universal Fluent convergence threshold.
 
-## SST final window: iterations 217-236
+## SST final window: iterations 217–236
 
 The active continuity criterion was first met at iteration 216. The calculation
 continued for 20 iterations with the same second-order settings.
@@ -38,7 +38,7 @@ The solid receives `35,819.602 W/m` through the external interface and rejects
 |---|---|
 | ![SST residuals](../results/figures/convergence/run145_sst_residuals_final_window.svg) | ![SST monitors](../results/figures/convergence/run145_sst_monitors.svg) |
 
-## Transition SST final window: iterations 537-556
+## Transition SST final window: iterations 537–556
 
 The case starts from the fine SST field. The transition equations changed to
 Second Order Upwind at iteration 386.

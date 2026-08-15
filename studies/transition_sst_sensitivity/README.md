@@ -25,7 +25,7 @@ For the upstream diagnostic, fluid cells ahead of the leading edge and more than
 
 `Tu = 100 sqrt(2 k / 3) / |U|`.
 
-In the `2-5 mm` bin immediately upstream of the leading edge, the accepted baseline gives:
+In the `2–5 mm` bin immediately upstream of the leading edge, the accepted baseline gives:
 
 - median `Tu = 1.2473%`;
 - median `mu_t/mu = 7.851`;
@@ -49,7 +49,7 @@ Reducing the inlet turbulent-viscosity ratio produces much stronger freestream d
 | 5 | `0.8701%` | `604.438 K` | `27.7758 kW/m` | `0.903562` | about `0.69 x/Cx` |
 | 1 | `0.3637%` | `574.705 K` | `22.9198 kW/m` | `0.905424` | trailing-edge region |
 
-The ratio-1 case moves the intermittency and wall-shear response to about `x/Cx = 0.962-0.968`. For that case, the interior gradient search is restricted to `x/Cx < 0.98` so the geometric trailing edge does not dominate the diagnostic.
+The ratio-1 case moves the intermittency and wall-shear response to about `x/Cx = 0.962–0.968`. For that case, the interior gradient search is restricted to `x/Cx < 0.98` so the geometric trailing edge does not dominate the diagnostic.
 
 The three-point result is summarised in `b1_three_point_summary.csv`; detailed case outputs remain in the corresponding `tu065_vr05_*`, `tu065_vr01_*` and comparison CSVs.
 
@@ -68,7 +68,7 @@ Changing the prescribed inlet turbulence intensity from `6.5%` to `8.3%` produce
 | 6.5% | `1.2473%` | `608.879 K` | `28.5483 kW/m` | `0.903351` |
 | 8.3% | `1.2370%` | `608.678 K` | `28.5133 kW/m` | `0.903358` |
 
-The two decay curves differ farther upstream but approach and cross before the vane. By the final `2-5 mm` bin, the near-vane turbulence levels are almost the same. Mean wall temperature changes by only `-0.033%`, external heat rate by `-0.122%`, and the suction-side response shifts by one wall-face station.
+The two decay curves differ farther upstream but approach and cross before the vane. By the final `2–5 mm` bin, the near-vane turbulence levels are almost the same. Mean wall temperature changes by only `-0.033%`, external heat rate by `-0.122%`, and the suction-side response shifts by one wall-face station.
 
 Detailed outputs are in `tu083_vr10_freestream_decay.csv`, `tu083_vr10_transition_signature.csv`, `tu083_vr10_global_checks.csv`, `tu083_vr10_integral_summary.csv`, `tu065_vs_tu083_vr10_diagnostic_summary.csv` and `b2_two_point_summary.csv`.
 

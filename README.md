@@ -21,7 +21,7 @@ calculation using the shear-stress-transport (SST) `k-omega` model.
 | Fine grid | `44,760` cells; maximum wall `y+ = 0.45189` |
 | Experimental comparison | Pressure ratio, wall temperature and external heat-transfer coefficient (HTC) |
 | Numerical checks | Final-window convergence, mass/interface/solid-energy balances, three-grid sensitivity |
-| Sensitivity studies | Transition SST inlet conditions; internal-cooling `h` / `Tbulk`; internal-HTC `+/-3%` envelope |
+| Sensitivity studies | Transition SST inlet conditions; internal-cooling `h` / `Tbulk`; internal-HTC `±3%` envelope |
 | Reproducibility | Python rebuild in CI, released Fluent restart states and headless PyFluent saved-state checks |
 
 ## Fine-grid SST result
@@ -82,9 +82,9 @@ SHA-256 hashes in [`fluent/restart_manifest.csv`](fluent/restart_manifest.csv).
 - Model sensitivity. Transition SST gives pressure errors similar to SST but
   substantially larger thermal errors on the fine grid, so it is kept as a
   sensitivity case rather than the baseline.
-- Internal-cooling uncertainty sensitivity. Applying NASA's reported `+/-3%`
+- Internal-cooling uncertainty sensitivity. Applying NASA's reported `±3%`
   internal-HTC magnitude to the existing `h` sensitivity family gives about
-  `+/-1.735 K` on mean external wall temperature; the SST wall-temperature bias
+  `±1.735 K` on mean external wall temperature; the SST wall-temperature bias
   remains positive on both surfaces across that envelope.
 
 Details are in [`docs/convergence_acceptance.md`](docs/convergence_acceptance.md),
@@ -112,7 +112,7 @@ in [`docs/model_setup.md`](docs/model_setup.md).
 | Controlled perturbation | Main observed response |
 |---|---|
 | Internal cooling `h/h0: 1.00 -> 0.90` | `Tw_mean +6.104 K`; external heat rate `-5.393%`; outlet Mach `+0.000804%` |
-| Internal `h +/-3%` envelope | `Tw_mean +/-1.735 K`; pressure-side bias `+6.827 ... +10.947 K`; suction-side bias `+11.416 ... +14.582 K` |
+| Internal `h ±3%` envelope | `Tw_mean ±1.735 K`; pressure-side bias `+6.827 ... +10.947 K`; suction-side bias `+11.416 ... +14.582 K` |
 | Transition SST `mu_t/mu_in: 10 -> 1` at `Tu_in = 6.5%` | Near-LE `Tu 1.247% -> 0.364%`; transition-like suction response `x/Cx 0.653 -> 0.967`; external heat rate `-19.716%` |
 | Transition SST `Tu_in: 6.5% -> 8.3%` at `mu_t/mu_in = 10` | Near-LE `Tu 1.247% -> 1.237%`; `Tw_mean -0.033%`; external heat rate `-0.122%` |
 

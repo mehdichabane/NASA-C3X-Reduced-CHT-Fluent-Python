@@ -59,7 +59,7 @@ external heat rate are below `0.1%`. Local profiles remain more sensitive in
 the last `5%` of surface distance near the trailing edge.
 
 For the local comparison, both meshes are interpolated onto the same `s/L`
-coordinate. The reported range-normalized MAE is
+coordinate. The reported range-normalised MAE is
 
 `100 x MAE / (max(phi_fine) - min(phi_fine))`
 
@@ -104,7 +104,7 @@ rather than a formal asymptotic GCI assessment.
 ## Transition SST mesh qualification
 
 The original Workbench/Ansys Meshing construction history was not retained, but
-the **realized mesh solved by Fluent is preserved in the CFF case files**. A CFF
+the **realised mesh solved by Fluent is preserved in the CFF case files**. A CFF
 case stores node coordinates plus face/cell/node connectivity, so several
 Transition-SST-specific resolution quantities can be audited directly from the
 saved mesh rather than inferred from the missing GUI recipe.
@@ -115,7 +115,7 @@ Direct inspection of the released fine CFF mesh gives:
 - `373` pressure-side and `446` suction-side wall faces/cells when the retained
   wall-face centres are mapped to the repository C3X pressure/suction profile;
 - a first wall-normal layer thickness of approximately `1.0 micrometre`;
-- `30` successive inflation layers whose realized wall-normal thicknesses follow
+- `30` successive inflation layers whose realised wall-normal thicknesses follow
   an approximately `1.20` geometric expansion (`1.000, 1.200, 1.440, 1.728, ...`
   micrometres before the post-inflation jump);
 - byte-identical CFF mesh datasets between the released fine SST iteration-236
@@ -127,7 +127,7 @@ The accepted Transition SST direct wall export gives
 The [Fluent 2026 R1 Transition SST mesh requirements](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_th/flu_th_sec_turb_sst_grid.html)
 recommend, as best practice, maximum `y+` of about `1`, a wall-normal expansion
 ratio below `1.1`, and approximately `100-150` streamwise cells on each side of
-a turbine blade. The realized mesh therefore **comfortably satisfies the
+a turbine blade. The realised mesh therefore **comfortably satisfies the
 wall-resolution and streamwise-count recommendations but does not satisfy the
 recommended wall-normal expansion ratio**: the retained inflation stack is
 approximately `1.20`, not `<1.1`. Fluent's own flat-plate study reports a small
@@ -153,7 +153,7 @@ editable Workbench/Ansys Meshing recipe:
 - operation order in SpaceClaim and Ansys Meshing;
 - the original Workbench project history.
 
-This does not erase the realized mesh information stored in the Fluent CFF case:
+This does not erase the realised mesh information stored in the Fluent CFF case:
 for example, the actual first-layer height, inflation-layer progression,
 streamwise wall-face counts and connectivity can be recovered directly. What
 cannot be done from the retained source curves alone is to recreate the original

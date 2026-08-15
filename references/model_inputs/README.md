@@ -21,11 +21,11 @@ has its own short record in
 
 `run145_4512_external_boundary_provenance.csv` separates direct NASA operating
 conditions from Fluent-specific inputs and computed quantities. NASA-CR-168015
-Table IX gives Run 145 / code 4512 as `PTI = 58.57 psia`, `TTI = 792 K`,
+Table IX gives Run 145 (code 4512) as `PTI = 58.57 psia`, `TTI = 792 K`,
 `M1 = 0.16`, `M2 = 0.90` and `Tu = 6.5%`. The Fluent inlet total pressure
 `403800 Pa` is the rounded SI implementation of the NASA value.
 
-The inlet turbulent-viscosity ratio `10` is a Fluent modeling input, not a NASA
+The inlet turbulent-viscosity ratio `10` is a Fluent modelling input, not a NASA
 measurement. The pressure outlet `236200 Pa` was selected to reproduce the
 nominal Run 145 exit-Mach operating point with the Fluent mass-weighted outlet
 Mach report; it was not transcribed from a NASA exit-pressure table. The full

@@ -2,10 +2,10 @@
 
 ## Scope
 
-The case represents the midspan section of NASA C3X Run 145, configuration
-4512. It is a steady two-dimensional RANS/CHT model sized for Ansys Fluent
-Student. The repository applies Fluent and post-processes its exports; it does
-not implement a CFD solver.
+The case represents the midspan section of NASA C3X Run 145 (code 4512). It is
+a steady two-dimensional RANS/CHT model sized for Ansys Fluent Student. The
+repository applies Fluent and post-processes its exports; it does not implement
+a CFD solver.
 
 The gas passage and solid vane are solved. The ten cooling passages are present
 in the solid geometry, but each internal wall uses a prescribed convection
@@ -30,15 +30,15 @@ separated below. A machine-readable provenance table is stored in
 | Quantity | Value used / reported | Role | Provenance |
 |---|---:|---|---|
 | Inlet total pressure | `403800 Pa` | imposed pressure-inlet input | Rounded implementation of NASA Table IX `PTI = 58.57 psia` (`403825.9 Pa`) |
-| Inlet total temperature | `792 K` | imposed pressure-inlet input | Direct NASA Table IX Run 145 / code 4512 value |
+| Inlet total temperature | `792 K` | imposed pressure-inlet input | Direct NASA Table IX Run 145 (code 4512) value |
 | Experimental inlet Mach | `0.16` | reference only | Direct NASA Table IX value; not imposed independently at the pressure inlet |
 | Inlet turbulence intensity | `6.5%` | imposed turbulence input | Direct NASA Table IX average inlet `Tu` |
-| Inlet turbulent viscosity ratio | `10` | imposed turbulence-model input | Released Fluent setup; modeling choice, not a NASA measurement |
+| Inlet turbulent viscosity ratio | `10` | imposed turbulence-model input | Released Fluent setup; modelling choice, not a NASA measurement |
 | Outlet static pressure | `236200 Pa` | imposed pressure-outlet input | Adjusted until Fluent mass-weighted outlet Mach was numerically consistent with nominal NASA Run 145 `M2 = 0.90`; not a direct NASA exit-pressure transcription |
 | NASA exit Mach | `0.90` | nominal operating-point anchor | Direct NASA Table IX value; pressure-derived from measured inlet total pressure and average measured exit-plane static pressure |
 | Fine SST outlet Mach | `0.901294` | Fluent operating-point consistency result | `surface-massavg` of local Mach on the outlet with the retained `236200 Pa` setting |
 
-NASA Table IX reports Run 145 / code 4512 as `PTI = 58.57 psia`,
+NASA Table IX reports Run 145 (code 4512) as `PTI = 58.57 psia`,
 `TTI = 792 K`, `M1 = 0.16`, `M2 = 0.90` and `Tu = 6.5%`. The pressure-inlet
 total pressure used in Fluent, `403800 Pa`, is therefore a `0.0064%` rounding
 of the direct NASA value rather than an independently selected pressure.
@@ -51,7 +51,7 @@ validation metric; the adjustment history is documented in
 [`outlet_pressure_selection.md`](outlet_pressure_selection.md).
 
 The inlet turbulent-viscosity ratio `10` is likewise not an experimental NASA
-quantity. It is a Fluent turbulence-boundary modeling input retained in the
+quantity. It is a Fluent turbulence-boundary modelling input retained in the
 released states. Fluent's intensity/viscosity-ratio specification uses `10` as
 the default turbulent-viscosity ratio; its influence is explicitly examined in
 the Transition SST sensitivity study rather than treated as measured data.
@@ -130,7 +130,7 @@ pressure choice is not assessed. The generated inputs are stored in
 
 The values above reproduce the material definitions in the released Fluent
 state. Independent C3X and prior-C3X literature matches for several constants
-are summarized in
+are summarised in
 [`references/model_inputs/README.md`](../references/model_inputs/README.md).
 Those comparisons are consistency checks on the released setup; they do not
 establish which source was used when the original material definitions were
@@ -154,7 +154,7 @@ minimum orthogonal quality is `0.128589`, maximum equiangle skewness is
 `0.802574`, maximum Fluent aspect ratio is `418.787`, and external-wall `y+`
 min / mean / max is `0.01044 / 0.30441 / 0.45189`.
 
-All-grid quality distributions, realized-mesh diagnostics and the missing GUI
+All-grid quality distributions, realised-mesh diagnostics and the missing GUI
 generation settings are in [`meshing_recipe.md`](meshing_recipe.md).
 
 ## Fluent settings and run decisions
@@ -179,7 +179,7 @@ that the Transition SST warm-start state was written before the four
 `turbulence/transition` transport-equation schemes were deliberately changed.
 Immediately afterward, `k`, `omega`, intermittency and transition
 momentum-thickness Reynolds number were set to Fluent scheme index `0` (First
-Order Upwind) for stabilization and retained at first order through iteration
+Order Upwind) for stabilisation and retained at first order through iteration
 386. After the first-order iteration-386 checkpoint was written, those same four
 equations were changed to scheme index `1` (Second Order Upwind). The
 iteration-386 solution was written again before further iteration and then
@@ -204,7 +204,7 @@ inlet turbulence level, not as a leading-edge target for this reduced domain.
 The decay and its strong sensitivity to inlet turbulent-viscosity ratio are
 documented in
 [`studies/transition_sst_sensitivity/README.md`](../studies/transition_sst_sensitivity/README.md).
-These diagnostics characterize model behavior; they do not establish an
+These diagnostics characterise model behaviour; they do not establish an
 experimentally verified transition location or a calibrated inlet state.
 
 For these inlet settings and the present fine grid, Transition SST produced
@@ -224,7 +224,7 @@ or medium Transition SST cases were run.
 
 ## Thermal comparison convention
 
-NASA thermal values are dimensionalized with `T_ref = 811 K` and
+NASA thermal values are dimensionalised with `T_ref = 811 K` and
 `HTC_ref = 1135 W/(m2 K)`. The CFD comparison uses the fluid-side heat flux:
 
 ```text

@@ -2,7 +2,7 @@
 
 ## Operating-point target
 
-NASA-CR-168015 reports Run 145 / code 4512 with an exit Mach number of
+NASA-CR-168015 reports Run 145 (code 4512) with an exit Mach number of
 `M2 = 0.90`. NASA defines this exit Mach from measured inlet total pressure and
 average measured exit-plane static pressure, and the facility used back-pressure
 control to set the exit-Mach condition. Table IX does not tabulate the

@@ -128,13 +128,11 @@ approximately `1.20`, not `<1.1`. Fluent's own flat-plate study reports a small
 but noticeable upstream transition shift at expansion factor `1.2` and warns
 that wall-normal sensitivity can increase in pressure-gradient flows.
 
-No coarse or medium Transition SST solutions were run. Consequently, the
-extracted transition-like response locations remain fine-grid model-response
-diagnostics, not grid-converged or experimentally established transition
-locations. The stronger conclusion supported by the retained files is not
-"Transition SST mesh quality is unknown"; it is that the realized mesh can be
-substantially audited, passes two major best-practice checks, and has a specific
-known limitation in its `~1.20` wall-normal expansion.
+No coarse or medium Transition SST solutions were run, so the extracted
+transition-like response locations remain fine-grid diagnostics. The saved mesh
+can still be audited directly: it satisfies the wall-resolution and
+streamwise-count recommendations, while its `~1.20` wall-normal expansion
+remains a limitation for Transition SST.
 
 ## Missing setup information
 

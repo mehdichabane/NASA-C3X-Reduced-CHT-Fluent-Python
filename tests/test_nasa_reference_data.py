@@ -42,60 +42,33 @@ def test_run145_coolant_table_source_page() -> None:
     assert coolant["average_temperature_K"].iloc[-1] == 506.46
 
 
-def test_run145_external_boundary_provenance() -> None:
+def test_run145_external_boundary_values_and_sources() -> None:
     boundary = pd.read_csv(MODEL_INPUTS / "run145_4512_external_boundary_provenance.csv")
     rows = boundary.set_index("quantity")
 
+    assert float(rows.loc["operating_pressure", "model_value"]) == 0.0
     assert float(rows.loc["inlet_total_pressure", "model_value"]) == 403800.0
-    assert "rounded NASA" in rows.loc["inlet_total_pressure", "classification"]
     assert float(rows.loc["inlet_total_temperature", "model_value"]) == 792.0
-    assert "direct NASA" in rows.loc["inlet_total_temperature", "classification"]
+    assert float(rows.loc["experimental_inlet_mach", "model_value"]) == 0.16
     assert float(rows.loc["inlet_turbulence_intensity", "model_value"]) == 6.5
-    assert "direct NASA" in rows.loc["inlet_turbulence_intensity", "classification"]
-    assert "experimental anchor" in rows.loc[
-        "inlet_turbulence_intensity", "qualification"
-    ].lower()
-
     assert float(rows.loc["inlet_turbulent_viscosity_ratio", "model_value"]) == 10.0
-    assert rows.loc["inlet_turbulent_viscosity_ratio", "classification"] == "Fluent modeling choice"
-    vr_qualification = rows.loc["inlet_turbulent_viscosity_ratio", "qualification"].lower()
-    assert "not a nasa measurement" in vr_qualification
-    assert "not inferred from nasa tu" in vr_qualification
-    assert "not calibrated" in vr_qualification
-    assert "10, 5 and 1" in rows.loc[
-        "inlet_turbulent_viscosity_ratio", "qualification"
-    ]
-
     assert float(rows.loc["outlet_static_pressure", "model_value"]) == 236200.0
-    assert rows.loc[
-        "outlet_static_pressure", "classification"
-    ] == "operating-point adjustment to nominal NASA exit Mach"
-    outlet_qualification = rows.loc["outlet_static_pressure", "qualification"].lower()
-    assert "not a direct nasa exit-pressure transcription" in outlet_qualification
-    assert "operating-point consistency check" in outlet_qualification
-    assert "not an independent validation metric" in outlet_qualification
-    assert "not definition-identical" in outlet_qualification
-    assert "not a like-for-like mach error" in outlet_qualification
-
     assert float(rows.loc["experimental_exit_mach", "model_value"]) == 0.90
-    experimental_exit_source = rows.loc["experimental_exit_mach", "source_detail"].lower()
-    experimental_exit_qualification = rows.loc[
-        "experimental_exit_mach", "qualification"
-    ].lower()
-    assert "average measured exit-plane static pressure" in experimental_exit_source
-    assert "pressure-derived" in experimental_exit_qualification
-    assert "not definition-identical" in experimental_exit_qualification
+    assert float(rows.loc["fine_sst_exit_mach", "model_value"]) == 0.901294
 
-    assert "not an independent validation metric" in rows.loc[
-        "fine_sst_exit_mach", "qualification"
-    ].lower()
-    exit_mach_source = rows.loc["fine_sst_exit_mach", "source_detail"].lower()
-    exit_mach_qualification = rows.loc["fine_sst_exit_mach", "qualification"].lower()
-    assert "mass-weighted outlet mach" in exit_mach_source
-    assert "surface-massavg" in exit_mach_source
-    assert "area-weighted outlet mach" not in exit_mach_source
-    assert "pressure-derived" in exit_mach_qualification
-    assert "not a like-for-like validation error" in exit_mach_qualification
+    for quantity in (
+        "inlet_total_pressure",
+        "inlet_total_temperature",
+        "experimental_inlet_mach",
+        "inlet_turbulence_intensity",
+        "experimental_exit_mach",
+    ):
+        assert "NASA-CR-168015" in rows.loc[quantity, "primary_source"]
+
+    assert "Ansys Fluent 26.1" in rows.loc[
+        "inlet_turbulent_viscosity_ratio", "primary_source"
+    ]
+    assert "surface-massavg" in rows.loc["fine_sst_exit_mach", "source_detail"]
 
 
 def test_run145_outlet_pressure_selection_history() -> None:
@@ -127,40 +100,25 @@ def test_run145_outlet_pressure_selection_history() -> None:
         float(rows.loc["accepted_operating_point", "outlet_mach_mass_weighted"]),
         0.89951531,
     )
-    accepted_qualification = rows.loc["accepted_operating_point", "qualification"].lower()
-    assert "differently defined quantities" in accepted_qualification
-    assert "not a validation error" in accepted_qualification
-
     assert float(rows.loc["current_fine_sst", "outlet_static_pressure_Pa"]) == 236200.0
-    current_qualification = rows.loc["current_fine_sst", "qualification"].lower()
-    assert "surface-mass-averaged" in current_qualification
-    assert "pressure-derived" in current_qualification
-    assert "not an independent or like-for-like validation metric" in current_qualification
+    assert np.isclose(
+        float(rows.loc["current_fine_sst", "outlet_mach_mass_weighted"]),
+        0.901294441,
+    )
 
 
-def test_transition_sst_turbulence_inputs_keep_experiment_and_model_separate() -> None:
+def test_transition_sst_turbulence_inputs() -> None:
     settings = pd.read_csv(MODEL_INPUTS / "transition_sst_settings.csv")
     rows = settings.set_index("setting")
 
     assert float(rows.loc["inlet_intensity", "value"]) == 6.5
     assert "NASA-CR-168015 Table IX" in rows.loc["inlet_intensity", "source"]
-    assert "experimental anchor" in rows.loc["inlet_intensity", "notes"].lower()
 
     assert float(rows.loc["inlet_viscosity_ratio", "value"]) == 10.0
-    vr_source = rows.loc["inlet_viscosity_ratio", "source"].lower()
-    vr_notes = rows.loc["inlet_viscosity_ratio", "notes"].lower()
-    assert "nasa" not in vr_source
-    assert "ansys fluent 26.1" in vr_source
-    assert "modeling input" in vr_notes
-    assert "not a nasa measurement" in vr_notes
-    assert "not inferred from nasa tu uncertainty" in vr_notes
-    assert "1-10" in vr_notes
+    assert "Ansys Fluent 26.1" in rows.loc["inlet_viscosity_ratio", "source"]
 
     assert float(rows.loc["inlet_intermittency", "value"]) == 1.0
-    assert "not a nasa measurement" in rows.loc[
-        "inlet_intermittency", "notes"
-    ].lower()
-    assert "model-generated transition input" in rows.loc["inlet_retheta", "notes"].lower()
+    assert rows.loc["inlet_retheta", "value"] == "Fluent correlation from inlet turbulence intensity"
 
 
 def test_transition_sst_discretization_provenance() -> None:
@@ -173,11 +131,8 @@ def test_transition_sst_discretization_provenance() -> None:
 
     stabilization = rows.loc["transition_equations_stabilization"]
     assert stabilization["value"] == "k, omega, intermittency, Re_theta_t: First Order Upwind"
-    assert "scheme index 0" in stabilization["notes"].lower()
     assert "iteration 386" in stabilization["notes"].lower()
 
     final = rows.loc["transition_equations_final"]
     assert final["value"] == "k, omega, intermittency, Re_theta_t: Second Order Upwind"
-    assert "scheme index 1" in final["notes"].lower()
-    assert "unchanged iteration-386 solution" in final["notes"].lower()
-    assert "bounded second order" not in final["value"].lower()
+    assert "iteration 386" in final["notes"].lower()

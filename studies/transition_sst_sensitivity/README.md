@@ -2,7 +2,7 @@
 
 This study asks why the fine-grid Transition SST case preserves the Run 145 pressure comparison while producing a substantially different thermal field from the SST baseline. Phase A diagnoses the accepted Transition SST solution; Phase B changes the inlet turbulence state one parameter at a time while keeping the mesh, thermal boundary conditions, numerics and model settings fixed.
 
-The study is diagnostic rather than a calibration exercise. The case levels were not chosen to minimize NASA error.
+The study is diagnostic rather than a calibration exercise. The case levels were not chosen to minimise NASA error.
 
 ## Case matrix
 
@@ -51,7 +51,7 @@ Reducing the inlet turbulent-viscosity ratio produces much stronger freestream d
 
 The ratio-1 case moves the intermittency and wall-shear response to about `x/Cx = 0.962-0.968`. For that case, the interior gradient search is restricted to `x/Cx < 0.98` so the geometric trailing edge does not dominate the diagnostic.
 
-The three-point result is summarized in `b1_three_point_summary.csv`; detailed case outputs remain in the corresponding `tu065_vr05_*`, `tu065_vr01_*` and comparison CSVs.
+The three-point result is summarised in `b1_three_point_summary.csv`; detailed case outputs remain in the corresponding `tu065_vr05_*`, `tu065_vr01_*` and comparison CSVs.
 
 ## Experimental inlet-turbulence reference
 

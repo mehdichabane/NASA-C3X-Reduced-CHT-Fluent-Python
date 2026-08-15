@@ -1,6 +1,6 @@
 # Project notes
 
-This page keeps the modeling decisions and development sequence that are useful
+This page keeps the modelling decisions and development sequence that are useful
 for understanding the project. Detailed setup, convergence, mesh and comparison
 results stay in their dedicated documents.
 
@@ -9,7 +9,7 @@ public, so the public Git history starts later than the CFD work. The retained
 Fluent states and transcripts preserve several engineering steps, but not
 reliable calendar dates for the pre-public simulations.
 
-## Main modeling decisions
+## Main modelling decisions
 
 ### 1. Reduced 2D CHT model
 
@@ -116,7 +116,7 @@ sensitive. I therefore report the three solutions as a mesh-sensitivity study,
 not as a formal GCI result. The original meshing history was not preserved well
 enough to establish a systematically similar refinement family.
 
-If I repeated this part of the work, I would preserve one parameterized meshing
+If I repeated this part of the work, I would preserve one parameterised meshing
 recipe and generate the full grid family from it before running the solutions.
 Mesh dimensions, quality statistics and local profile changes are in
 [`meshing_recipe.md`](meshing_recipe.md).
@@ -171,4 +171,4 @@ those details afterwards.
 The current reproducibility boundary is described in
 [`reproducibility.md`](reproducibility.md): the Python analysis is rebuilt in CI,
 and the released Fluent states can be reopened and queried, but they are not a
-full initialization-to-final solver replay.
+full initialisation-to-final solver replay.

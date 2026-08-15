@@ -25,7 +25,7 @@ files refer to those case names.
 
 The bundle supports reopening the saved states and auditing the SST CFF meshes.
 It does not reproduce the original interactive meshing sequence or demonstrate
-that a new initialization converges to the saved fine SST state.
+that a new initialisation converges to the saved fine SST state.
 
 ## PyFluent saved-state report audit
 
@@ -75,9 +75,9 @@ The recomputed reports are:
 
 The launch configuration, local hash helpers and archived-audit provenance are
 unit-tested in CI; Fluent itself is not executed in GitHub Actions. These are
-saved-state audits only: they do not regenerate the mesh, initialize the solver,
+saved-state audits only: they do not regenerate the mesh, initialise the solver,
 replay iterations, export the full wall data set, or establish final-state
-equivalence from initialization.
+equivalence from initialisation.
 
 ## Transition SST restart
 
@@ -87,7 +87,7 @@ rather than leaving it to filename inference:
 
 - Transition SST (4 eqn) is enabled from the iteration-236 fine SST state;
 - the Transition SST warm-start case/data pair is written before the deliberate
-  stabilization change;
+  stabilisation change;
 - `k`, `omega`, intermittency and transition momentum-thickness Reynolds number
   are then changed to Fluent scheme index `0` (First Order Upwind) and retained
   at first order through iteration 386;
@@ -112,4 +112,4 @@ Only the fine grid was run with Transition SST. The transcript, monitor file and
 direct wall export are included in the restart bundle; the CSV exports used by
 the Python workflow are under `data/fluent_exports/transition_sst/`. The
 original Workbench/Ansys Meshing construction history is not in the bundle, but
-the realized Fluent CFF mesh and final solver state are preserved.
+the realised Fluent CFF mesh and final solver state are preserved.

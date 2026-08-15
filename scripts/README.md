@@ -35,7 +35,7 @@ The optional `replay_saved_state_reports.py` helper is deliberately not part of
 26.1 session. Its separate dependency is pinned in `requirements-fluent.txt` as
 `ansys-fluent-core==0.40.2`. The helper requests Fluent `26.1.0` explicitly in
 2D double precision and checks the running version before reading the saved
-state. It does not replay the solve from initialization.
+state. It does not replay the solve from initialisation.
 
 The restart binaries are not stored in Git, so CFF mesh extraction is run
 after the bundle has been downloaded and extracted:

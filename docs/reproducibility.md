@@ -63,7 +63,7 @@ The original SpaceClaim and Ansys Meshing GUI history was not retained. The
 source curves and solved meshes are available, but several interactive meshing
 controls and the original operation sequence are not.
 
-The repository also does not contain a full initialization-to-final Fluent replay
+The repository also does not contain a full initialisation-to-final Fluent replay
 for the SST baseline, nor replay scripts for the internal-cooling and Transition
 SST sensitivity solves. Those study outputs are checked in CI for consistency
 with the committed case matrices and reported numerical relationships, rather

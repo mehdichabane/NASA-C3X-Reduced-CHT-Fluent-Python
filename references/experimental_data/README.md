@@ -7,7 +7,7 @@ Python workflow.
 
 ## External thermal data
 
-`run145_4512_heat_transfer_temperature.csv` keeps both the normalized values
+`run145_4512_heat_transfer_temperature.csv` keeps both the normalised values
 transcribed from Appendix A, page 180, and their dimensional reconstruction.
 The conversion used in the project is explicit:
 
@@ -22,7 +22,7 @@ For example, the first pressure-side station gives
 `0.8385 × 811 K = 680.024 K` and
 `0.5425 × 1135 W/(m²·K) = 615.738 W/(m²·K)` after rounding.
 
-`T_ref = 811 K` is the reference temperature used to dimensionalize the NASA
+`T_ref = 811 K` is the reference temperature used to dimensionalise the NASA
 thermal table. It is not the Fluent inlet total temperature, which is `792 K`.
 For the CFD comparison, the heat-transfer coefficient is evaluated with the
 same reference temperature:

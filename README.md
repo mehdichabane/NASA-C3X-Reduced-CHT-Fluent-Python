@@ -2,10 +2,11 @@
 
 [![Rebuild and test analysis](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml)
 
-Ansys Fluent 26.1 + Python benchmark of **NASA C3X Run 145**, focused on
+Ansys Fluent 2026 R1 (26.1) + Python benchmark of **NASA C3X Run 145**, focused on
 verification, comparison with public experimental data and reproducible
-analysis. The primary model is steady two-dimensional compressible RANS/CHT
-with SST `k-omega`.
+analysis. The primary model is a steady two-dimensional compressible
+Reynolds-averaged Navier-Stokes (RANS) / conjugate heat transfer (CHT)
+calculation using the shear-stress-transport (SST) `k-omega` model.
 
 > **Scope.** This is a reduced benchmark and does not claim a complete ASME
 > V&V 20 validation. Internal coolant flow, film cooling and three-dimensional
@@ -15,15 +16,18 @@ with SST `k-omega`.
 
 | Item | Details |
 |---|---|
-| Experiment | NASA-CR-168015, Run 145 / code 4512 |
+| Experiment | NASA-CR-168015, Run 145 (code 4512) |
 | Primary CFD model | Fluent 26.1, steady 2D compressible RANS/CHT, SST `k-omega` |
 | Fine grid | `44,760` cells; maximum wall `y+ = 0.45189` |
-| Experimental comparison | Pressure ratio, wall temperature and external HTC |
+| Experimental comparison | Pressure ratio, wall temperature and external heat-transfer coefficient (HTC) |
 | Numerical checks | Final-window convergence, mass/interface/solid-energy balances, three-grid sensitivity |
 | Sensitivity studies | Transition SST inlet conditions; internal-cooling `h` / `Tbulk`; internal-HTC `+/-3%` envelope |
 | Reproducibility | Python rebuild in CI, released Fluent restart states and headless PyFluent saved-state checks |
 
 ## Fine-grid SST result
+
+Errors are reported using mean absolute error (MAE) and mean absolute percentage
+error (MAPE).
 
 | Metric | Pressure side | Suction side |
 |---|---:|---:|
@@ -73,7 +77,8 @@ SHA-256 hashes in [`fluent/restart_manifest.csv`](fluent/restart_manifest.csv).
   `23,781` and `44,760` cells. Medium-to-fine changes in outlet Mach, mean wall
   temperature and external heat rate are below `0.1%`, while local
   trailing-edge profiles remain more sensitive. The three meshes are therefore
-  reported as a sensitivity study rather than formal GCI.
+  reported as a sensitivity study rather than a formal grid convergence index
+  (GCI) assessment.
 - Model sensitivity. Transition SST gives pressure errors similar to SST but
   substantially larger thermal errors on the fine grid, so it is kept as a
   sensitivity case rather than the baseline.

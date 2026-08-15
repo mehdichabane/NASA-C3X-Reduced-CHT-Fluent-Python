@@ -9,7 +9,7 @@ Separate the effect of prescribed inlet turbulence intensity from the effect of 
 - the thermal solution;
 - the NASA Run 145 comparison.
 
-Case levels are chosen as controlled sensitivity perturbations, not to minimize NASA error.
+Case levels are chosen as controlled sensitivity perturbations, not to minimise NASA error.
 
 ## Case matrix
 
@@ -26,7 +26,7 @@ B1 varies viscosity ratio at fixed `Tu_in = 6.5%`. B2 varies inlet turbulence in
 
 ## Common restart and numerics
 
-Do not chain sensitivity cases or reinitialize the solution. Except for the named inlet turbulence parameter, retain the accepted Transition SST setup unchanged, including:
+Do not chain sensitivity cases or reinitialise the solution. Except for the named inlet turbulence parameter, retain the accepted Transition SST setup unchanged, including:
 
 - external and internal thermal boundary conditions;
 - mesh and materials;

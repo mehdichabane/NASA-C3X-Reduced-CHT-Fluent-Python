@@ -43,46 +43,12 @@ NASA Table IX reports Run 145 / code 4512 as `PTI = 58.57 psia`,
 total pressure used in Fluent, `403800 Pa`, is therefore a `0.0064%` rounding
 of the direct NASA value rather than an independently selected pressure.
 
-The NASA Test Conditions section is also explicit about the role and definition
-of the exit condition. Exit Mach numbers are based on measured inlet total
-pressure and the average measured exit-plane static pressure, and at a given
-Reynolds-number condition the exit-Mach level was independently established by
-adjusting the cascade exit pressure with a controllable exhaust valve. Table IX
-does not, however, tabulate that measured exit static pressure numerically for
-Run 145.
-
-The Fluent quantity used during the model adjustment is not definition-identical
-to NASA `M2`. The saved `fine_mach_outlet` report is a `surface-massavg` of the
-local Mach field on the outlet; Fluent's surface mass-weighted average weights
-the local quantity by surface mass flux. NASA `M2`, by contrast, is the
-pressure-derived experimental quantity described above. Their numerical
-proximity is therefore used only to establish consistency with the nominal
-operating point, not as a like-for-like validation comparison.
-
-The retained project development record resolves how the Fluent value was
-selected. `241200 Pa` was first used as a provisional pressure outlet. With the
-second-order calculation at that setting, the Fluent mass-weighted outlet Mach
-was `0.88064076`. A local isentropic pressure-ratio control update with
-`gamma = 1.4`, using nominal NASA `M2 = 0.90` numerically as the target, gave
-`236228.236 Pa`; that estimate was rounded to `236200 Pa`. Continuing Fluent
-with the rounded value produced a recorded mass-weighted outlet Mach of
-`0.89951531`. Its `0.0539%` normalized numerical difference from `0.90` is an
-operating-point mismatch indicator between differently defined quantities, not
-a validation error or experimental uncertainty. The current released fine-grid
-baseline retains `236200 Pa` and gives mass-weighted `Mout = 0.901294`.
-
-Accordingly, `236200 Pa` is an **operating-point boundary condition selected so
-the Fluent mass-weighted outlet Mach is numerically consistent with the nominal
-NASA Run 145 `M2 = 0.90` operating point**, not a direct NASA exit-pressure
-transcription. The resulting numerical proximity is an operating-point
-consistency check, not an independent validation metric and not a comparison of
-identically defined Mach observables. Wall-temperature and HTC measurements were
-not used to select this pressure. The complete source-selection record and
-calculation are in [`outlet_pressure_selection.md`](outlet_pressure_selection.md)
-and
-[`run145_outlet_pressure_selection.csv`](../references/model_inputs/run145_outlet_pressure_selection.csv).
-With the Fluent operating pressure set to `0 Pa`, the pressure-outlet value is
-numerically an absolute static pressure.
+With Fluent operating pressure set to `0 Pa`, the pressure outlet was set to
+`236200 Pa` to reproduce the nominal Run 145 exit-Mach operating point. Because
+NASA `M2` and Fluent's mass-weighted outlet Mach use different definitions,
+outlet Mach is treated as an operating-point check rather than an independent
+validation metric; the adjustment history is documented in
+[`outlet_pressure_selection.md`](outlet_pressure_selection.md).
 
 The inlet turbulent-viscosity ratio `10` is likewise not an experimental NASA
 quantity. It is a Fluent turbulence-boundary modeling input retained in the

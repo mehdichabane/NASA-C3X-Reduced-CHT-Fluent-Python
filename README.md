@@ -1,4 +1,4 @@
-# NASA C3X Run 145 — reduced RANS/CHT benchmark
+# NASA C3X Run 145: reduced RANS/CHT benchmark
 
 [![Rebuild and test analysis](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/mehdichabane/NASA-C3X-Reduced-CHT-Fluent-Python/actions/workflows/checks.yml)
 
@@ -66,21 +66,21 @@ SHA-256 hashes in [`fluent/restart_manifest.csv`](fluent/restart_manifest.csv).
 
 ## Numerical checks
 
-- **Convergence and conservation.** The fine SST run keeps unchanged
-  second-order settings over its final 20 iterations; engineering-monitor spans
-  remain below `0.02%`, with the closure checks reported above.
-- **Mesh sensitivity.** Coarse, medium and fine SST meshes contain `14,657`,
+- Convergence and conservation. The fine SST run keeps unchanged second-order
+  settings over its final 20 iterations; engineering-monitor spans remain below
+  `0.02%`, with the closure checks reported above.
+- Mesh sensitivity. Coarse, medium and fine SST meshes contain `14,657`,
   `23,781` and `44,760` cells. Medium-to-fine changes in outlet Mach, mean wall
   temperature and external heat rate are below `0.1%`, while local
   trailing-edge profiles remain more sensitive. The three meshes are therefore
   reported as a sensitivity study rather than formal GCI.
-- **Model sensitivity.** Transition SST gives pressure errors similar to SST but
+- Model sensitivity. Transition SST gives pressure errors similar to SST but
   substantially larger thermal errors on the fine grid, so it is kept as a
   sensitivity case rather than the baseline.
-- **Internal-cooling uncertainty sensitivity.** Applying NASA's reported
-  `+/-3%` internal-HTC magnitude to the existing `h` sensitivity family gives
-  about `+/-1.735 K` on mean external wall temperature; the SST wall-temperature
-  bias remains positive on both surfaces across that envelope.
+- Internal-cooling uncertainty sensitivity. Applying NASA's reported `+/-3%`
+  internal-HTC magnitude to the existing `h` sensitivity family gives about
+  `+/-1.735 K` on mean external wall temperature; the SST wall-temperature bias
+  remains positive on both surfaces across that envelope.
 
 Details are in [`docs/convergence_acceptance.md`](docs/convergence_acceptance.md),
 [`docs/meshing_recipe.md`](docs/meshing_recipe.md),
@@ -139,11 +139,11 @@ reports. Full solver reruns are outside the CI workflow; see
 
 ## Documentation
 
-- **Model setup:** [`docs/model_setup.md`](docs/model_setup.md)
-- **Numerical verification:** [`docs/convergence_acceptance.md`](docs/convergence_acceptance.md) and [`docs/meshing_recipe.md`](docs/meshing_recipe.md)
-- **NASA comparison:** [`docs/nasa_comparison.md`](docs/nasa_comparison.md)
-- **Sensitivity studies:** [`internal cooling`](studies/internal_cooling_sensitivity/README.md) and [`Transition SST`](studies/transition_sst_sensitivity/README.md)
-- **Reproducibility:** [`docs/reproducibility.md`](docs/reproducibility.md)
+- Model setup: [`docs/model_setup.md`](docs/model_setup.md)
+- Numerical verification: [`docs/convergence_acceptance.md`](docs/convergence_acceptance.md) and [`docs/meshing_recipe.md`](docs/meshing_recipe.md)
+- NASA comparison: [`docs/nasa_comparison.md`](docs/nasa_comparison.md)
+- Sensitivity studies: [`internal cooling`](studies/internal_cooling_sensitivity/README.md) and [`Transition SST`](studies/transition_sst_sensitivity/README.md)
+- Reproducibility: [`docs/reproducibility.md`](docs/reproducibility.md)
 
 ## Source and licence
 

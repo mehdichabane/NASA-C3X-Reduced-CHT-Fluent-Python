@@ -79,7 +79,7 @@ nabla . (k_s(T) nabla T) = 0
 k_s(T) = 6.811 + 0.020176 T  W/(m K)
 ```
 
-The same C3X ASTM 310 correlation is reported in Table 2 of Prapamonthon et al.,
+The same conductivity law is reported in Table 2 of Prapamonthon et al.,
 *Energies* 11(4), 1000 (2018),
 [doi:10.3390/en11041000](https://doi.org/10.3390/en11041000).
 
@@ -115,12 +115,6 @@ independently of this property-evaluation pressure, and sensitivity to the
 pressure choice is not assessed. The generated inputs are stored in
 `references/model_inputs/run145_4512_internal_convection.csv`.
 
-Trompoukis et al. (2021),
-[doi:10.3390/ijtpp6020020](https://doi.org/10.3390/ijtpp6020020), is retained as
-a later C3X reference, but it is not the primary provenance record for the
-correlation or the ten `C_r` values because NASA-CR-168015 documents both
-directly.
-
 ## Material values
 
 | Domain | Property | Fluent definition |
@@ -134,25 +128,18 @@ directly.
 | Hot gas | Dynamic viscosity | `3.33e-05 Pa s` |
 | Hot gas | Thermal conductivity | `0.05234 W/(m K)` |
 
-The released Fluent state remains the authoritative baseline-definition record
-for these constants. Independent literature matches are recorded with explicit
-scope: exact C3X or prior-C3X-model matches are documented for solid density,
-solid specific heat, gas molecular weight, gas specific heat, gas dynamic
-viscosity and the solid conductivity law; the archived gas thermal conductivity
-is recorded only as a derived rounding match from the published `cp`, `mu` and
-`Pr` triple. These matches make the baseline auditable but do not establish
-which source was consulted when the original Fluent material definitions were
-selected. The machine-readable qualification is in
-[`material_property_provenance.csv`](../references/model_inputs/material_property_provenance.csv)
-and
-[`thermophysical_literature_matches.csv`](../references/model_inputs/thermophysical_literature_matches.csv),
-with a summary in
+The values above reproduce the material definitions in the released Fluent
+state. Independent C3X and prior-C3X literature matches for several constants
+are summarized in
 [`references/model_inputs/README.md`](../references/model_inputs/README.md).
+Those comparisons are consistency checks on the released setup; they do not
+establish which source was used when the original material definitions were
+entered.
 
 The hot-gas specific heat, molecular viscosity and thermal conductivity are
-retained as constant baseline inputs in the saved model. Their sensitivity is
-not evaluated here, so the reported comparison should not be interpreted as
-including uncertainty associated with those property choices.
+retained as constant baseline inputs. Their sensitivity is not evaluated here,
+so the reported comparison does not include uncertainty associated with those
+property choices.
 
 ## Mesh and near-wall resolution
 

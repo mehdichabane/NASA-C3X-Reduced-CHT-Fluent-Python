@@ -15,7 +15,7 @@ Two completed one-factor families are used:
 - internal heat-transfer coefficient: `h/h0 = 0.90, 0.95, 1.00, 1.05, 1.10`;
 - coolant bulk temperature: `Tbulk - Tbulk,0 = -10, -5, 0, +5, +10 K`.
 
-All ten passages are perturbed together. The local interaction check uses the four `(+/-5% h, +/-5 K)` corners around the same baseline; exact values are listed in `interaction_case_matrix.csv`.
+All ten passages are perturbed together. The local interaction check uses the four `(±5% h, ±5 K)` corners around the same baseline; exact values are listed in `interaction_case_matrix.csv`.
 
 Because all ten passages are perturbed coherently, this screening probes common-mode scaling and offset directions. It does not quantify uncertainty in the passage-to-passage distribution of prescribed `h` or `Tbulk`, nor errors specific to individual passage correction factors `C_r`.
 
@@ -50,7 +50,7 @@ Each accepted case retains the same outputs used by the baseline workflow, inclu
 - mass, fluid-solid interface and solid-energy balance checks;
 - wall profiles required to compute `delta Tw = Tw(case) - Tw(baseline)`.
 
-The local one-factor sensitivity coefficients use the symmetric `+/-5%` and `+/-5 K` cases. The `+/-10%` and `+/-10 K` cases provide the wider screening check for nonlinearity.
+The local one-factor sensitivity coefficients use the symmetric `±5%` and `±5 K` cases. The `±10%` and `±10 K` cases provide the wider screening check for nonlinearity.
 
 ## h_m10 pilot
 
@@ -71,7 +71,7 @@ Both five-point families are complete. The symmetric local derivatives and the w
 | Quantity | HTC family | `Tbulk` family | HTC linear `R2` | `Tbulk` linear `R2` |
 |---|---:|---:|---:|---:|
 | Mean wall temperature | `-0.5783 K` per `+1% h` | `+0.30489 K/K` | `0.999012` | `0.999998` |
-| External heat-transfer rate | `+184.15 W/m` per `+1% h` | `-95.601 W/(m K)` | `0.999229` | `0.9999999` |
+| External heat-transfer rate | `+184.15 W/m` per `+1% h` | `-95.601 W/(m·K)` | `0.999229` | `0.9999999` |
 | Mean solid temperature | `-0.6678 K` per `+1% h` | `+0.35479 K/K` | `0.999017` | `0.999999` |
 
 For the `Tbulk` family, the central and five-point derivatives differ by only `0.0011%` for mean wall temperature and `0.0043%` for external heat-transfer rate. The maximum linear-fit residual is `0.072%` of the five-point response span for mean wall temperature and `0.025%` for heat-transfer rate. The HTC family is also close to linear, but its corresponding residuals are about `1.35%` and `1.19%` of the response span.
@@ -82,7 +82,7 @@ The two families give a consistent physical picture. Stronger prescribed interna
 
 ## Completed interaction screening
 
-The four `(+/-5% h, +/-5 K)` corners were restarted independently from the same accepted baseline at iteration 236 and evaluated with the same convergence and balance criteria. The coded bilinear model is
+The four `(±5% h, ±5 K)` corners were restarted independently from the same accepted baseline at iteration 236 and evaluated with the same convergence and balance criteria. The coded bilinear model is
 
 `Y = beta0 + beta_h*x_h + beta_T*x_T + beta_hT*x_h*x_T`.
 
@@ -96,6 +96,6 @@ For the principal thermal responses:
 
 The interaction is therefore resolved but small relative to both main effects in this local screening box. The factorial main effects also reproduce the symmetric one-factor effects closely: the relative differences are about `0.0023%` (`h`) and `0.054%` (`Tbulk`) for mean wall temperature, and `0.0014%` and `0.036%` for external heat-transfer rate.
 
-The four-corner bilinear model is saturated, so no ANOVA p-values or experimental-error confidence intervals are inferred from these deterministic CFD runs. The result supports a predominantly additive local response, with a small bilinear correction over the tested `+/-5% h` and `+/-5 K` range.
+The four-corner bilinear model is saturated, so no ANOVA p-values or experimental-error confidence intervals are inferred from these deterministic CFD runs. The result supports a predominantly additive local response, with a small bilinear correction over the tested `±5% h` and `±5 K` range.
 
 Consolidated one-factor results are in `h_family_summary.csv`, `h_family_local_sensitivity.csv`, `t_family_summary.csv`, `t_family_local_sensitivity.csv`, `t_family_linearity.csv` and `h_vs_t_family_comparison.csv`. Interaction inputs and results are in `interaction_case_matrix.csv`, `interaction_plan.md`, `interaction_corner_summary.csv`, `interaction_factorial_coefficients.csv`, `interaction_additivity_check.csv` and `interaction_main_effect_consistency.csv`.

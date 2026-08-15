@@ -44,7 +44,7 @@ h = Nu_D * k_air / D
 ```
 
 NASA Figure 7 (report p. 16) supplies the passage diameters and per-hole
-correction factors: `C_r = 1.118` for holes 1-7, `1.056` for holes 8-9 and
+correction factors: `C_r = 1.118` for holes 1–7, `1.056` for holes 8–9 and
 `1.025` for hole 10. Run 145 coolant bulk temperatures and Reynolds numbers come
 from Appendix A, report p. 181.
 
@@ -64,13 +64,13 @@ The archived Fluent baseline uses:
 
 | Domain | Property | Fluent definition | Literature cross-check |
 |---|---|---:|---|
-| Solid | Density | `8030 kg/m3` | Zheng et al. (2015), C3X density match |
-| Solid | Specific heat | `473 J/(kg K)` | Bianchini, Facchini & Mangani (2009), prior C3X-model match |
-| Solid | Conductivity | `k_s(T)=6.811+0.020176T` W/(m K) | Prapamonthon et al. (2018), Table 2 |
+| Solid | Density | `8030 kg/m³` | Zheng et al. (2015), C3X density match |
+| Solid | Specific heat | `473 J/(kg·K)` | Bianchini, Facchini & Mangani (2009), prior C3X-model match |
+| Solid | Conductivity | `k_s(T)=6.811+0.020176T` W/(m·K) | Prapamonthon et al. (2018), Table 2 |
 | Hot gas | Density | ideal gas, `M=28.96 kg/kmol` | Bianchini, Facchini & Mangani (2009) |
-| Hot gas | Specific heat | `1075 J/(kg K)` | Bianchini, Facchini & Mangani (2009) |
-| Hot gas | Dynamic viscosity | `3.33e-05 Pa s` | Bianchini, Facchini & Mangani (2009) |
-| Hot gas | Thermal conductivity | `0.05234 W/(m K)` | rounds from the Bianchini `cp`, `mu` and `Pr` values |
+| Hot gas | Specific heat | `1075 J/(kg·K)` | Bianchini, Facchini & Mangani (2009) |
+| Hot gas | Dynamic viscosity | `3.33e-05 Pa·s` | Bianchini, Facchini & Mangani (2009) |
+| Hot gas | Thermal conductivity | `0.05234 W/(m·K)` | rounds from the Bianchini `cp`, `mu` and `Pr` values |
 
 These literature entries are independent consistency checks on the archived
 setup, not a reconstruction of which source was consulted when the original

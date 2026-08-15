@@ -46,8 +46,8 @@ loss or streamwise coolant development.
 Because external wall temperature depends on this prescribed cooling as well as
 on the gas-side model, I ran separate common-mode `h` and `Tbulk` sensitivity
 families. Reducing all internal HTCs by 10% raises the mean external wall
-temperature by about `6.1 K`. NASA's reported `+/-3%` internal-HTC magnitude was
-later applied to the existing `h` sweep, giving about `+/-1.735 K` on mean wall
+temperature by about `6.1 K`. NASA's reported `±3%` internal-HTC magnitude was
+later applied to the existing `h` sweep, giving about `±1.735 K` on mean wall
 temperature.
 
 The generated inputs and sensitivity results are under
@@ -61,8 +61,8 @@ thermal comparison changes substantially.
 
 For SST, wall-temperature MAPE is about `1.45%` on the pressure side and
 `2.00%` on the suction side, while HTC MAPE is about `7.80%` and `11.54%`.
-Transition SST raises wall-temperature MAPE to about `6.35-6.41%` and HTC MAPE
-to roughly `32-47%` on the same fine grid.
+Transition SST raises wall-temperature MAPE to about `6.35–6.41%` and HTC MAPE
+to roughly `32–47%` on the same fine grid.
 
 I then checked the inlet turbulence inputs because the transition response
 depends strongly on how freestream turbulence decays before the vane. Changing
@@ -143,7 +143,7 @@ accepted fine SST state, enabled Transition SST and used first-order convection
 for `k`, `omega`, intermittency and `Re_theta_t` while the added equations
 settled. A checkpoint was saved at iteration `386`; those four equations were
 then changed to Second Order Upwind and the run continued to iteration `556`.
-Iterations `537-556` form the final unchanged confirmation window.
+Iterations `537–556` form the final unchanged confirmation window.
 
 The restart bundle also contains the Transition SST transcript, monitor history
 and direct wall export. See [`../fluent/README.md`](../fluent/README.md) and the

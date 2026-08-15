@@ -76,7 +76,7 @@ archived temperature-dependent conductivity:
 
 ```text
 nabla . (k_s(T) nabla T) = 0
-k_s(T) = 6.811 + 0.020176 T  W/(m K)
+k_s(T) = 6.811 + 0.020176 T  W/(m·K)
 ```
 
 The same conductivity law is reported in Table 2 of Prapamonthon et al.,
@@ -96,12 +96,12 @@ The source chain for this reduced internal-convection closure is direct in
 NASA-CR-168015. The heat-transfer measurement section gives the Nusselt
 correlation above, defines `C_r` as the thermal-entry correction to the
 fully-developed smooth-pipe expression, and states that its experimental range
-is approximately `1.03-1.12`. NASA attributes that correction to Ref. 22,
+is approximately `1.03–1.12`. NASA attributes that correction to Ref. 22,
 Crawford and Kays, *Convective Heat and Mass Transfer* (1980).
 
 NASA Figure 7 (report p. 16) directly tabulates the C3X passage geometry and
-per-hole `C_r` values. The repository transcribes `C_r = 1.118` for holes 1-7,
-`1.056` for holes 8-9 and `1.025` for hole 10. These are primary-source
+per-hole `C_r` values. The repository transcribes `C_r = 1.118` for holes 1–7,
+`1.056` for holes 8–9 and `1.025` for hole 10. These are primary-source
 transcriptions, not values inferred from a later publication or recovered only
 from the Fluent state.
 
@@ -119,14 +119,14 @@ pressure choice is not assessed. The generated inputs are stored in
 
 | Domain | Property | Fluent definition |
 |---|---|---:|
-| Solid | Density | `8030 kg/m3` |
-| Solid | Specific heat | `473 J/(kg K)` |
-| Solid | Conductivity | `6.811 + 0.020176 T` W/(m K) |
+| Solid | Density | `8030 kg/m³` |
+| Solid | Specific heat | `473 J/(kg·K)` |
+| Solid | Conductivity | `6.811 + 0.020176 T` W/(m·K) |
 | Hot gas | Density | ideal gas |
 | Hot gas | Molecular weight | `28.96 kg/kmol` |
-| Hot gas | Specific heat | `1075 J/(kg K)` |
-| Hot gas | Dynamic viscosity | `3.33e-05 Pa s` |
-| Hot gas | Thermal conductivity | `0.05234 W/(m K)` |
+| Hot gas | Specific heat | `1075 J/(kg·K)` |
+| Hot gas | Dynamic viscosity | `3.33e-05 Pa·s` |
+| Hot gas | Thermal conductivity | `0.05234 W/(m·K)` |
 
 The values above reproduce the material definitions in the released Fluent
 state. Independent C3X and prior-C3X literature matches for several constants
@@ -198,7 +198,7 @@ extracted record is in
 
 The imposed `6.5%` inlet turbulence intensity is not preserved to the vane in
 the archived baseline. The fine-grid freestream diagnostic gives a median
-`Tu = 1.2473%` and `mu_t/mu = 7.851` in the `2-5 mm` bin immediately upstream
+`Tu = 1.2473%` and `mu_t/mu = 7.851` in the `2–5 mm` bin immediately upstream
 of the geometric leading edge. NASA documents `6.5%` as an average cascade
 inlet turbulence level, not as a leading-edge target for this reduced domain.
 The decay and its strong sensitivity to inlet turbulent-viscosity ratio are
@@ -225,7 +225,7 @@ or medium Transition SST cases were run.
 ## Thermal comparison convention
 
 NASA thermal values are dimensionalised with `T_ref = 811 K` and
-`HTC_ref = 1135 W/(m2 K)`. The CFD comparison uses the fluid-side heat flux:
+`HTC_ref = 1135 W/(m²·K)`. The CFD comparison uses the fluid-side heat flux:
 
 ```text
 q_into_vane = -q_fluent,fluid-side

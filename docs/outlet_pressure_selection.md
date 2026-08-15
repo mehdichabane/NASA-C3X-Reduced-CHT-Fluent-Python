@@ -9,7 +9,7 @@ control to set the exit-Mach condition. Table IX does not tabulate the
 corresponding Run 145 exit static pressure.
 
 Primary source: [Hylton et al., NASA-CR-168015 (1983)](https://ntrs.nasa.gov/citations/19830020105),
-Test Conditions section and Table IX, report pp. 28-30.
+Test Conditions section and Table IX, report pp. 28–30.
 
 The Fluent quantity used for the operating-point adjustment is different: the
 saved `fine_mach_outlet` report is a surface mass-weighted average of the local

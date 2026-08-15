@@ -99,10 +99,10 @@ Transition SST is systematically colder.
 
 | Model | Surface | Points | MAE | RMSE | MAPE | Inside experimental HTC interval |
 |---|---|---:|---:|---:|---:|---:|
-| SST | Pressure | `31` | `46.954 W/(m2 K)` | `62.406 W/(m2 K)` | `7.795%` | `58.06%` |
-| SST | Suction | `44` | `84.320 W/(m2 K)` | `118.616 W/(m2 K)` | `11.535%` | `63.64%` |
-| Transition SST | Pressure | `31` | `294.658 W/(m2 K)` | `350.778 W/(m2 K)` | `47.443%` | `9.68%` |
-| Transition SST | Suction | `44` | `281.010 W/(m2 K)` | `389.862 W/(m2 K)` | `32.232%` | `31.82%` |
+| SST | Pressure | `31` | `46.954 W/(m²·K)` | `62.406 W/(m²·K)` | `7.795%` | `58.06%` |
+| SST | Suction | `44` | `84.320 W/(m²·K)` | `118.616 W/(m²·K)` | `11.535%` | `63.64%` |
+| Transition SST | Pressure | `31` | `294.658 W/(m²·K)` | `350.778 W/(m²·K)` | `47.443%` | `9.68%` |
+| Transition SST | Suction | `44` | `281.010 W/(m²·K)` | `389.862 W/(m²·K)` | `32.232%` | `31.82%` |
 
 ![Heat-transfer-coefficient comparison](../results/figures/nasa_comparison/heat_transfer_coefficient.svg)
 

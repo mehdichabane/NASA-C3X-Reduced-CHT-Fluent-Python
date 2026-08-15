@@ -72,12 +72,12 @@ zero-range fallback implemented in the post-processing is not used here.
 |---|---|---:|---:|
 | Pressure | `p_s/p_t,in` | `0.00764` | `8.76%` |
 | Pressure | Wall temperature | `0.927 K` | `4.84%` |
-| Pressure | Heat flux | `4.199 kW/m2` | `4.06%` |
-| Pressure | HTC | `42.99 W/(m2 K)` | `3.87%` |
+| Pressure | Heat flux | `4.199 kW/m²` | `4.06%` |
+| Pressure | HTC | `42.99 W/(m²·K)` | `3.87%` |
 | Suction | `p_s/p_t,in` | `0.00258` | `4.56%` |
 | Suction | Wall temperature | `0.943 K` | `3.77%` |
-| Suction | Heat flux | `1.053 kW/m2` | `1.65%` |
-| Suction | HTC | `13.06 W/(m2 K)` | `2.74%` |
+| Suction | Heat flux | `1.053 kW/m²` | `1.65%` |
+| Suction | HTC | `13.06 W/(m²·K)` | `2.74%` |
 
 For example, the pressure-side `8.76%` value means that the medium-to-fine
 pressure-ratio MAE is `0.00764`, which is `8.76%` of the fine-grid
@@ -126,7 +126,7 @@ The accepted Transition SST direct wall export gives
 
 The [Fluent 2026 R1 Transition SST mesh requirements](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_th/flu_th_sec_turb_sst_grid.html)
 recommend, as best practice, maximum `y+` of about `1`, a wall-normal expansion
-ratio below `1.1`, and approximately `100-150` streamwise cells on each side of
+ratio below `1.1`, and approximately `100–150` streamwise cells on each side of
 a turbine blade. The realised mesh therefore **comfortably satisfies the
 wall-resolution and streamwise-count recommendations but does not satisfy the
 recommended wall-normal expansion ratio**: the retained inflation stack is

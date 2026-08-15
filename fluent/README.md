@@ -95,7 +95,7 @@ rather than leaving it to filename inference:
   equations are changed to scheme index `1` (Second Order Upwind);
 - the iteration-386 state is written again before any further iteration, then
   continued with those second-order settings to iteration 556;
-- iteration 536 is retained as a converged candidate and iterations 537-556 form
+- iteration 536 is retained as a converged candidate and iterations 537–556 form
   the final unchanged confirmation window.
 
 The [Fluent 2026 R1 discretization-scheme index table](https://ansyshelp.ansys.com/public/Views/Secured/corp/v261/en/flu_tcl/x1-1000010.html)

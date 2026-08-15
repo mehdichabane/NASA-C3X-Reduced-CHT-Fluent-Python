@@ -22,5 +22,5 @@ canonical filenames establish solver-state identity.
 | fine SST, iter 236 | `35819.60242176461` | `655.619216610248` | `0.9012944409738727` |
 | fine Transition SST, iter 556 | `28548.27415186197` | `608.87899709921` | `0.9033510682539843` |
 
-These files document saved-state report reproducibility only. Mesh generation,
-iteration replay and sensitivity reruns are outside this archive.
+Project-wide reproducibility scope and limitations are documented in
+[`docs/reproducibility.md`](../../../../docs/reproducibility.md).

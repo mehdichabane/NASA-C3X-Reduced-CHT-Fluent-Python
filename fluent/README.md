@@ -24,6 +24,8 @@ The word `ACCEPTED` remains in the coarse and medium filenames because the data
 files refer to those case names.
 
 The bundle supports reopening the saved states and auditing the SST CFF meshes.
+Project-wide reproducibility scope and limitations are documented in
+[`docs/reproducibility.md`](../docs/reproducibility.md).
 
 ## PyFluent saved-state report audit
 
@@ -61,7 +63,7 @@ Run those commands from a directory where each matching `.dat.h5` file remains
 beside its `.cas.h5` file, or provide the corresponding full case-file path.
 
 Live Fluent 26.1 executions for the released fine SST and final fine Transition
-SST states are now archived under
+SST states are archived under
 [`results/processed/verification/live_saved_state_audits/`](../results/processed/verification/live_saved_state_audits/).
 Their recorded case/data SHA-256 values match this directory's restart manifest.
 The recomputed reports are:
@@ -72,9 +74,8 @@ The recomputed reports are:
 | fine Transition SST, iter 556 | `28548.27415186197` | `608.87899709921` | `0.9033510682539843` |
 
 The launch configuration, local hash helpers and archived-audit provenance are
-unit-tested in CI; Fluent itself is not executed in GitHub Actions. The audits
-reopen retained states and recompute scalar reports rather than replaying the
-solver from initialisation.
+unit-tested in CI. The scope of these saved-state checks is defined in
+[`docs/reproducibility.md`](../docs/reproducibility.md).
 
 ## Transition SST restart
 
@@ -107,6 +108,4 @@ Transition SST chronology. The saved `fine_mach_outlet` report definition is a
 
 Only the fine grid was run with Transition SST. The transcript, monitor file and
 direct wall export are included in the restart bundle; the CSV exports used by
-the Python workflow are under `data/fluent_exports/transition_sst/`. The
-original Workbench/Ansys Meshing construction history is not in the bundle, but
-the realised Fluent CFF mesh and final solver state are preserved.
+the Python workflow are under `data/fluent_exports/transition_sst/`.

@@ -37,7 +37,7 @@ The full decay curve is in `baseline_freestream_decay.csv`.
 
 The vane wall is traversed from leading edge to trailing edge on the pressure and suction sides. In the baseline case, the strongest concurrent suction-side intermittency and wall-temperature gradients occur near `x/Cx = 0.6534`, with the wall-shear gradient near `0.6551`.
 
-This location is used only as a **transition-like response front** in the CFD solution. It is not treated as an experimentally measured transition onset. The extracted thresholds and gradient locations are in `baseline_transition_signature.csv`.
+This location is used only as a transition-like response front in the CFD solution. It is not treated as an experimentally measured transition onset. The extracted thresholds and gradient locations are in `baseline_transition_signature.csv`.
 
 ## Viscosity-ratio sensitivity at fixed `Tu_in = 6.5%`
 
@@ -55,7 +55,7 @@ The three-point result is summarised in `b1_three_point_summary.csv`; detailed c
 
 ## Experimental inlet-turbulence reference
 
-NASA-CR-168015 reports `Tu` as the average inlet turbulence intensity for the C3X cascade. The combustor-induced inlet level was `6.5%`, measured with LDA, and upstream rods increased it to `8.3%`.
+NASA-CR-168015 reports `Tu` as the average inlet turbulence intensity for the C3X cascade. The combustor-induced inlet level was `6.5%`, measured with laser Doppler anemometry (LDA), and upstream rods increased it to `8.3%`.
 
 These values are therefore treated as inlet-level conditions, not leading-edge targets. The exact axial correspondence between the experimental measurement plane and this reduced computational inlet is not assumed.
 

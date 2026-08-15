@@ -22,9 +22,5 @@ canonical filenames establish solver-state identity.
 | fine SST, iter 236 | `35819.60242176461` | `655.619216610248` | `0.9012944409738727` |
 | fine Transition SST, iter 556 | `28548.27415186197` | `608.87899709921` | `0.9033510682539843` |
 
-This evidence is deliberately narrow. It demonstrates that the released saved
-states can be reopened by Fluent 26.1 through the pinned PyFluent audit path and
-that the stored scalar reports can be recomputed from those states. It does not
-regenerate the mesh, initialize or iterate the solver, replay convergence from an
-initial condition, reproduce the sensitivity-study solves, or establish
-initialization-to-final equivalence.
+These files document saved-state report reproducibility only. Mesh generation,
+iteration replay and sensitivity reruns are outside this archive.

@@ -131,7 +131,7 @@ the Transition transcript/monitor/direct-wall evidence. Thus the binary CFD
 artifacts accompanied the original public project rather than appearing only
 after the later documentation work.
 
-## 3. Public development after publication
+## 3. Git-backed development after publication
 
 From 7 August onward, the chronology is Git-backed. The main milestones are:
 

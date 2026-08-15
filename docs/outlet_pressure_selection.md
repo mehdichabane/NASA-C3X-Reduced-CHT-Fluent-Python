@@ -54,7 +54,7 @@ fine-grid SST baseline keeps the same `236200 Pa` boundary condition and gives
 | Stage | Outlet static pressure | Fluent mass-weighted outlet Mach |
 |---|---:|---:|
 | Provisional second-order point | `241200 Pa` | `0.88064076` |
-| Isentropic estimate | `236228.236 Pa` | — |
+| Isentropic estimate | `236228.236 Pa` | `n/a (estimate only)` |
 | Applied rounded setting | `236200 Pa` | `0.89951531` |
 | Released fine SST baseline | `236200 Pa` | `0.90129444` |
 

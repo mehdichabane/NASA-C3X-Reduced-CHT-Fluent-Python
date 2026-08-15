@@ -1,0 +1,9 @@
+quantity,unit,comparison_scope,baseline_value,sensitivity_per_plus_1pct_h,nasa_reported_internal_htc_uncertainty_percent,value_at_h_minus_uncertainty,value_at_h_plus_uncertainty,envelope_min,envelope_max,half_width,validation_use
+mean_external_wall_temperature,K,CFD integral,655.61921661,-0.5783141619,3,657.354159096,653.884274124,653.884274124,657.354159096,1.7349424857,use_as_input_sensitivity
+external_heat_transfer_rate,W/m,CFD integral,35819.6024218,184.14800343,3,35267.1584115,36372.0464321,35267.1584115,36372.0464321,552.44401029,use_as_input_sensitivity
+wall_temperature_bias_pressure,K,NASA wall temperature,8.88710132613,-0.686643323532,3,10.9470312967,6.82717135553,6.82717135553,10.9470312967,2.0599299706,use_as_input_sensitivity
+wall_temperature_bias_suction,K,NASA wall temperature,12.9986675061,-0.52764301759,3,14.5815965589,11.4157384533,11.4157384533,14.5815965589,1.58292905277,use_as_input_sensitivity
+wall_temperature_mape_pressure,percent,NASA wall temperature,1.44800232792,-0.104058503557,3,1.76017783859,1.13582681725,1.13582681725,1.76017783859,0.312175510671,use_as_input_sensitivity
+wall_temperature_mape_suction,percent,NASA wall temperature,2.00453310766,-0.079369943258,3,2.24264293743,1.76642327789,1.76642327789,2.24264293743,0.238109829774,use_as_input_sensitivity
+external_htc_mape_pressure,percent,NASA external HTC,7.79505834879,0.016779626029,3,7.7447194707,7.84539722688,7.7447194707,7.84539722688,0.050338878087,sensitivity_only_do_not_combine_with_table_vi
+external_htc_mape_suction,percent,NASA external HTC,11.5347484602,0.07387742686,3,11.3131161796,11.7563807408,11.3131161796,11.7563807408,0.22163228058,sensitivity_only_do_not_combine_with_table_vi

@@ -6,7 +6,7 @@ screening runs; the ranges below are not measured confidence intervals.
 
 ## Baseline
 
-The starting point is the accepted fine-grid SST Run 145 solution. Geometry, mesh, external boundary conditions, material properties, turbulence model, discretization and convergence checks remain unchanged.
+The starting point is the accepted fine-grid SST Run 145 solution. Geometry, mesh, external boundary conditions, material properties, turbulence model, discretisation and convergence checks remain unchanged.
 
 Only the ten internal convection boundaries are varied. Their baseline values are taken from `references/model_inputs/run145_4512_internal_convection.csv`.
 

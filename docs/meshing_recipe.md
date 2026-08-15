@@ -63,10 +63,10 @@ coordinate. The reported range-normalised MAE is
 
 `100 x MAE / (max(phi_fine) - min(phi_fine))`
 
-evaluated over the same surface and region. It is a profile-shape diagnostic,
-not a pointwise relative error and not a percentage error in the physical
-quantity itself. All trailing-edge ranges listed below are non-zero, so the
-zero-range fallback implemented in the post-processing is not used here.
+evaluated over the same surface and region. This is a profile-shape diagnostic
+normalised by the local fine-grid range; the physical MAE is reported separately
+in the preceding column. All trailing-edge ranges listed below are non-zero, so
+the zero-range fallback implemented in the post-processing is not used here.
 
 | Surface | Quantity | Medium-to-fine MAE | MAE / local fine-grid range |
 |---|---|---:|---:|
@@ -79,11 +79,9 @@ zero-range fallback implemented in the post-processing is not used here.
 | Suction | Heat flux | `1.053 kW/m²` | `1.65%` |
 | Suction | HTC | `13.06 W/(m²·K)` | `2.74%` |
 
-For example, the pressure-side `8.76%` value means that the medium-to-fine
-pressure-ratio MAE is `0.00764`, which is `8.76%` of the fine-grid
-pressure-ratio range within the last `5%` of that surface. It does **not** mean
-that the medium-grid pressure is locally `8.76%` different from the fine-grid
-pressure.
+For example, the pressure-side `8.76%` value is the pressure-ratio MAE
+`0.00764` divided by the fine-grid pressure-ratio range within the last `5%` of
+that surface. The underlying pressure-ratio MAE remains `0.00764`.
 
 The full local summary is
 `results/processed/mesh_sensitivity/run145_three_grid_local_profile_summary.csv`.
@@ -94,7 +92,7 @@ three global quantities using an effective two-dimensional spacing proportional
 to `1/sqrt(N_cells)`. The machine-readable output therefore contains observed
 order, Richardson-extrapolated value, fine/medium GCI and asymptotic-ratio
 fields. These values are retained as exploratory diagnostics only; they are not
-accepted or reported here as formal discretization uncertainties. The retained
+accepted or reported here as formal discretisation uncertainties. The retained
 meshing record cannot establish that the three meshes form a systematically
 similar refinement family with the same generation parameters and controlled
 reference-spacing ratios. The missing sizing, bias and meshing-method records
@@ -116,7 +114,7 @@ Direct inspection of the released fine CFF mesh gives:
   wall-face centres are mapped to the repository C3X pressure/suction profile;
 - a first wall-normal layer thickness of approximately `1.0 micrometre`;
 - `30` successive inflation layers whose realised wall-normal thicknesses follow
-  an approximately `1.20` geometric expansion (`1.000, 1.200, 1.440, 1.728, ...`
+  an approximately `1.20` geometric expansion (`1.000, 1.200, 1.440, 1.728, …`
   micrometres before the post-inflation jump);
 - byte-identical CFF mesh datasets between the released fine SST iteration-236
   state and the released Transition SST iteration-556 state.

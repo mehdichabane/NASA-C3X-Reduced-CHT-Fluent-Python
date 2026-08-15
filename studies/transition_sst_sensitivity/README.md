@@ -1,8 +1,8 @@
 # Transition SST inlet-turbulence sensitivity
 
-This study asks why the fine-grid Transition SST case preserves the Run 145 pressure comparison while producing a substantially different thermal field from the SST baseline. Phase A diagnoses the accepted Transition SST solution; Phase B changes the inlet turbulence state one parameter at a time while keeping the mesh, thermal boundary conditions, numerics and model settings fixed.
+This study examines why the fine-grid Transition SST case preserves the Run 145 pressure comparison while producing a substantially different thermal field from the SST baseline. Phase A diagnoses the accepted Transition SST solution; Phase B changes the inlet turbulence state one parameter at a time while keeping the mesh, thermal boundary conditions, numerics and model settings fixed.
 
-The study is diagnostic rather than a calibration exercise. The case levels were not chosen to minimise NASA error.
+The case levels are controlled diagnostic perturbations selected independently of the NASA comparison error.
 
 ## Case matrix
 
@@ -82,11 +82,11 @@ For `tu065_vr01`, the final CFF archive does not contain a persisted cooling-hol
 
 At fixed `Tu_in = 6.5%`, changing
 
-`mu_t/mu_in: 10 -> 5 -> 1`
+`mu_t/mu_in: 10 → 5 → 1`
 
 changes the near-leading-edge turbulence roughly as
 
-`Tu_2-5mm: 1.247% -> 0.870% -> 0.364%`
+`Tu_2-5mm: 1.247% → 0.870% → 0.364%`
 
 and produces large changes in the thermal field and transition-like wall response while outlet Mach moves comparatively little.
 

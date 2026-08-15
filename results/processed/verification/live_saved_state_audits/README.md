@@ -12,10 +12,9 @@ recomputed three report definitions already stored in each saved case:
 - `fine_wall_temperature_avg`;
 - `fine_mach_outlet`.
 
-The recorded case/data SHA-256 digests match the corresponding fine SST and fine
-Transition SST entries in `fluent/restart_manifest.csv`. The absolute Windows
-paths in the JSON files are incidental execution metadata; the input hashes and
-canonical filenames establish solver-state identity.
+The archived payloads store the canonical case/data filenames and SHA-256
+digests. The digests match the corresponding fine SST and fine Transition SST
+entries in `fluent/restart_manifest.csv`.
 
 | Saved state | External heat rate [W] | Mean wall temperature [K] | Mass-weighted outlet Mach |
 |---|---:|---:|---:|

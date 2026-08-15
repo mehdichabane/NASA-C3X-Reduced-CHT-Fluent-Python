@@ -112,10 +112,10 @@ in [`docs/model_setup.md`](docs/model_setup.md).
 
 | Controlled perturbation | Main observed response |
 |---|---|
-| Internal cooling `h/h0: 1.00 -> 0.90` | `Tw_mean +6.104 K`; external heat rate `-5.393%`; outlet Mach `+0.000804%` |
-| Internal `h ±3%` envelope | `Tw_mean ±1.735 K`; pressure-side bias `+6.827 ... +10.947 K`; suction-side bias `+11.416 ... +14.582 K` |
-| Transition SST `mu_t/mu_in: 10 -> 1` at `Tu_in = 6.5%` | Near-LE `Tu 1.247% -> 0.364%`; transition-like suction response `x/Cx 0.653 -> 0.967`; external heat rate `-19.716%` |
-| Transition SST `Tu_in: 6.5% -> 8.3%` at `mu_t/mu_in = 10` | Near-LE `Tu 1.247% -> 1.237%`; `Tw_mean -0.033%`; external heat rate `-0.122%` |
+| Internal cooling `h/h0: 1.00 → 0.90` | `Tw_mean +6.104 K`; external heat rate `-5.393%`; outlet Mach `+0.000804%` |
+| Internal `h ±3%` envelope | `Tw_mean ±1.735 K`; pressure-side bias `+6.827 to +10.947 K`; suction-side bias `+11.416 to +14.582 K` |
+| Transition SST `mu_t/mu_in: 10 → 1` at `Tu_in = 6.5%` | Near-LE `Tu 1.247% → 0.364%`; transition-like suction response `x/Cx 0.653 → 0.967`; external heat rate `-19.716%` |
+| Transition SST `Tu_in: 6.5% → 8.3%` at `mu_t/mu_in = 10` | Near-LE `Tu 1.247% → 1.237%`; `Tw_mean -0.033%`; external heat rate `-0.122%` |
 
 See [`studies/internal_cooling_sensitivity/README.md`](studies/internal_cooling_sensitivity/README.md)
 and [`studies/transition_sst_sensitivity/README.md`](studies/transition_sst_sensitivity/README.md).

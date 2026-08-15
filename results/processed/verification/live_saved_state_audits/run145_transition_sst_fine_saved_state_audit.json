@@ -1,6 +1,7 @@
 {
   "actual_fluent_version": "26.1.0",
-  "case_file": "C:\\Users\\mehdi\\NASA-C3X-audit-clean\\restart-audit\\c3x_restart_files\\c3x_run145_transition_sst_fine_final_iter556.cas.h5",
+  "audit_type": "saved-state report recomputation",
+  "case_file": "c3x_run145_transition_sst_fine_final_iter556.cas.h5",
   "case_sha256": "1d798a84b90a06c55471b229b41ca2da08eece4925f8560280f6ad808bc50a30",
   "computed": [
     {
@@ -22,7 +23,7 @@
       ]
     }
   ],
-  "data_file": "C:\\Users\\mehdi\\NASA-C3X-audit-clean\\restart-audit\\c3x_restart_files\\c3x_run145_transition_sst_fine_final_iter556.dat.h5",
+  "data_file": "c3x_run145_transition_sst_fine_final_iter556.dat.h5",
   "data_sha256": "9f1664a5dd11f615b4582cf62be1cf5b520d822d066adbcd4a74b95c91324c52",
   "dimension": "2D",
   "precision": "double",
@@ -32,6 +33,5 @@
     "fine_mach_outlet"
   ],
   "requested_fluent_version": "26.1.0",
-  "scope": "saved-state report recomputation only; no initialization, iteration replay, mesh regeneration or equivalence claim",
   "ui_mode": "no_gui"
 }

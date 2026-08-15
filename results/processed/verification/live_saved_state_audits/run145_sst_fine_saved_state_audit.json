@@ -1,6 +1,7 @@
 {
   "actual_fluent_version": "26.1.0",
-  "case_file": "C:\\Users\\mehdi\\NASA-C3X-audit-clean\\restart-audit\\c3x_restart_files\\c3x_run145_nasa_exact_fine_SST_final_iter236.cas.h5",
+  "audit_type": "saved-state report recomputation",
+  "case_file": "c3x_run145_nasa_exact_fine_SST_final_iter236.cas.h5",
   "case_sha256": "ea02ff1184a5d2d3dbf98c83f44d7c34744f7cac2a22d992e5a283fd94d1944f",
   "computed": [
     {
@@ -22,7 +23,7 @@
       ]
     }
   ],
-  "data_file": "C:\\Users\\mehdi\\NASA-C3X-audit-clean\\restart-audit\\c3x_restart_files\\c3x_run145_nasa_exact_fine_SST_final_iter236.dat.h5",
+  "data_file": "c3x_run145_nasa_exact_fine_SST_final_iter236.dat.h5",
   "data_sha256": "4cab13f7f98b06adc479a0005f2cac24cf8443d7e0d1616c74f94870761e97ff",
   "dimension": "2D",
   "precision": "double",
@@ -32,6 +33,5 @@
     "fine_mach_outlet"
   ],
   "requested_fluent_version": "26.1.0",
-  "scope": "saved-state report recomputation only; no initialization, iteration replay, mesh regeneration or equivalence claim",
   "ui_mode": "no_gui"
 }

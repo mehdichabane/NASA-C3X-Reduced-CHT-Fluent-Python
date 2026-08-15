@@ -1,6 +1,6 @@
 import csv
 import json
-from pathlib import Path, PureWindowsPath
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT_DIR = ROOT / "results" / "processed" / "verification" / "live_saved_state_audits"
@@ -10,10 +10,7 @@ EXPECTED_REPORTS = [
     "fine_wall_temperature_avg",
     "fine_mach_outlet",
 ]
-EXPECTED_SCOPE = (
-    "saved-state report recomputation only; no initialization, iteration replay, "
-    "mesh regeneration or equivalence claim"
-)
+EXPECTED_AUDIT_TYPE = "saved-state report recomputation"
 
 
 def manifest_rows() -> dict[str, dict[str, str]]:
@@ -32,7 +29,7 @@ def assert_common_audit_fields(payload: dict[str, object]) -> None:
     assert payload["precision"] == "double"
     assert payload["ui_mode"] == "no_gui"
     assert payload["report_definitions"] == EXPECTED_REPORTS
-    assert payload["scope"] == EXPECTED_SCOPE
+    assert payload["audit_type"] == EXPECTED_AUDIT_TYPE
 
     computed = payload["computed"]
     assert isinstance(computed, list)
@@ -44,8 +41,8 @@ def test_fine_sst_live_audit_matches_restart_manifest() -> None:
     row = manifest_rows()["fine"]
     assert_common_audit_fields(payload)
 
-    assert PureWindowsPath(str(payload["case_file"])).name == row["case_file"]
-    assert PureWindowsPath(str(payload["data_file"])).name == row["data_file"]
+    assert payload["case_file"] == row["case_file"]
+    assert payload["data_file"] == row["data_file"]
     assert payload["case_sha256"] == row["sha256_case"]
     assert payload["data_sha256"] == row["sha256_data"]
 
@@ -55,7 +52,7 @@ def test_transition_sst_live_audit_matches_restart_manifest() -> None:
     row = manifest_rows()["transition_sst_fine"]
     assert_common_audit_fields(payload)
 
-    assert PureWindowsPath(str(payload["case_file"])).name == row["case_file"]
-    assert PureWindowsPath(str(payload["data_file"])).name == row["data_file"]
+    assert payload["case_file"] == row["case_file"]
+    assert payload["data_file"] == row["data_file"]
     assert payload["case_sha256"] == row["sha256_case"]
     assert payload["data_sha256"] == row["sha256_data"]

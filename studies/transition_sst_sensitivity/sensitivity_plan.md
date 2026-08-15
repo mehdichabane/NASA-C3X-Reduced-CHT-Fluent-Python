@@ -9,7 +9,7 @@ Separate the effect of prescribed inlet turbulence intensity from the effect of 
 - the thermal solution;
 - the NASA Run 145 comparison.
 
-Case levels are chosen as controlled sensitivity perturbations, not to minimise NASA error.
+Case levels are controlled diagnostic perturbations selected independently of the NASA comparison error.
 
 ## Case matrix
 
@@ -31,7 +31,7 @@ Do not chain sensitivity cases or reinitialise the solution. Except for the name
 - external and internal thermal boundary conditions;
 - mesh and materials;
 - inlet intermittency and built-in transition correlations;
-- pressure, density, momentum and energy discretization;
+- pressure, density, momentum and energy discretisation;
 - `Second Order Upwind` for `k`, `omega`, intermittency and transition momentum-thickness Reynolds number;
 - report definitions and balance criteria.
 

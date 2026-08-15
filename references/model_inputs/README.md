@@ -10,7 +10,7 @@
 | `run145_outlet_pressure_selection.csv` | pressure-outlet selection record and isentropic update |
 | `run145_4512_internal_convection.csv` | generated CoolProp properties and convection coefficients |
 | `run145_wall_surface_coordinate_reference.csv` | pressure/suction labels for the final wall coordinates |
-| `transition_sst_settings.csv` | inlet, Transition SST and discretization settings recovered from the saved case and transcript |
+| `transition_sst_settings.csv` | inlet, Transition SST and discretisation settings recovered from the saved case and transcript |
 
 The complete Fluent setup is documented in
 [`docs/model_setup.md`](../../docs/model_setup.md). The outlet-pressure adjustment
@@ -25,13 +25,11 @@ Table IX gives Run 145 (code 4512) as `PTI = 58.57 psia`, `TTI = 792 K`,
 `M1 = 0.16`, `M2 = 0.90` and `Tu = 6.5%`. The Fluent inlet total pressure
 `403800 Pa` is the rounded SI implementation of the NASA value.
 
-The inlet turbulent-viscosity ratio `10` is a Fluent modelling input, not a NASA
-measurement. The pressure outlet `236200 Pa` was selected to reproduce the
-nominal Run 145 exit-Mach operating point with the Fluent mass-weighted outlet
-Mach report; it was not transcribed from a NASA exit-pressure table. The full
-`241200 Pa -> 236200 Pa` adjustment sequence is kept in
-[`run145_outlet_pressure_selection.csv`](run145_outlet_pressure_selection.csv)
-and the dedicated engineering note linked above.
+The inlet turbulent-viscosity ratio of `10` comes from the released Fluent
+setup. The `236200 Pa` outlet pressure comes from the operating-point adjustment
+documented in [`run145_outlet_pressure_selection.csv`](run145_outlet_pressure_selection.csv)
+and [`docs/outlet_pressure_selection.md`](../../docs/outlet_pressure_selection.md).
+The recorded adjustment runs from `241200 Pa → 236200 Pa`.
 
 ## Reduced internal cooling
 
@@ -72,7 +70,6 @@ The archived Fluent baseline uses:
 | Hot gas | Dynamic viscosity | `3.33e-05 Pa·s` | Bianchini, Facchini & Mangani (2009) |
 | Hot gas | Thermal conductivity | `0.05234 W/(m·K)` | rounds from the Bianchini `cp`, `mu` and `Pr` values |
 
-These literature entries are independent consistency checks on the archived
-setup, not a reconstruction of which source was consulted when the original
-Fluent material definitions were entered. The detailed match scope remains in
+The archived Fluent state defines the baseline material values; the literature
+entries provide independent consistency checks. Detailed match scope is in
 `thermophysical_literature_matches.csv` and `material_property_provenance.csv`.

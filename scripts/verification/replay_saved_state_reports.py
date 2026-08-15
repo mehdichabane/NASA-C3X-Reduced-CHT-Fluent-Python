@@ -19,8 +19,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Open a saved Fluent 26.1 case/data pair through PyFluent and "
-            "recompute existing scalar report definitions. This is a "
-            "saved-state audit, not a replay from initialization."
+            "recompute existing scalar report definitions for a saved-state audit."
         )
     )
     parser.add_argument(
@@ -127,8 +126,8 @@ def main() -> None:
             report_defs=list(args.report)
         )
         payload = {
-            "case_file": str(case_file),
-            "data_file": str(data_file),
+            "case_file": case_file.name,
+            "data_file": data_file.name,
             "case_sha256": sha256_file(case_file),
             "data_sha256": sha256_file(data_file),
             "requested_fluent_version": FLUENT_PRODUCT_VERSION,
@@ -138,10 +137,7 @@ def main() -> None:
             "ui_mode": FLUENT_UI_MODE,
             "report_definitions": list(args.report),
             "computed": json_ready(computed),
-            "scope": (
-                "saved-state report recomputation only; no initialization, "
-                "iteration replay, mesh regeneration or equivalence claim"
-            ),
+            "audit_type": "saved-state report recomputation",
         }
         rendered = json.dumps(payload, indent=2, sort_keys=True)
         print(rendered)

@@ -146,7 +146,7 @@ solver replays. See [`docs/reproducibility.md`](docs/reproducibility.md).
 
 ## Documentation map
 
-- [Engineering decision rationale](ENGINEERING_RATIONALE.md)
+- [Modeling notes](MODELING_NOTES.md)
 - [Evidence-backed project history](docs/project_history.md)
 - [Model definition and implementation](docs/model_setup.md)
 - [Run 145 outlet-pressure selection](docs/outlet_pressure_selection.md)

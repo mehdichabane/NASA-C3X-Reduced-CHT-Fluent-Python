@@ -139,14 +139,11 @@ reports. Full solver reruns are outside the CI workflow; see
 
 ## Documentation
 
-- [Modeling notes](MODELING_NOTES.md)
-- [Project development notes](docs/project_history.md)
-- [Model setup](docs/model_setup.md)
-- [Outlet-pressure selection](docs/outlet_pressure_selection.md)
-- [Convergence and balances](docs/convergence_acceptance.md)
-- [Mesh study](docs/meshing_recipe.md)
-- [NASA comparison](docs/nasa_comparison.md)
-- [Reproducibility](docs/reproducibility.md)
+- **Model setup:** [`docs/model_setup.md`](docs/model_setup.md)
+- **Numerical verification:** [`docs/convergence_acceptance.md`](docs/convergence_acceptance.md) and [`docs/meshing_recipe.md`](docs/meshing_recipe.md)
+- **NASA comparison:** [`docs/nasa_comparison.md`](docs/nasa_comparison.md)
+- **Sensitivity studies:** [`internal cooling`](studies/internal_cooling_sensitivity/README.md) and [`Transition SST`](studies/transition_sst_sensitivity/README.md)
+- **Reproducibility:** [`docs/reproducibility.md`](docs/reproducibility.md)
 
 ## Source and licence
 

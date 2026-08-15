@@ -8,9 +8,10 @@ analysis. The primary model is a steady two-dimensional compressible
 Reynolds-averaged Navier-Stokes (RANS) / conjugate heat transfer (CHT)
 calculation using the shear-stress-transport (SST) `k-omega` model.
 
-> **Scope.** This is a reduced benchmark and does not claim a complete ASME
-> V&V 20 validation. Internal coolant flow, film cooling and three-dimensional
-> effects are not resolved.
+> **Scope.** This is a reduced benchmark focused on numerical verification and
+> comparison with NASA measurements. Internal coolant flow, film cooling and
+> three-dimensional effects are outside the model scope; a complete
+> validation-uncertainty assessment is not included.
 
 ## At a glance
 

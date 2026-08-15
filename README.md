@@ -53,6 +53,17 @@ documented in [`docs/outlet_pressure_selection.md`](docs/outlet_pressure_selecti
 |---|---|
 | ![Fine-grid mesh](results/figures/mesh/run145_fine_mesh_overview.png) | ![NASA pressure-ratio comparison](results/figures/nasa_comparison/pressure_ratio.svg) |
 
+## Fluent outputs
+
+| SST residuals, final window | SST engineering monitors |
+|---|---|
+| ![SST residuals](results/figures/convergence/run145_sst_residuals_final_window.svg) | ![SST monitors](results/figures/convergence/run145_sst_monitors.svg) |
+
+The retained SST state is iteration `236`; the Transition SST state is iteration
+`556`. Raw monitor, residual, wall and global-check exports are under
+`data/fluent_exports/`, while the released case/data pairs are listed with their
+SHA-256 hashes in [`fluent/restart_manifest.csv`](fluent/restart_manifest.csv).
+
 ## Numerical checks
 
 - **Convergence and conservation.** The fine SST run keeps unchanged

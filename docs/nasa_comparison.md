@@ -6,31 +6,15 @@ from Table VI, report page 27. Additional experimental uncertainties reported
 in the Data Uncertainties subsection and Table VII are transcribed in
 `references/experimental_data/c3x_experimental_uncertainty_summary.csv`.
 
-This is a benchmark comparison. Conformance to a complete
-[ASME V&V 20](https://www.asme.org/codes-standards/find-codes-standards/standard-for-verification-and-validation-in-computational-fluid-dynamics-and-heat-transfer/2009)
-validation assessment is not claimed. NASA supplies multiple experimental
-uncertainty estimates, but the retained mesh record does not support an accepted
-formal discretization-uncertainty estimate and model-input uncertainty is not
-propagated. The repository therefore does not construct a combined
-validation-uncertainty budget.
-
-The NASA Run 145 `M2 = 0.90` value and the Fluent outlet-Mach report are not
-definition-identical observables. NASA defines exit Mach from measured inlet
-total pressure and average measured exit-plane static pressure. The saved
-Fluent `fine_mach_outlet` report is instead a `surface-massavg` of the local Mach
-field on the outlet. The pressure outlet was selected until this Fluent
-mass-weighted quantity was numerically consistent with the nominal NASA
-operating point. The resulting fine-grid `Mout = 0.901294` is therefore reported
-as an operating-point consistency and convergence check, not as a like-for-like
-Mach validation error and not as an independent validation observable. It is not
-included among the independent experimental comparison metrics below. The
-complete pressure-selection history is in
+The outlet Mach is used only to match the nominal Run 145 operating point. NASA
+`M2 = 0.90` and Fluent's mass-weighted outlet Mach are defined differently; the
+selection of the `236200 Pa` pressure outlet is documented in
 [`outlet_pressure_selection.md`](outlet_pressure_selection.md).
 
 ## NASA experimental uncertainty record
 
-NASA's Data Uncertainties subsection reports the component uncertainties that
-feed the experimental reduction. The values transcribed here are:
+NASA's Data Uncertainties subsection reports the component uncertainties used in
+the experimental reduction:
 
 | Quantity | Reported uncertainty |
 |---|---:|
@@ -53,19 +37,13 @@ Table VII separately reports uncertainty in test parameters:
 | Inlet turbulence intensity, `Tu` | `±10.0%` |
 
 NASA states that the key uncertainty analysis uses the Kline and McClintock
-method (Ref. 23); the `Tu` value is reported as being based on prior experience
-with the LDA system. These values are source metadata in the present repository,
-not stochastic inputs propagated through Fluent.
+method (Ref. 23); the `Tu` value is based on prior experience with the LDA
+system. Table VI already gives the resulting regional external-HTC uncertainty,
+so the component values above are not added again to those intervals.
 
-Table VI is already the resulting *regional external-HTC uncertainty* for the
-C3X experimental reduction. The component uncertainties above are therefore not
-added again to the Table VI HTC intervals. Doing so would double-count sources
-already represented in NASA's external-HTC uncertainty analysis.
-
-NASA also cautions that these values describe uncertainty in the absolute level
-when the data are used for verification. Some systematic contributions affect
-multiple runs similarly, so uncertainty in run-to-run trends can be smaller than
-the absolute-level uncertainty.
+NASA also notes that some systematic contributions affect multiple runs in a
+similar way, so uncertainty in run-to-run trends can be smaller than uncertainty
+in the absolute level.
 
 ## Coordinate matching and metrics
 
@@ -75,23 +53,20 @@ used. Bias is defined as CFD minus NASA.
 
 The SST profile comes from the final fine-grid wall export. Transition SST uses
 the direct 819-face Fluent wall export at iteration 556. HTC uncertainty bands
-are assigned by experimental surface position `s/L`. The reported interval
-fraction uses Table VI experimental HTC uncertainty only; it is not a combined
-validation uncertainty.
+are assigned by experimental surface position `s/L` using the Table VI regional
+intervals.
 
 `scripts/comparison/compare_run145.py` writes the pointwise tables and summary to
 `results/processed/nasa_comparison/` and generates the three figures below.
 
-For wall temperature, MAE and RMSE in kelvin are the most directly interpretable
-dimensional error measures and are therefore reported alongside MAPE. MAPE is
-retained as a compact relative summary using absolute temperature in kelvin,
-but it should not be interpreted alone: percentage errors can look small when
-the compared temperatures have a large absolute baseline, and the value is not
-invariant to an affine change of temperature scale.
+For wall temperature, MAE and RMSE in kelvin are reported alongside MAPE. MAPE
+is kept as a compact relative summary using absolute temperature in kelvin, but
+it should not be read alone because the large absolute temperature baseline can
+make percentage errors look small.
 
 Summary bias, MAE, RMSE and MAPE give equal weight to each experimental station.
-They are station-wise statistics, not arc-length-weighted surface integrals;
-regions with denser experimental station placement therefore contribute more
+They are station-wise statistics rather than arc-length-weighted surface
+integrals, so regions with denser experimental station placement contribute more
 entries to the summary metrics.
 
 ## Pressure ratio
@@ -114,12 +89,9 @@ entries to the summary metrics.
 | Transition SST | Pressure | `31` | `-39.366 K` | `39.366 K` | `40.593 K` | `6.348%` |
 | Transition SST | Suction | `44` | `-41.723 K` | `41.723 K` | `52.352 K` | `6.408%` |
 
-At the reported precision, the magnitude of the wall-temperature bias equals
-the MAE for all four rows. The stationwise temperature errors are therefore
-one-signed over the sampled stations: the SST baseline is systematically hotter
-than the NASA values, while the accepted Transition SST baseline is
-systematically colder. This is a descriptive bias of the archived model states,
-not a calibration target and not a decomposition of its physical cause.
+At the reported precision, the wall-temperature errors are one-signed over the
+sampled stations: SST is systematically hotter than the NASA values, while
+Transition SST is systematically colder.
 
 ![Wall-temperature comparison](../results/figures/nasa_comparison/wall_temperature.svg)
 
@@ -134,34 +106,17 @@ not a calibration target and not a decomposition of its physical cause.
 
 ![Heat-transfer-coefficient comparison](../results/figures/nasa_comparison/heat_transfer_coefficient.svg)
 
-*The HTC error bars show the reported Table VI experimental HTC uncertainty
-only. They are not a combined CFD/experimental validation-uncertainty interval.*
+The HTC error bars use the Table VI experimental uncertainty intervals.
 
 ## Why SST remains the primary case
 
-Transition SST gives similar pressure errors but much larger thermal errors for
-the accepted fine-grid baseline. The sharp rear suction-side increase is a model
-response; Run 145 does not provide a measured transition location that would
-confirm it.
-
-The separate
+Transition SST gives pressure errors close to SST but substantially worsens the
+wall-temperature and HTC comparison on the current fine grid. The separate
 [`Transition SST inlet-turbulence sensitivity study`](../studies/transition_sst_sensitivity/README.md)
-shows that the imposed inlet turbulence state does not remain unchanged between
-the computational inlet and the vane. At fixed `Tu_in = 6.5%`, changes in inlet
-turbulent-viscosity ratio produce large changes in near-vane turbulence decay,
-the suction-side transition-like response and the thermal field, while the
-outlet Mach number changes much less. At viscosity ratio `10`, changing the
-documented inlet turbulence level from `6.5%` to `8.3%` produces only a small
-near-vane and thermal response because the inlet difference is strongly
-attenuated before the leading edge.
+also shows that the suction-side transition-like response is strongly affected
+by turbulence decay between the inlet and the vane, especially through the
+inlet turbulent-viscosity ratio.
 
-All transition-response-front locations cited by that study are extracted from
-the fine mesh only. No coarse/medium Transition SST mesh-sensitivity assessment
-was performed for those coordinates, so they are fine-grid model-response
-diagnostics rather than grid-converged transition locations.
-
-These results explain a strong model sensitivity; they do not identify an
-experimentally verified transition onset, calibrate the calculation, or show
-that SST is generally superior to transition models. Wall temperature also
-combines external convection, solid conduction and the prescribed internal
-convection boundaries.
+Transition SST is therefore retained as a sensitivity case rather than the
+baseline. No coarse or medium Transition SST cases were run, so the reported
+transition-response locations are fine-grid diagnostics.
